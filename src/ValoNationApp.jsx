@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useState, useReducer } from "react";
 import Footer from "./components/Footer";
 import Heading from "./components/Heading";
 import ShopContainer from "./components/shop/ShopContainer";
+import { cartReducer, initialState } from "./reducers/cart-reducer";
 
 export default function ValoNationApp() {
-  const [cart, setCart] = useState([]);
+  const [cart, cartDispatch] = useReducer(cartReducer, initialState)
+  
+  // const [cart, setCart] = useState([]);
 
   const addToCart = weapon => {
     //Revisar si producto ya existe
@@ -31,7 +34,7 @@ export default function ValoNationApp() {
     <>
       <Heading title="tienda" cart={cart} deleteFromCart={deleteFromCart} clearCart={clearCart} />
 
-      <ShopContainer addToCart={addToCart}/>
+      <ShopContainer cartDispatch={cartDispatch}/>
 
       <Footer />
     </>

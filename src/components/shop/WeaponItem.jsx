@@ -1,4 +1,4 @@
-export default function WeaponItem({ weapon, addToCart }) {
+export default function WeaponItem({ weapon, cartDispatch }) {
   const { uuid, displayIcon, displayName, shopData } = weapon;
 
   const objWeapon = {
@@ -33,7 +33,7 @@ export default function WeaponItem({ weapon, addToCart }) {
             </p>
           </div>
           <div className="actions mb-md-0">
-            <button className="btn btn-lg btn-primary w-100 mb-3" onClick={() => addToCart(objWeapon)}>
+            <button className="btn btn-lg btn-primary w-100 mb-3" onClick={() => cartDispatch({type:'add-to-cart', payload: {item: objWeapon}})}>
               Agregar al carrito
             </button>
             <a href="#" className="d-block fs-4 text-decoration-none text-center">

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import useValorant from "../../api/useValorant";
 import WeaponItem from "./WeaponItem";
 
-export default function GridItems({addToCart}) {
+export default function GridItems({cartDispatch}) {
   const [weapons, setWeapons] = useState([]);
 
   const { fetchWeapons } = useValorant();
@@ -22,7 +22,7 @@ export default function GridItems({addToCart}) {
       ) : (
         <div className="row">
           {weapons.map((weapon) => (
-            <WeaponItem key={weapon.uuid} weapon={weapon} addToCart={addToCart} />
+            <WeaponItem key={weapon.uuid} weapon={weapon} cartDispatch={cartDispatch} />
           ))}
         </div>
       )}
