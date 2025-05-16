@@ -1,9 +1,0 @@
-// Sobrescribir variables antes de importar Bootstrap
-$primary: #FF4655; // nuevo color primario (naranja)
-
-// Importar Bootstrap (solo lo que necesitas o todo)
-@import 'bootstrap/scss/bootstrap';
-
-header .nav-link:hover{
-    color: $primary;
-}
