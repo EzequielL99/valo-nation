@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export default function LoginPage() {
   return (
-    <form action="#">
+    <form action="#" className='form-login'>
       <div className="border border-light-subtle rounded-pill d-flex align-items-center py-2 mb-4">
         <label htmlFor="inputUsuario" className='ps-3 pe-2 d-flex justify-content-center align-items-center'>
             <UserIcon className='icon'/>
