@@ -1,13 +1,16 @@
-export default function WeaponItem({ weapon, cartDispatch }) {
+import { useValoNation } from "../../hooks/useValoNation";
+
+export default function ItemCard({ weapon }) {
+  const { dispatch } = useValoNation();
   const { uuid, displayIcon, displayName, shopData } = weapon;
 
   const objWeapon = {
-    id: uuid, 
+    id: uuid,
     img: displayIcon,
     name: displayName,
-    category: shopData !== null ? shopData.category : 'Knife',
-    price: shopData !== null ? shopData.cost : 0
-  }
+    category: shopData !== null ? shopData.category : "Knife",
+    price: shopData !== null ? shopData.cost : 0,
+  };
 
   return (
     <div className="col-6 col-md-4 p-md-3 mt-4 mt-md-0">
@@ -27,16 +30,29 @@ export default function WeaponItem({ weapon, cartDispatch }) {
         </div>
         <div className="weapon-info">
           <div className="d-md-flex text-center justify-content-between align-items-center mb-4">
-            <h3 className="p-0 m-0 mb-2 mb-md-0 text-uppercase">{objWeapon.name}</h3>
+            <h3 className="p-0 m-0 mb-2 mb-md-0 text-uppercase">
+              {objWeapon.name}
+            </h3>
             <p className="price text-primary h1 fw-bold p-0 m-0">
-              {objWeapon.price === 0 ? 'FREE' : objWeapon.price}
+              {objWeapon.price === 0 ? "FREE" : objWeapon.price}
             </p>
           </div>
           <div className="actions mb-md-0">
-            <button className="btn btn-lg btn-primary w-100 mb-3" onClick={() => cartDispatch({type:'add-to-cart', payload: {item: objWeapon}})}>
+            <button
+              className="btn btn-lg btn-primary w-100 mb-3"
+              onClick={() =>
+                dispatch({
+                  type: "add-to-cart",
+                  payload: { item: objWeapon },
+                })
+              }
+            >
               Agregar al carrito
             </button>
-            <a href="#" className="d-block fs-4 text-decoration-none text-center">
+            <a
+              href="#"
+              className="d-block fs-4 text-decoration-none text-center link-light"
+            >
               Ver más
             </a>
           </div>

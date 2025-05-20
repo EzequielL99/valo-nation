@@ -36,15 +36,13 @@ export const cartReducer = (state, action) => {
   }
 
   if (action.type === "remove-from-cart") {
-    return {
-      ...state,
-    };
+    const {itemId} = action.payload;
+
+    return state.filter(item => item.id !== itemId);
   }
 
   if (action.type === "clear-cart") {
-    return {
-      ...state,
-    };
+    return [];
   }
 
   return state;

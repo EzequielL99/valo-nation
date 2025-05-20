@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default function useValorant() {
+export default function useValorantAPI() {
   const fetchWeapons = async () => {
     try {
       const { data } = await axios("https://valorant-api.com/v1/weapons");

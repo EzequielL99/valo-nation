@@ -1,19 +1,14 @@
-import {
-  ShoppingCartIcon,
-  UserIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { UserIcon } from "@heroicons/react/24/outline";
 import CartPopover from "./shop/CartPopover";
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import CartButton from "./shop/CartButton";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
-export default function Header({ cart, deleteFromCart, clearCart }) {
+export default function Header() {
+  const { pathname } = useLocation();
   const [showCart, setShowCart] = useState(false);
 
-  const toggleCart = (e) => {
-    e.preventDefault();
-
-    setShowCart(!showCart);
-  };
+  const isShop = useMemo(() => pathname === "/shop", [pathname]);
 
   return (
     <div className="container">
@@ -22,9 +17,9 @@ export default function Header({ cart, deleteFromCart, clearCart }) {
         data-bs-theme="dark"
       >
         <div className="container px-0 justify-content-md-between">
-          <a href="#" className="navbar-brand">
+          <Link to="/" className="navbar-brand">
             <span className="fw-bold text-primary">VALO</span>-NATION
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -41,88 +36,93 @@ export default function Header({ cart, deleteFromCart, clearCart }) {
             id="navbarSupportedContent"
           >
             <ul className="navbar-nav">
-              <li className="nav-item">
-                <a href="#" className="nav-link">
-                  Inicio
-                </a>
-              </li>
-              <li className="nav-item">
-                <a href="#" className="nav-link">
-                  Tienda
-                </a>
-              </li>
-              <li className="nav-item">
-                <a href="#" className="nav-link">
-                  Ayuda
-                </a>
-              </li>
-
-              <li className="nav-item d-md-none my-2">
-                <a
-                  href="#"
-                  className="text-decoration-none text-primary fw-bold"
+              <li className="nav-item d-md-none my-3">
+                <NavLink
+                  to="/admin"
+                  className="text-decoration-none text-white fw-bold"
                 >
                   ADMIN
-                </a>
+                </NavLink>
               </li>
+
               <li className="nav-item d-md-none mb-3">
-                <a
-                  href="#"
-                  className="text-decoration-none text-primary fw-bold"
+                <NavLink
+                  to="/profile"
+                  className="text-decoration-none text-white fw-bold"
                 >
-                  MI PERFIL
-                </a>
+                  INGRESAR
+                </NavLink>
+              </li>
+
+              <li className="nav-item">
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    isActive ? "nav-link text-primary" : "nav-link"
+                  }
+                >
+                  Inicio
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink
+                  to="/shop"
+                  className={({ isActive }) =>
+                    isActive ? "nav-link text-primary" : "nav-link"
+                  }
+                >
+                  Tienda
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink
+                  to="/contact"
+                  className={({ isActive }) =>
+                    isActive ? "nav-link text-primary" : "nav-link"
+                  }
+                >
+                  Contacto
+                </NavLink>
               </li>
             </ul>
           </div>
 
           <ul className="navbar-nav gap-3 d-none d-md-flex">
             <li className="nav-item">
-              <a
-                href="#"
+              <NavLink
+                to="/admin"
                 className="btn btn-outline-primary rounded-pill text-uppercase px-4"
               >
-                admin
-              </a>
+                ADMIN
+              </NavLink>
             </li>
+            {isShop && (
+              <li className="nav-item">
+                <CartButton showCart={showCart} setShowCart={setShowCart} />
+              </li>
+            )}
             <li className="nav-item">
-              <a
-                href="#"
-                className="btn btn-outline-primary rounded-circle py-2 position-relative btn-carrito"
-              >
-                <ShoppingCartIcon className="icon" />
-              </a>
-            </li>
-            <li className="nav-item">
-              <a
-                href="#"
+              <NavLink
+                to="/profile"
                 className="btn btn-outline-primary rounded-circle py-2"
               >
                 <UserIcon className="icon" />
-              </a>
+              </NavLink>
             </li>
           </ul>
         </div>
       </nav>
-      <a
-        href="#"
-        className="btn btn-primary rounded-circle py-2 position-fixed z-3 d-md-none end-0 bottom-0 translate-middle"
-        onMouseEnter={() => setShowCart(true)}
-        onClick={toggleCart}
-      >
-        {showCart ? (
-          <XMarkIcon className="icon" />
-        ) : (
-          <ShoppingCartIcon className="icon" />
-        )}
-      </a>
-      <CartPopover
-        cart={cart}
-        deleteFromCart={deleteFromCart}
-        clearCart={clearCart}
-        showCart={showCart}
-        setShowCart={setShowCart}
-      />
+
+      {isShop && (
+        <>
+          <CartButton
+            showCart={showCart}
+            setShowCart={setShowCart}
+            floatingButton={true}
+          />
+          <CartPopover showCart={showCart} setShowCart={setShowCart} />
+        </>
+      )}
     </div>
   );
 }
