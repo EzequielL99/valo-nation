@@ -11,6 +11,7 @@ export default function GridItems() {
 
   useEffect(() => {
     fetchWeapons().then((weaponsList) => {
+      console.log(weaponsList);
       setIsLoading(false);
       setWeapons(weaponsList);
     });

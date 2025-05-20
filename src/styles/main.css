@@ -13,7 +13,16 @@ body {
   font-family: "Roboto", sans-serif;
   font-size: 1.6rem !important;
 }
+/* -------------------------------- Generals: Headings -------------------------------- */
+h1{
+  font-size: 3.2rem;
+}
 
+h2{
+  font-size: 2.8rem;
+}
+
+/* -------------------------------- Generals: Buttons -------------------------------- */
 .btn {
   font-size: 1.4rem;
   text-transform: uppercase;
@@ -47,7 +56,7 @@ body {
   background-color: var(--bs-primary);
 }
 
-input{
+input {
   outline: none;
 }
 
@@ -57,30 +66,51 @@ input{
   width: 50px;
   aspect-ratio: 1.154;
   position: relative;
-  background: conic-gradient(from 120deg at 50% 64%,#0000, var(--bs-primary) 1deg 120deg,#0000 121deg);
-  animation: l27-0 1.5s infinite cubic-bezier(0.3,1,0,1);
+  background: conic-gradient(
+    from 120deg at 50% 64%,
+    #0000,
+    var(--bs-primary) 1deg 120deg,
+    #0000 121deg
+  );
+  animation: l27-0 1.5s infinite cubic-bezier(0.3, 1, 0, 1);
 }
 .loader:before,
 .loader:after {
-  content:'';
+  content: "";
   position: absolute;
-  inset:0;
-  background:inherit;
+  inset: 0;
+  background: inherit;
   transform-origin: 50% 66%;
   animation: l27-1 1.5s infinite;
 }
 .loader:after {
-  --s:-1;
+  --s: -1;
 }
 @keyframes l27-0 {
-   0%,30%      {transform: rotate(0)}
-   70%         {transform: rotate(120deg)}
-   70.01%,100% {transform: rotate(360deg)}
+  0%,
+  30% {
+    transform: rotate(0);
+  }
+  70% {
+    transform: rotate(120deg);
+  }
+  70.01%,
+  100% {
+    transform: rotate(360deg);
+  }
 }
 @keyframes l27-1 {
-   0%      {transform: rotate(calc(var(--s,1)*120deg)) translate(0)}
-   30%,70% {transform: rotate(calc(var(--s,1)*120deg)) translate(calc(var(--s,1)*-5px),10px)}
-   100%    {transform: rotate(calc(var(--s,1)*120deg)) translate(0)}
+  0% {
+    transform: rotate(calc(var(--s, 1) * 120deg)) translate(0);
+  }
+  30%,
+  70% {
+    transform: rotate(calc(var(--s, 1) * 120deg))
+      translate(calc(var(--s, 1) * -5px), 10px);
+  }
+  100% {
+    transform: rotate(calc(var(--s, 1) * 120deg)) translate(0);
+  }
 }
 
 /* ----------------------------- HEADING/HEADER ----------------------------- */
@@ -127,34 +157,101 @@ a.navbar-brand {
   font-size: 2.5rem;
 }
 
+/* --------------------------------- INDEX PAGE -------------------------------- */
+.index-hero {
+  background-image: url(./img/home-background.jpg);
+  background-color: rgba(0, 0, 0, 0.4);
+  background-blend-mode: darken;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  min-height: 80vh;
+}
+
+section.weapon-details .img-weapon{
+  position: relative;
+  height: 100vh;
+  width: 90%;
+  background: url(./img/pistol-img.png) center / 80% no-repeat;
+}
+
+.weapon-details .ripple,
+.weapon-details .ripple::before{
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  background-color: var(--bs-primary);
+  border-radius: 50%;
+}
+
+.ripple{
+  left: 35%;
+  top: 40%;
+}
+
+.ripple::before{
+  content: '';
+  animation: rippleAnimation 1s ease-in-out infinite;
+}
+
+.ripple-tooltip,
+.ripple-tooltip::before,
+.ripple-tooltip::after{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.ripple-tooltip::before{
+  content: '';
+  width: 0;
+  height: 0;
+  border: .8rem solid transparent;
+  border-top-color: var(--bs-light);
+}
+.ripple-tooltip::after{
+  content: attr(title);
+  background-color: var(--bs-light);
+  white-space: pre;
+  padding: 1rem;
+  border-radius: var(--bs-border-radius);
+  top: -5rem;
+}
+
+@keyframes rippleAnimation{
+  to{
+    transform: scale(3);
+    opacity: 0;
+  }
+}
 /* --------------------------------- CARRITO -------------------------------- */
 #popoverCarrito {
   bottom: 100%;
   left: 0%;
   width: 100%;
-  transition: transform .4s ease-in-out;
+  transition: transform 0.4s ease-in-out;
 }
 
-#popoverCarrito.active{
-    transform: translateY(99%);
+#popoverCarrito.active {
+  transform: translateY(99%);
 }
 
-#popoverCarrito table{
-    font-size: 1rem;
-    width: 100%;
-    text-align: center;
+#popoverCarrito table {
+  font-size: 1rem;
+  width: 100%;
+  text-align: center;
 }
 
-#popoverCarrito table th{
-    font-size: 1.3rem;
+#popoverCarrito table th {
+  font-size: 1.3rem;
 }
 
 #popoverCarrito table td {
-    padding-bottom: 1rem;
+  padding-bottom: 1rem;
 }
 
-#popoverCarrito table td img{
-    max-width: 8rem;
+#popoverCarrito table td img {
+  max-width: 8rem;
 }
 
 .carrito {
