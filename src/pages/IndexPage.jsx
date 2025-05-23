@@ -36,10 +36,10 @@ export default function IndexPage() {
       </section>
 
       <section className="container py-5">
-        <h2 className="text-center text-uppercase text-primary">Productos Destacados</h2>
+        <h2 className="text-center text-uppercase text-primary fw-bolder">Productos Destacados</h2>
         <div className="row mt-4">
           {itemCategories.map((item) => (
-            <div className="col-12 p-3" key={item.title}>
+            <div className="col-12 col-md-4 p-3" key={item.title}>
               <CategoryCard
                 title={item.title}
                 description={item.description}

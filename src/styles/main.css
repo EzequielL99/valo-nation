@@ -57,12 +57,18 @@ h2 {
   color: var(--bs-primary);
 }
 
-.btn-outline-primary:hover {
-  border-color: var(--bs-primary);
-  background-color: var(--bs-primary);
+.btn-outline-primary:not(.btn-carrito):active,
+.btn-outline-primary:not(.btn-carrito).active,
+.btn-outline-primary:not(.btn-carrito):visited,
+.btn-outline-primary:not(.btn-carrito):hover,
+.btn-outline-primary:not(.btn-carrito):focus,
+.btn-outline-primary:not(.btn-carrito):focus-visible {
+  border-color: var(--bs-primary) !important;
+  background-color: var(--bs-primary) !important;
+  box-shadow: none !important;
 }
 
-.btn.rounded-circle{
+.btn.rounded-circle {
   width: 3.5rem;
   height: 3.5rem;
   display: flex;
@@ -75,7 +81,6 @@ input {
 }
 
 /* --------------------------------- LOADER --------------------------------- */
-/* HTML: <div class="loader"></div> */
 .loader {
   width: 50px;
   aspect-ratio: 1.154;
@@ -132,7 +137,7 @@ header nav {
   background-color: var(--bs-gray-800);
 }
 
-@media (min-width: var(--bs-breakpoint-md)) {
+@media (min-width: 768px) {
   header nav {
     background-color: var(--bs-dark);
   }
@@ -149,7 +154,7 @@ header .nav-link:hover {
   background-repeat: no-repeat;
 }
 
-@media (min-width: var(--bs-breakpoint-md)) {
+@media (min-width: 768px) {
   .header-hero {
     min-height: 50vh;
   }
@@ -161,7 +166,7 @@ header .nav-link:hover {
   left: 50%;
 }
 
-@media (min-width: var(--bs-breakpoint-md)) {
+@media (min-width: 768px) {
   .header-hero .page-title {
     font-size: 20rem;
   }
@@ -171,7 +176,27 @@ a.navbar-brand {
   font-size: 2.5rem;
 }
 
-/* --------------------------------- INDEX PAGE -------------------------------- */
+.navbar-nav .btn.btn-carrito:active,
+.navbar-nav .btn.btn-carrito:focus,
+.navbar-nav .btn.btn-carrito:focus-within {
+  background-color: transparent;
+  border-color: var(--bs-primary);
+  color: var(--bs-primary);
+}
+
+.navbar-nav .btn.btn-carrito.active {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+  color: var(--bs-white);
+}
+
+header .btn-outline-primary.active {
+  background-color: var(--bs-white);
+  border-color: var(--bs-white);
+  color: var(--bs-primary);
+}
+
+/* --------------------------------- HERO -------------------------------- */
 .hero {
   background-image: url(./img/generic-background.jpeg);
   background-color: rgba(0, 0, 0, 0.4);
@@ -183,13 +208,32 @@ a.navbar-brand {
   margin-top: -7rem;
 }
 
+.hero:not(.index) h1 {
+  font-size: 6rem;
+}
+
+@media (min-width: 768px) {
+  .hero:not(.index) h1 {
+    font-size: 18rem;
+  }
+}
+
+/* --------------------------------- INDEX PAGE -------------------------------- */
 .hero.index {
   background-image: url(./img/home-background.jpg);
   min-height: 80vh;
 }
 
-.hero:not(.index) h1 {
-  font-size: 18rem;
+.category-card {
+  min-height: 30rem;
+}
+
+.category-card .card-image {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  max-height: 10rem;
+  min-height: 10rem;
 }
 
 section.weapon-details .img-weapon {
@@ -260,6 +304,19 @@ section.weapon-details .img-weapon {
   transform: translateY(99%);
 }
 
+@media (min-width: 768px) {
+  #popoverCarrito {
+    bottom: 0%;
+    transform: translateY(100%);
+    pointer-events: none;
+  }
+
+  #popoverCarrito.active {
+    transform: translateY(0%);
+    pointer-events: all;
+  }
+}
+
 #popoverCarrito table {
   font-size: 1rem;
   width: 100%;
@@ -315,6 +372,13 @@ section.weapon-details .img-weapon {
   pointer-events: none;
   overflow: hidden;
 }
+
+@media (min-width: 992px) {
+  .categories-wrapper {
+    max-height: 50rem;
+    pointer-events: initial;
+  }
+}
 .categories-wrapper.active {
   pointer-events: initial;
   max-height: 50rem;
@@ -331,9 +395,9 @@ section.weapon-details .img-weapon {
   min-height: 10rem;
 }
 
-@media (min-width: var(--bs-breakpoint-md)) {
+@media (min-width: 768px) {
   .weapon-card .weapon-img {
-    min-height: 25rem;
+    min-height: 15rem;
   }
 }
 
@@ -343,10 +407,10 @@ section.weapon-details .img-weapon {
   height: 4rem;
 }
 
-@media (min-width: var(--bs-breakpoint-md)) {
+@media (min-width: 768px) {
   .weapon-img > span:not(.tag-weapon) {
-    width: 20rem;
-    height: 20rem;
+    width: 8rem;
+    height: 8rem;
   }
 }
 
@@ -355,7 +419,7 @@ section.weapon-details .img-weapon {
   max-width: 90%;
 }
 
-@media (min-width: var(--bs-breakpoint-md)) {
+@media (min-width: 768px) {
   .weapon-img img {
     max-width: 100%;
   }
@@ -365,7 +429,7 @@ section.weapon-details .img-weapon {
   font-size: 1rem;
 }
 
-@media (min-width: var(--bs-breakpoint-md)) {
+@media (min-width: 992px) {
   .weapon-card .actions .btn-primary {
     font-size: 1.4rem;
   }

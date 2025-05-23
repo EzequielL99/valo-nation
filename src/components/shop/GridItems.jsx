@@ -27,7 +27,7 @@ export default function GridItems() {
   }, [isLoading]);
 
   return (
-    <div className="col-12 col-md-10">
+    <div className="col-12 col-lg-10">
       {isLoading && <Loader className="mx-auto my-4" />}
 
       {isError && (

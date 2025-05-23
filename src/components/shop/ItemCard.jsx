@@ -13,8 +13,8 @@ export default function ItemCard({ weapon }) {
   };
 
   return (
-    <div className="col-6 col-md-4 p-md-3 mt-4 mt-md-0">
-      <div className="weapon-card border border-light-subtle rounded-4 p-3 p-md-4">
+    <div className="col-6 col-md-4 py-md-3 mt-4 mt-md-0">
+      <div className="weapon-card border border-light-subtle rounded-4 p-3">
         <div className="d-flex justify-content-end align-items-center">
           <span className="tag-category fs-6 px-3 py-2 border border-light-subtle rounded-pill">
             {objWeapon.category}

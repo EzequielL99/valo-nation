@@ -42,7 +42,9 @@ export default function CartButton({
   ) : (
     <a
       href="#"
-      className="btn btn-outline-primary rounded-circle py-2 position-relative btn-carrito"
+      className={`btn btn-outline-primary rounded-circle py-2 position-relative btn-carrito ${showCart ? 'active' : ''}`}
+      onMouseEnter={() => setShowCart(true)}
+      onClick={toggleCart}
     >
       <ShoppingCartIcon className="icon" />
       {cartItemsQuantity > 0 && (
