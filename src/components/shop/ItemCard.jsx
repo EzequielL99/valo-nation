@@ -1,7 +1,7 @@
 import { useValoNation } from "../../hooks/useValoNation";
 
 export default function ItemCard({ weapon }) {
-  const { dispatch } = useValoNation();
+  const { cartDispatch } = useValoNation();
   const { uuid, displayIcon, displayName, shopData } = weapon;
 
   const objWeapon = {
@@ -41,7 +41,7 @@ export default function ItemCard({ weapon }) {
             <button
               className="btn btn-lg btn-primary w-100 mb-3"
               onClick={() =>
-                dispatch({
+                cartDispatch({
                   type: "add-to-cart",
                   payload: { item: objWeapon },
                 })

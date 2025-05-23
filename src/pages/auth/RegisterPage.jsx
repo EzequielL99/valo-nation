@@ -1,17 +1,18 @@
-import { useState, useMemo, useEffect } from "react";
-import { EnvelopeIcon, KeyIcon } from "@heroicons/react/24/outline";
-import { Link, useNavigate } from "react-router-dom";
-import { useValoNation } from "../../hooks/useValoNation";
+import { useEffect, useMemo, useState } from "react";
+import { UserIcon, KeyIcon, EnvelopeIcon } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
-export default function LoginPage() {
-  const [userData, setUserData] = useState({
+import { useValoNation } from "../../hooks/useValoNation";
+
+export default function RegisterPage() {
+  const [newUser, setNewUser] = useState({
     email: "",
+    usuario: "",
     password: "",
   });
 
   const { auth, authDispatch } = useValoNation();
-  const navigate = useNavigate();
 
   // Efecto: Montaje de componente
   useEffect(() => {
@@ -21,7 +22,7 @@ export default function LoginPage() {
     authDispatch({ type: "load-users", payload: { users: storedUsers } });
   }, []);
 
-  // Efecto: Error al ingresar
+  // Efecto: Error al registrar
   useEffect(() => {
     if (auth.error) {
       toast.error(auth.error, {
@@ -33,19 +34,9 @@ export default function LoginPage() {
     }
   }, [auth.error]);
 
-  // Efecto: Usuario registrado con exito
-  useEffect(() => {
-    if (auth.currentUser !== null) {
-      toast.success(`Bienvenido ${auth.currentUser.usuario}`, {
-        autoClose: 2000,
-        onClose: () => navigate("/shop"),
-      });
-    }
-  }, [auth.currentUser]);
-
   const handleChange = (e) => {
-    setUserData({
-      ...userData,
+    setNewUser({
+      ...newUser,
       [e.target.name]: e.target.value,
     });
   };
@@ -53,12 +44,15 @@ export default function LoginPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    authDispatch({ type: "login", payload: { userData } });
+    authDispatch({ type: "register", payload: { newUser } });
   };
 
   const isFormValid = useMemo(
-    () => userData.email.trim() !== "" && userData.password.trim() !== "",
-    [userData]
+    () =>
+      newUser.email.trim() !== "" &&
+      newUser.usuario.trim() !== "" &&
+      newUser.password.trim() !== "",
+    [newUser]
   );
 
   return (
@@ -75,9 +69,32 @@ export default function LoginPage() {
           name="email"
           id="inputEmail"
           onChange={handleChange}
+          value={newUser.email}
           className="d-block text-light bg-transparent border-0 flex-grow-1"
           placeholder="Email"
           aria-label="Email"
+          aria-describedby="visible-addon"
+          aria-required
+          required
+        />
+      </div>
+
+      <div className="border border-light-subtle rounded-pill d-flex align-items-center py-2 mb-4">
+        <label
+          htmlFor="inputUsuario"
+          className="ps-3 pe-2 d-flex justify-content-center align-items-center"
+        >
+          <UserIcon className="icon" />
+        </label>
+        <input
+          type="text"
+          name="usuario"
+          id="inputUsuario"
+          onChange={handleChange}
+          value={newUser.usuario}
+          className="d-block text-light bg-transparent border-0 flex-grow-1"
+          placeholder="Usuario"
+          aria-label="Usuario"
           aria-describedby="visible-addon"
           aria-required
           autoComplete="off"
@@ -97,6 +114,7 @@ export default function LoginPage() {
           name="password"
           id="inputPassword"
           onChange={handleChange}
+          value={newUser.password}
           className="d-block text-light bg-transparent border-0 flex-grow-1"
           placeholder="Contraseña"
           aria-label="Contraseña"
@@ -108,13 +126,13 @@ export default function LoginPage() {
 
       <input
         type="submit"
-        value="Ingresar"
+        value="Registrarse"
         disabled={!isFormValid}
         className="text-uppercase btn btn-lg btn-primary w-100 mb-3"
       />
 
-      <Link to="/auth/register" className="text-white-50 text-decoration-none">
-        NO TENGO CUENTA
+      <Link to="/auth/login" className="text-white-50 text-decoration-none">
+        YA TENGO CUENTA
       </Link>
     </form>
   );

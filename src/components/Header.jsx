@@ -3,10 +3,12 @@ import CartPopover from "./shop/CartPopover";
 import { useMemo, useState } from "react";
 import CartButton from "./shop/CartButton";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import { useValoNation } from "../hooks/useValoNation";
 
 export default function Header() {
   const { pathname } = useLocation();
   const [showCart, setShowCart] = useState(false);
+  const { auth } = useValoNation();
 
   const isShop = useMemo(() => pathname === "/shop", [pathname]);
 
@@ -36,21 +38,23 @@ export default function Header() {
             id="navbarSupportedContent"
           >
             <ul className="navbar-nav">
-              <li className="nav-item d-md-none my-3">
-                <NavLink
-                  to="/admin"
-                  className="text-decoration-none text-white fw-bold"
-                >
-                  ADMIN
-                </NavLink>
-              </li>
+              {auth.currentUser.role === "admin" && (
+                <li className="nav-item d-md-none my-3">
+                  <NavLink
+                    to="/admin"
+                    className="text-decoration-none text-white fw-bold"
+                  >
+                    ADMIN
+                  </NavLink>
+                </li>
+              )}
 
               <li className="nav-item d-md-none mb-3">
                 <NavLink
-                  to="/profile"
+                  to={auth.currentUser ? "/profile" : "/auth/login"}
                   className="text-decoration-none text-white fw-bold"
                 >
-                  INGRESAR
+                  {auth.currentUser ? "MI PERFIL" : "INGRESAR"}
                 </NavLink>
               </li>
 

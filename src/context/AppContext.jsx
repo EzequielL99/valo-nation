@@ -1,16 +1,20 @@
 import {useReducer, createContext} from 'react';
 import { cartReducer, initialState } from '../reducers/cart-reducer';
+import { authReducer, initialState as authInitialState } from '../reducers/auth-reducer';
 
 export const AppContext = createContext()
 
 export const AppProvider = ({children}) => {
-    const [state, dispatch] = useReducer(cartReducer, initialState)
+    const [cart, cartDispatch] = useReducer(cartReducer, initialState);
+    const [auth, authDispatch] = useReducer(authReducer, authInitialState);
 
     return (
         <AppContext.Provider
             value={{
-                state,
-                dispatch
+                cart,
+                cartDispatch,
+                auth,
+                authDispatch
             }}
         >
             {children}

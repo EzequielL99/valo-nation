@@ -6,7 +6,7 @@ export default function CartPopover({
   showCart,
   setShowCart,
 }) {
-  const { state: cart, dispatch: cartDispatch } = useValoNation();
+  const { cart, cartDispatch } = useValoNation();
   
   useEffect(() => {
     if (showCart && cart.length === 0) {

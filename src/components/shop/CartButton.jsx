@@ -11,7 +11,7 @@ export default function CartButton({
   setShowCart,
   floatingButton = false,
 }) {
-  const { state: cart } = useValoNation();
+  const { cart } = useValoNation();
 
   const toggleCart = (e) => {
     e.preventDefault();
