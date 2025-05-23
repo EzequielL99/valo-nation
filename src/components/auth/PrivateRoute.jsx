@@ -5,7 +5,7 @@ export default function PrivateRoute({ adminPage = false, children }) {
   const { auth } = useValoNation();
 
   // Pagina de Admin - NO AUTORIZADO
-  if (adminPage && auth.currentUser && auth.currentUser.role !== "admin")
+  if (adminPage && auth.currentUser && auth.currentUser?.role !== "admin")
     return <Navigate to="/" replace />;
 
   // Pagina que require sesión iniciada

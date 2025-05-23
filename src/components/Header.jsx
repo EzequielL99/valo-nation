@@ -1,21 +1,22 @@
-import { UserIcon } from "@heroicons/react/24/outline";
 import CartPopover from "./shop/CartPopover";
 import { useMemo, useState } from "react";
 import CartButton from "./shop/CartButton";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useValoNation } from "../hooks/useValoNation";
+import AdminButton from "./AdminButton";
+import ProfileButton from "./ProfileButton";
 
 export default function Header() {
   const { pathname } = useLocation();
   const [showCart, setShowCart] = useState(false);
-  const { auth } = useValoNation();
+  const { auth, authDispatch } = useValoNation();
 
   const isShop = useMemo(() => pathname === "/shop", [pathname]);
 
   return (
-    <div className="container">
+    <div className="container bg-dark sticky-top">
       <nav
-        className="position-relative z-3 navbar navbar-expand-md px-4 py-3 rounded-bottom rounded-bottom-3"
+        className="position-relative z-3 navbar bg-dark navbar-expand-md px-4 py-3 rounded-bottom rounded-bottom-3"
         data-bs-theme="dark"
       >
         <div className="container px-0 justify-content-md-between">
@@ -38,26 +39,6 @@ export default function Header() {
             id="navbarSupportedContent"
           >
             <ul className="navbar-nav">
-              {auth.currentUser.role === "admin" && (
-                <li className="nav-item d-md-none my-3">
-                  <NavLink
-                    to="/admin"
-                    className="text-decoration-none text-white fw-bold"
-                  >
-                    ADMIN
-                  </NavLink>
-                </li>
-              )}
-
-              <li className="nav-item d-md-none mb-3">
-                <NavLink
-                  to={auth.currentUser ? "/profile" : "/auth/login"}
-                  className="text-decoration-none text-white fw-bold"
-                >
-                  {auth.currentUser ? "MI PERFIL" : "INGRESAR"}
-                </NavLink>
-              </li>
-
               <li className="nav-item">
                 <NavLink
                   to="/"
@@ -88,17 +69,29 @@ export default function Header() {
                   Contacto
                 </NavLink>
               </li>
+
+              <li className="nav-item d-md-none py-4 border-top border-primary">
+                <div className="d-flex justify-content-between align-items-center">
+                  <AdminButton className="btn btn-outline-light rounded-pill" />
+
+                  <ProfileButton mobile={true} />
+
+                  {auth.currentUser && (
+                    <button
+                      className="btn btn-outline-light rounded-pill"
+                      onClick={() => authDispatch({ type: "logout" })}
+                    >
+                      SALIR
+                    </button>
+                  )}
+                </div>
+              </li>
             </ul>
           </div>
 
-          <ul className="navbar-nav gap-3 d-none d-md-flex">
+          <ul className="navbar-nav gap-3 d-none d-md-flex align-items-center">
             <li className="nav-item">
-              <NavLink
-                to="/admin"
-                className="btn btn-outline-primary rounded-pill text-uppercase px-4"
-              >
-                ADMIN
-              </NavLink>
+              <AdminButton className="btn btn-outline-primary rounded-pill text-uppercase px-4" />
             </li>
             {isShop && (
               <li className="nav-item">
@@ -106,12 +99,7 @@ export default function Header() {
               </li>
             )}
             <li className="nav-item">
-              <NavLink
-                to="/profile"
-                className="btn btn-outline-primary rounded-circle py-2"
-              >
-                <UserIcon className="icon" />
-              </NavLink>
+              <ProfileButton />
             </li>
           </ul>
         </div>
@@ -130,3 +118,4 @@ export default function Header() {
     </div>
   );
 }
+/* ---------------------------------- EMLV ---------------------------------- */

@@ -57,6 +57,9 @@ export default function RegisterPage() {
 
   return (
     <form onSubmit={handleSubmit} className="form-login mx-auto">
+      <div className="border border-light-subtle rounded-3 p-4 mb-5">
+        <p className="p-0 m-0 fs-4">Queres ser admin? Tu nombre de usuario debe ser <span className="text-primary">Admin</span></p>
+      </div>
       <div className="border border-light-subtle rounded-pill d-flex align-items-center py-2 mb-4">
         <label
           htmlFor="inputEmail"

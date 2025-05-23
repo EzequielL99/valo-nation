@@ -25,7 +25,7 @@ const itemCategories = [
 export default function IndexPage() {
   return (
     <>
-      <section className="container-fluid index-hero d-flex flex-column align-items-center justify-content-center">
+      <section className="container-fluid hero index d-flex flex-column align-items-center justify-content-center">
         <div className="container text-white text-center">
           <h1 className="text-uppercase fw-bold">Domina la batalla</h1>
           <p>Adquiere las mejores réplicas del armamento de Valorant.</p>

@@ -12,6 +12,7 @@ export default function useValorantAPI() {
       }
     } catch (error) {
       console.error("Error:", error);
+      throw error;
     }
   };
 
