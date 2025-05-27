@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { useValoNation } from "../../hooks/useValoNation";
 // Icons
 import {
@@ -25,7 +25,6 @@ export default function CartButton({
     <a
       href="#"
       className="btn btn-primary rounded-circle py-2 position-fixed z-3 d-md-none end-0 bottom-0 translate-middle"
-      onMouseEnter={() => setShowCart(true)}
       onClick={toggleCart}
     >
       {showCart ? (
@@ -43,7 +42,6 @@ export default function CartButton({
     <a
       href="#"
       className={`btn btn-outline-primary rounded-circle py-2 position-relative btn-carrito ${showCart ? 'active' : ''}`}
-      onMouseEnter={() => setShowCart(true)}
       onClick={toggleCart}
     >
       <ShoppingCartIcon className="icon" />

@@ -18,26 +18,26 @@ export default function CategoryList() {
         <div className={`categories-wrapper ${showFilter ? "active" : ''}`}>
           <h3 className="h2 mb-3 my-4 text-center text-md-start">Categorías</h3>
           <div
-            className="d-flex flex-column flex-md-row gap-2 justify-content-md-between category-list"
+            className="d-flex flex-column gap-2 justify-content-md-between category-list"
             role="group"
             aria-label="Vertical button group"
           >
-            <button type="button" className="btn text-start text-white py-3 text-center text-md-start">
+            <button type="button" className="btn text-start py-3 text-center text-md-start">
               Todas las armas
             </button>
-            <button type="button" className="btn text-start text-white py-3 text-center text-md-start">
+            <button type="button" className="btn text-start py-3 text-center text-md-start">
               Fusil de asalto
             </button>
-            <button type="button" className="btn text-start text-white py-3 text-center text-md-start">
+            <button type="button" className="btn text-start py-3 text-center text-md-start">
               Subfusil
             </button>
-            <button type="button" className="btn text-start text-white py-3 text-center text-md-start">
+            <button type="button" className="btn text-start py-3 text-center text-md-start">
               Armas pesadas
             </button>
-            <button type="button" className="btn text-start text-white py-3 text-center text-md-start">
+            <button type="button" className="btn text-start py-3 text-center text-md-start">
               Francotirador
             </button>
-            <button type="button" className="btn text-start text-white py-3 text-center text-md-start">
+            <button type="button" className="btn text-start py-3 text-center text-md-start">
               Pistolas
             </button>
           </div>

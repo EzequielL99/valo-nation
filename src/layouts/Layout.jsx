@@ -1,12 +1,12 @@
 import { Outlet } from "react-router-dom";
-import Heading from "../components/Heading";
+import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { ToastContainer } from "react-toastify";
 
 export default function Layout() {
   return (
     <>
-      <Heading />
+      <Header />
       <Outlet />
       <Footer />
       <ToastContainer limit={3}/>

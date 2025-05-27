@@ -4,7 +4,7 @@ export default function AdminButton({ className }) {
   const { auth } = useValoNation();
 
   return auth.currentUser?.role === "admin" ? (
-    <NavLink to="/admin" className={className}>
+    <NavLink to="/admin/dashboard" className={className}>
       ADMIN
     </NavLink>
   ) : (

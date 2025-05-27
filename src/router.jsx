@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import IndexPage from "./pages/IndexPage";
 import ShopPage from "./pages/shop/ShopPage";
+import ProductDetailPage from "./pages/shop/ProductDetailPage";
 import Layout from "./layouts/Layout";
 import ProfilePage from "./pages/ProfilePage";
 import AdminPage from "./pages/AdminPage";
@@ -10,6 +11,8 @@ import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import PrivateRoute from "./components/auth/PrivateRoute";
 import { useValoNation } from "./hooks/useValoNation";
+import AdminLayout from "./layouts/AdminLayout";
+import AddProduct from "./pages/admin/AddProduct";
 
 export default function AppRouter() {
   const {auth} = useValoNation();
@@ -19,9 +22,14 @@ export default function AppRouter() {
         <Route element={<Layout />}>
           <Route path="/" element={<IndexPage />} index/>
           <Route path="/shop" element={<PrivateRoute> <ShopPage /> </PrivateRoute>} />
+          <Route path="/shop/:id" element={<ProductDetailPage />} />
           <Route path="/profile" element={<PrivateRoute> <ProfilePage /> </PrivateRoute>} />
-          <Route path="/admin" element={<PrivateRoute adminPage={true}> <AdminPage /> </PrivateRoute>} />
           <Route path="/contact" element={<ContactPage />} />
+        </Route>
+
+        <Route element={<AdminLayout />}>
+          <Route path="/admin/dashboard" element={<PrivateRoute adminPage={true}> <AdminPage /> </PrivateRoute>} />
+          <Route path="/admin/products/add" element={<PrivateRoute adminPage={true}> <AddProduct /> </PrivateRoute>} />
         </Route>
 
         <Route element={<AuthLayout />}>

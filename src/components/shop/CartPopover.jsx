@@ -2,12 +2,9 @@ import { TrashIcon } from "@heroicons/react/24/outline";
 import { useEffect, useMemo } from "react";
 import { useValoNation } from "../../hooks/useValoNation";
 
-export default function CartPopover({
-  showCart,
-  setShowCart,
-}) {
+export default function CartPopover({ showCart, setShowCart }) {
   const { cart, cartDispatch } = useValoNation();
-  
+
   useEffect(() => {
     if (showCart && cart.length === 0) {
       setTimeout(() => {
@@ -31,63 +28,67 @@ export default function CartPopover({
       id="popoverCarrito"
       aria-label="Carrito de compras"
     >
-      {!cartIsEmpty ? (
-        <>
-          <table>
-            <thead>
-              <tr>
-                <th>Producto</th>
-                <th>Nombre</th>
-                <th>Precio</th>
-                <th>Cantidad</th>
-                <th>Eliminar</th>
-              </tr>
-            </thead>
-            <tbody>
-              {cart.map((weapon) => (
-                <tr key={weapon.id}>
-                  <td className="">
-                    <img
-                      src={weapon.img}
-                      alt={weapon.name}
-                      className="img-fluid"
-                    />
-                  </td>
-                  <td className="">{weapon.name}</td>
-                  <td className="">{weapon.price}</td>
-                  <td className="">{weapon.quantity}</td>
-                  <td className="">
-                    <button
-                      className="btn btn-outline-primary"
-                      onClick={() =>
-                        cartDispatch({
-                          type: "remove-from-cart",
-                          payload: { itemId: weapon.id },
-                        })
-                      }
-                    >
-                      <TrashIcon className="icon" />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <p className="text-end mt-4">
-            Total a pagar: <span className="fw-bold">${cartTotal}</span>
+      <div className="container">
+        {!cartIsEmpty ? (
+          <>
+            <div className="cart-table-wrapper">
+              <table className="w-100">
+                <thead>
+                  <tr>
+                    <th>Producto</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Eliminar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {cart.map((weapon) => (
+                    <tr key={weapon.id}>
+                      <td className="">
+                        <img
+                          src={weapon.img}
+                          alt={weapon.name}
+                          className="img-fluid"
+                        />
+                      </td>
+                      <td className="">{weapon.name}</td>
+                      <td className="">{weapon.price}</td>
+                      <td className="">{weapon.quantity}</td>
+                      <td className="">
+                        <button
+                          className="btn btn-outline-primary"
+                          onClick={() =>
+                            cartDispatch({
+                              type: "remove-from-cart",
+                              payload: { itemId: weapon.id },
+                            })
+                          }
+                        >
+                          <TrashIcon className="icon" />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="text-end mt-4">
+              Total a pagar: <span className="fw-bold">${cartTotal}</span>
+            </p>
+            <button
+              className="btn btn-primary w-100 mt-3 text-uppercase"
+              onClick={() => cartDispatch({ type: "clear-cart" })}
+            >
+              Vaciar carrito
+            </button>
+          </>
+        ) : (
+          <p className="p-0 m-0 text-center text-primary">
+            Tu carrito está vacío
           </p>
-          <button
-            className="btn btn-primary w-100 mt-3 text-uppercase"
-            onClick={() => cartDispatch({ type: "clear-cart" })}
-          >
-            Vaciar carrito
-          </button>
-        </>
-      ) : (
-        <p className="p-0 m-0 text-center text-primary">
-          Tu carrito está vacío
-        </p>
-      )}
+        )}
+      </div>
     </div>
   );
 }

@@ -28,7 +28,12 @@ export default function GridItems() {
 
   return (
     <div className="col-12 col-lg-10">
-      {isLoading && <Loader className="mx-auto my-4" />}
+      {isLoading && (
+        <div className="container text-center">
+          <Loader className="mx-auto my-4" />
+          <p>Consultando productos...</p>
+        </div>
+      )}
 
       {isError && (
         <div className="text-danger text-center py-5">

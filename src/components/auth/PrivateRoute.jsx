@@ -9,7 +9,7 @@ export default function PrivateRoute({ adminPage = false, children }) {
     return <Navigate to="/" replace />;
 
   // Pagina que require sesión iniciada
-  if (!auth.currentUser) return <Navigate to="/auth/login" replace />;
+  if (!auth.currentUser) return <Navigate to="/auth/login?ec=302" replace />;
 
   // Todo OK - Avanza
   return children;

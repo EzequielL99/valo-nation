@@ -134,7 +134,7 @@ export default function RegisterPage() {
         className="text-uppercase btn btn-lg btn-primary w-100 mb-3"
       />
 
-      <Link to="/auth/login" className="text-white-50 text-decoration-none">
+      <Link to="/auth/login" className="link-primary text-decoration-none">
         YA TENGO CUENTA
       </Link>
     </form>

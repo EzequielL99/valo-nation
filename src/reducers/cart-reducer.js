@@ -36,9 +36,32 @@ export const cartReducer = (state, action) => {
   }
 
   if (action.type === "remove-from-cart") {
-    const {itemId} = action.payload;
+    const { itemId } = action.payload;
 
-    return state.filter(item => item.id !== itemId);
+    return state.filter((item) => item.id !== itemId);
+  }
+
+  if (action.type === "update-quantity") {
+    const { itemId, newQuantity } = action.payload;
+
+    const itemExists = state.find((product) => product.id === itemId);
+
+    let updatedCart = state;
+    if (itemExists) {
+      updatedCart = state.map((product) => {
+        if (product.id === itemId) {
+          if (newQuantity <= MAX_ITEMS && newQuantity >= MIN_ITEMS) {
+            return { ...product, quantity: newQuantity };
+          } else {
+            return product;
+          }
+        } else {
+          return product;
+        }
+      });
+    }
+
+    return updatedCart;
   }
 
   if (action.type === "clear-cart") {

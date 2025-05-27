@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useValoNation } from "../hooks/useValoNation";
 import {
   UserIcon,
@@ -14,38 +14,43 @@ export default function ProfileButton({ mobile = false }) {
         MI PERFIL
       </NavLink>
     ) : (
-      <div class="dropstart">
+      <div className="dropstart">
         <button
-          class="btn btn-outline-primary rounded-circle py-2"
+          className="btn btn-outline-primary rounded-circle py-2"
           type="button"
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
           <UserIcon className="icon" />
         </button>
-        <ul class="dropdown-menu top-100 px-4 py-3">
-          <li className="pb-2">
+        <ul className="dropdown-menu p-0 top-100 pt-3">
+          <li className="pb-2 px-4">
             <p className="dropdown-header p-0 m-0 fs-5">
               Hola {auth.currentUser.usuario}!
             </p>
           </li>
-          <li className="pb-2">
-            <NavLink class="dropdown-item" className='link-primary text-decoration-none fs-5' to="/profile">
+          <li>
+            <NavLink
+              className="dropdown-item link-primary text-decoration-none fs-5 px-4 py-3"
+              to="/profile"
+            >
               Mi perfil
             </NavLink>
           </li>
           <li>
-              <button onClick={() => authDispatch({ type: "logout" })} className="btn m-0 p-0 text-capitalize fs-5 link-primary">Salir</button>
+            <Link
+              onClick={(e) => {
+                e.preventDefault();
+                authDispatch({ type: "logout" });
+              }}
+              className="dropdown-item link-primary text-decoration-none fs-5 px-4 pt-2 pb-3"
+              to="/profile"
+            >
+              Salir
+            </Link>
           </li>
         </ul>
       </div>
-
-      // <NavLink
-      //   to="/profile"
-      //   className="btn btn-outline-primary rounded-circle py-2"
-      // >
-      //   <UserIcon className="icon" />
-      // </NavLink>
     );
   } else {
     // No hay usuario activo

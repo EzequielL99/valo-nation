@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import { EnvelopeIcon, KeyIcon } from "@heroicons/react/24/outline";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useValoNation } from "../../hooks/useValoNation";
 import { toast } from "react-toastify";
 
@@ -11,7 +11,7 @@ export default function LoginPage() {
   });
 
   const { auth, authDispatch } = useValoNation();
-  const navigate = useNavigate();
+  const location = useLocation();
 
   // Efecto: Montaje de componente
   useEffect(() => {
@@ -19,6 +19,8 @@ export default function LoginPage() {
     const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
 
     authDispatch({ type: "load-users", payload: { users: storedUsers } });
+
+    if(location.search.includes('302')) toast.error('Registrate o iniciá sesión', {autoClose: 1800})
   }, []);
 
   // Efecto: Error al ingresar
@@ -32,16 +34,6 @@ export default function LoginPage() {
       authDispatch({ type: "clear-error" });
     }
   }, [auth.error]);
-
-  // Efecto: Usuario registrado con exito
-  useEffect(() => {
-    if (auth.currentUser !== null) {
-      toast.success(`Bienvenido ${auth.currentUser.usuario}`, {
-        autoClose: 2000,
-        onClose: () => navigate("/shop"),
-      });
-    }
-  }, [auth.currentUser]);
 
   const handleChange = (e) => {
     setUserData({
@@ -113,7 +105,7 @@ export default function LoginPage() {
         className="text-uppercase btn btn-lg btn-primary w-100 mb-3"
       />
 
-      <Link to="/auth/register" className="text-white-50 text-decoration-none">
+      <Link to="/auth/register" className="link-primary text-decoration-none">
         NO TENGO CUENTA
       </Link>
     </form>

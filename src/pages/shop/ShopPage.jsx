@@ -11,7 +11,7 @@ export default function ShopPage() {
         </div>
       </section>
 
-      <main className="container min-vh-100 bg-dark text-light rounded-3 position-relative z-2 shop-container p-5">
+      <main className="container min-vh-100 bg-light rounded-3 position-relative z-2 shop-container p-5">
         <SearchBar />
         <div className="row mt-5">
           <CategoryList />

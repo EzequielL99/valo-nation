@@ -9,7 +9,7 @@ export default function SearchBar() {
           <MagnifyingGlassIcon className="icon" />
           <input
             type="text"
-            className="bg-transparent border-0 text-white"
+            className="bg-transparent border-0"
             placeholder="Buscar armamento"
           />
         </div>
