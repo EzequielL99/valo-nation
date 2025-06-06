@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { UserIcon, KeyIcon, EnvelopeIcon } from "@heroicons/react/24/outline";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { useValoNation } from "../../hooks/useValoNation";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function RegisterPage() {
   const [newUser, setNewUser] = useState({
@@ -12,7 +12,8 @@ export default function RegisterPage() {
     password: "",
   });
 
-  const { auth, authDispatch } = useValoNation();
+  const { auth, authDispatch } = useAuth();
+  const navigate = useNavigate();
 
   // Efecto: Montaje de componente
   useEffect(() => {
@@ -33,6 +34,17 @@ export default function RegisterPage() {
       authDispatch({ type: "clear-error" });
     }
   }, [auth.error]);
+
+  useEffect(() => {
+    if (auth.currentUser !== null) {
+      toast.success(`Te damos la bienvenida ${auth.currentUser.usuario}`, {
+        autoClose: 1200,
+        onClose: () => {
+          navigate("/");
+        },
+      });
+    }
+  }, [auth.currentUser]);
 
   const handleChange = (e) => {
     setNewUser({
@@ -58,8 +70,12 @@ export default function RegisterPage() {
   return (
     <form onSubmit={handleSubmit} className="form-login mx-auto">
       <div className="border border-light-subtle rounded-3 p-4 mb-5">
-        <p className="p-0 m-0 fs-4">Queres ser admin? Tu nombre de usuario debe ser <span className="text-primary">Admin</span></p>
+        <p className="p-0 m-0 fs-4">
+          Queres ser admin? Tu nombre de usuario debe ser{" "}
+          <span className="text-primary">Admin</span>
+        </p>
       </div>
+      <p className="mb-4">Registrate para poder acceder a nuestra tienda.</p>
       <div className="border border-light-subtle rounded-pill d-flex align-items-center py-2 mb-4">
         <label
           htmlFor="inputEmail"

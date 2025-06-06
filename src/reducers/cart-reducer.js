@@ -41,8 +41,8 @@ export const cartReducer = (state, action) => {
     return state.filter((item) => item.id !== itemId);
   }
 
-  if (action.type === "update-quantity") {
-    const { itemId, newQuantity } = action.payload;
+  if (action.type === "increase-quantity") {
+    const { itemId } = action.payload;
 
     const itemExists = state.find((product) => product.id === itemId);
 
@@ -50,8 +50,8 @@ export const cartReducer = (state, action) => {
     if (itemExists) {
       updatedCart = state.map((product) => {
         if (product.id === itemId) {
-          if (newQuantity <= MAX_ITEMS && newQuantity >= MIN_ITEMS) {
-            return { ...product, quantity: newQuantity };
+          if (product.quantity < MAX_ITEMS) {
+            return { ...product, quantity: product.quantity + 1 };
           } else {
             return product;
           }
@@ -59,6 +59,34 @@ export const cartReducer = (state, action) => {
           return product;
         }
       });
+    }
+
+    return updatedCart;
+  }
+
+  if (action.type === "decrease-quantity") {
+    const { itemId } = action.payload;
+
+    const itemExists = state.find((product) => product.id === itemId);
+
+    let updatedCart = state;
+    if (itemExists) {
+      // Relevar si el producto se debe eliminar
+      if (itemExists.quantity <= MIN_ITEMS) {
+        updatedCart = state.filter((product) => product.id !== itemId);
+      } else {
+        updatedCart = state.map((product) => {
+          if (product.id === itemId) {
+            if (product.quantity > MIN_ITEMS) {
+              return { ...product, quantity: product.quantity - 1 };
+            } else {
+              return product;
+            }
+          } else {
+            return product;
+          }
+        });
+      }
     }
 
     return updatedCart;

@@ -1,9 +1,9 @@
-import { useValoNation } from "../../hooks/useValoNation";
 import { Link } from "react-router-dom";
 import { getProductInfo } from "../../utils";
+import { useCart } from "../../hooks/useCart";
 
 export default function ItemCard({ weapon }) {
-  const { cartDispatch } = useValoNation();
+  const { cartDispatch } = useCart();
   const objProduct = getProductInfo(weapon);
 
   return (

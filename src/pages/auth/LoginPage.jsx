@@ -1,8 +1,9 @@
 import { useState, useMemo, useEffect } from "react";
-import { EnvelopeIcon, KeyIcon } from "@heroicons/react/24/outline";
-import { Link, useLocation } from "react-router-dom";
-import { useValoNation } from "../../hooks/useValoNation";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { EnvelopeIcon, KeyIcon } from "@heroicons/react/24/outline";
+
+import { useAuth } from "../../hooks/useAuth";
 
 export default function LoginPage() {
   const [userData, setUserData] = useState({
@@ -10,8 +11,9 @@ export default function LoginPage() {
     password: "",
   });
 
-  const { auth, authDispatch } = useValoNation();
+  const { auth, authDispatch } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Efecto: Montaje de componente
   useEffect(() => {
@@ -35,6 +37,18 @@ export default function LoginPage() {
     }
   }, [auth.error]);
 
+  // Efecto: Ingreso OK
+  useEffect(() => {
+    if(auth.currentUser !== null){
+      toast.success(`Que bueno verte ${auth.currentUser.usuario}`, {
+        autoClose: 1000,
+        onClose: () => {
+          navigate('/');
+        }
+      })
+    }
+  }, [auth.currentUser])
+
   const handleChange = (e) => {
     setUserData({
       ...userData,
@@ -55,6 +69,7 @@ export default function LoginPage() {
 
   return (
     <form onSubmit={handleSubmit} className="form-login mx-auto">
+      <p className="mb-4">Inicia sesión para tener acceso al sitio completo</p>
       <div className="border border-light-subtle rounded-pill d-flex align-items-center py-2 mb-4">
         <label
           htmlFor="inputEmail"

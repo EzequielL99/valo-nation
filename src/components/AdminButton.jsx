@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
-import { useValoNation } from "../hooks/useValoNation";
+import { useAuth } from "../hooks/useAuth";
 export default function AdminButton({ className }) {
-  const { auth } = useValoNation();
+  const { auth } = useAuth();
 
   return auth.currentUser?.role === "admin" ? (
     <NavLink to="/admin/dashboard" className={className}>

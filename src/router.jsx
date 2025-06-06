@@ -1,40 +1,66 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import IndexPage from "./pages/IndexPage";
-import ShopPage from "./pages/shop/ShopPage";
-import ProductDetailPage from "./pages/shop/ProductDetailPage";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Layout from "./layouts/Layout";
+import AdminLayout from "./layouts/AdminLayout";
+import AuthLayout from "./layouts/AuthLayout";
+
+import IndexPage from "./pages/IndexPage";
 import ProfilePage from "./pages/ProfilePage";
 import AdminPage from "./pages/AdminPage";
 import ContactPage from "./pages/ContactPage";
-import AuthLayout from "./layouts/AuthLayout";
+import ShopPage from "./pages/shop/ShopPage";
+import ProductDetailPage from "./pages/shop/ProductDetailPage";
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
+import UnauthorizedPage from "./pages/auth/UnauthorizedPage";
+import AddProductPage from "./pages/admin/AddProductPage";
+import CartPage from "./pages/shop/CartPage";
+
 import PrivateRoute from "./components/auth/PrivateRoute";
-import { useValoNation } from "./hooks/useValoNation";
-import AdminLayout from "./layouts/AdminLayout";
-import AddProduct from "./pages/admin/AddProduct";
+import RoleRoute from "./components/auth/RoleRoute";
 
 export default function AppRouter() {
-  const {auth} = useValoNation();
   return (
     <BrowserRouter>
       <Routes>
+        {/* Rutas publicas */}
         <Route element={<Layout />}>
-          <Route path="/" element={<IndexPage />} index/>
-          <Route path="/shop" element={<PrivateRoute> <ShopPage /> </PrivateRoute>} />
-          <Route path="/shop/:id" element={<ProductDetailPage />} />
-          <Route path="/profile" element={<PrivateRoute> <ProfilePage /> </PrivateRoute>} />
+          <Route path="/" element={<IndexPage />} index />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/unauthorized" element={<UnauthorizedPage />} />
+          {/* <Route path="*" element={<ContactPage />} /> */}
         </Route>
 
-        <Route element={<AdminLayout />}>
-          <Route path="/admin/dashboard" element={<PrivateRoute adminPage={true}> <AdminPage /> </PrivateRoute>} />
-          <Route path="/admin/products/add" element={<PrivateRoute adminPage={true}> <AddProduct /> </PrivateRoute>} />
+        {/* Rutas protegidas: LOGIN */}
+        <Route
+          element={
+            <PrivateRoute>
+              <Layout />
+            </PrivateRoute>
+          }
+        >
+          <Route path="/shop" element={<ShopPage />} />
+          <Route path="/shop/cart" element={<CartPage />} />
+          <Route path="/shop/:id" element={<ProductDetailPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Route>
 
+        {/* Rutas protegidas por rol: ADMIN */}
+        <Route
+          element={
+            <RoleRoute requiredRole="ADMIN">
+              <AdminLayout />
+            </RoleRoute>
+          }
+        >
+          <Route path="/admin/dashboard" element={<AdminPage />} />
+          <Route path="/admin/products/add" element={<AddProductPage />} />
+        </Route>
+
+        {/* Rutas de autenticación */}
         <Route element={<AuthLayout />}>
-            <Route path="/auth/login" element={!auth.currentUser ? <LoginPage /> : <Navigate to='/shop' replace />} />
-            <Route path="/auth/register" element={!auth.currentUser ? <RegisterPage /> : <Navigate to='/shop' replace />} />
+          <Route path="/auth/login" element={<LoginPage />} />
+          <Route path="/auth/register" element={<RegisterPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

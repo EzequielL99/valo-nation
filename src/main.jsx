@@ -9,12 +9,12 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 // Estilos CSS
 import "./styles/main.css";
 // Context API
-import { AppProvider } from "./context/AppContext.jsx";
+import AppProviders from "./providers/AppProviders.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <AppProvider>
+    <AppProviders>
       <AppRouter />
-    </AppProvider>
+    </AppProviders>
   </StrictMode>
 );

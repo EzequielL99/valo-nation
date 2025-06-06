@@ -14,3 +14,7 @@ export const getProductInfo = (data) => {
         : [],
   };
 };
+
+export const createFakeJWT = (username) => {
+  localStorage.setItem("authToken", `fake-token-${username.toLowerCase()}`);
+};

@@ -1,12 +1,12 @@
 import { NavLink, Link } from "react-router-dom";
-import { useValoNation } from "../hooks/useValoNation";
 import {
   UserIcon,
   ArrowRightEndOnRectangleIcon,
 } from "@heroicons/react/24/outline";
+import { useAuth } from "../hooks/useAuth";
 
 export default function ProfileButton({ mobile = false }) {
-  const { auth, authDispatch } = useValoNation();
+  const { auth, authDispatch } = useAuth();
 
   if (auth.currentUser) {
     return mobile ? (
@@ -31,7 +31,7 @@ export default function ProfileButton({ mobile = false }) {
           </li>
           <li>
             <NavLink
-              className="dropdown-item link-primary text-decoration-none fs-5 px-4 py-3"
+              className="dropdown-item link-dark text-decoration-none fs-5 px-4 py-3"
               to="/profile"
             >
               Mi perfil
@@ -43,7 +43,7 @@ export default function ProfileButton({ mobile = false }) {
                 e.preventDefault();
                 authDispatch({ type: "logout" });
               }}
-              className="dropdown-item link-primary text-decoration-none fs-5 px-4 pt-2 pb-3"
+              className="dropdown-item link-dark text-decoration-none fs-5 px-4 pt-2 pb-3"
               to="/profile"
             >
               Salir

@@ -1,16 +1,8 @@
-import { Navigate } from "react-router-dom";
-import { useValoNation } from "../../hooks/useValoNation";
+import { useAuth } from "../../hooks/useAuth";
+import { Navigate, Outlet } from "react-router-dom";
 
-export default function PrivateRoute({ adminPage = false, children }) {
-  const { auth } = useValoNation();
+export default function PrivateRoute({children}) {
+  const { auth } = useAuth();
 
-  // Pagina de Admin - NO AUTORIZADO
-  if (adminPage && auth.currentUser && auth.currentUser?.role !== "admin")
-    return <Navigate to="/" replace />;
-
-  // Pagina que require sesión iniciada
-  if (!auth.currentUser) return <Navigate to="/auth/login?ec=302" replace />;
-
-  // Todo OK - Avanza
-  return children;
+  return auth.currentUser ? children : <Navigate to="/auth/login" />;
 }

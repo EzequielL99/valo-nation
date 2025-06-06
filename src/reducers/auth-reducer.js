@@ -1,3 +1,5 @@
+import { createFakeJWT } from "../utils";
+
 export const initialState = {
   users: [],
   currentUser: null,
@@ -35,6 +37,7 @@ export const authReducer = (state, action) => {
       const updatedUsers = [...state.users, newUser];
 
       localStorage.setItem("users", JSON.stringify(updatedUsers));
+      createFakeJWT(newUser.usuario);
 
       return {
         ...state,
@@ -64,6 +67,10 @@ export const authReducer = (state, action) => {
         };
       }
 
+      // Credenciales OK - Generar Fake JWT
+      createFakeJWT(filteredUser.usuario);
+
+
       return {
         ...state,
         error: null,
@@ -72,6 +79,9 @@ export const authReducer = (state, action) => {
     }
 
     case "logout":
+      // Liberar Fake JWT
+      localStorage.removeItem("authToken");
+
       return {
         ...state,
         currentUser: null,

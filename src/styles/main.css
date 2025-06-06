@@ -10,7 +10,9 @@ html {
   box-sizing: border-box;
 }
 
-*,*::after,*::before{
+*,
+*::after,
+*::before {
   box-sizing: inherit;
 }
 
@@ -103,7 +105,13 @@ select {
   border: 3px solid var(--bs-primary) !important;
 }
 
-.dropdown-item.active, .dropdown-item:active{
+.dropdown-item:hover {
+  background-color: var(--bs-dark);
+  color: var(--bs-light) !important;
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
   background-color: var(--bs-primary-dark);
   color: var(--bs-light) !important;
 }
@@ -161,21 +169,11 @@ select {
 }
 
 /* ----------------------------- HEADER ----------------------------- */
-header nav {
-  background-color: var(--bs-gray-800);
-}
-
-@media (min-width: 768px) {
-  header nav {
-    background-color: var(--bs-dark);
-  }
-}
-
 header .nav-link:hover {
   color: var(--bs-primary);
 }
 
-header .dropdown-menu .link-primary:hover{
+header .dropdown-menu .link-primary:hover {
   color: var(--bs-light) !important;
 }
 
@@ -212,6 +210,7 @@ a.navbar-brand {
 .navbar-nav .btn.btn-carrito:focus-within {
   background-color: transparent;
   border-color: var(--bs-primary);
+  color: var(--bs-primary) !important;
 }
 
 .navbar-nav .btn.btn-carrito.active {
@@ -221,8 +220,12 @@ a.navbar-brand {
 }
 
 header .btn-outline-primary.active {
-  background-color: var(--bs-white);
-  border-color: var(--bs-white);
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+  color: var(--bs-light);
+}
+
+header .btn-carrito:focus {
   color: var(--bs-primary);
 }
 
@@ -254,7 +257,7 @@ header .btn-outline-primary.active {
   min-height: 80vh;
 }
 
-.hero.index .btn-light:hover{
+.hero.index .btn-light:hover {
   background-color: var(--bs-primary);
   border-color: var(--bs-primary);
   color: var(--bs-light);
@@ -327,73 +330,6 @@ section.weapon-details .img-weapon {
     transform: scale(3);
     opacity: 0;
   }
-}
-/* --------------------------------- CARRITO -------------------------------- */
-#popoverCarrito {
-  bottom: 100%;
-  left: 0%;
-  width: 100%;
-  transition: transform 0.4s ease-in-out;
-}
-
-#popoverCarrito.active {
-  transform: translateY(99%);
-}
-
-@media (min-width: 768px) {
-  #popoverCarrito {
-    bottom: 0%;
-    transform: translateY(100%);
-    pointer-events: none;
-  }
-
-  #popoverCarrito.active {
-    transform: translateY(0%);
-    pointer-events: all;
-  }
-}
-
-#popoverCarrito .cart-table-wrapper {
-  max-height: 20rem;
-  overflow-y: scroll;
-}
-
-#popoverCarrito table {
-  font-size: 1rem;
-  width: 100%;
-  text-align: center;
-}
-
-@media (min-width: 992px) {
-  #popoverCarrito table {
-    font-size: 1.4rem;
-  }
-}
-
-#popoverCarrito table th {
-  font-size: 1.3rem;
-}
-
-@media (min-width: 992px) {
-  #popoverCarrito table th {
-    font-size: 1.8rem;
-  }
-}
-
-#popoverCarrito table td {
-  padding-bottom: 1rem;
-}
-
-#popoverCarrito table td img {
-  max-width: 8rem;
-}
-
-.carrito {
-  min-width: 20rem;
-}
-
-.carrito tbody tr:last-of-type td {
-  padding-bottom: 0 !important;
 }
 
 /* ----------------------------- SHOP CONTAINER ----------------------------- */
@@ -511,7 +447,7 @@ section.weapon-details .img-weapon {
   box-shadow: inset 0 0 20px 20px #23232329;
 }
 
-.form-login .link-primary:hover{
+.form-login .link-primary:hover {
   color: var(--bs-light) !important;
 }
 
@@ -537,26 +473,37 @@ section.weapon-details .img-weapon {
   width: 4rem;
 }
 
+.input-quantity button:disabled {
+  background-color: var(--bs-gray-200);
+  border-color: var(--bs-gray-200);
+  color: var(--bs-light);
+}
+
 /* ------------------------------ PAGE:CONTACT ------------------------------ */
 .contact-form {
   max-width: var(--bs-breakpoint-sm);
   margin-top: -7rem;
 }
 
-/* .tag-category{
-    color: $light-border-subtle;
-} */
+/* ------------------------------- PAGE: CART ------------------------------- */
+.cart-list .btn .icon {
+  width: 2.8rem;
+  height: 2.8rem;
+}
 
+.cart-list li > * {
+  flex-basis: 20%;
+}
 
 /* -------------------------------------------------------------------------- */
 /*                                    ADMIN                                   */
 /* -------------------------------------------------------------------------- */
 
 /* -------------------------------- DASHBOARD ------------------------------- */
-.dashboard-card{
+.dashboard-card {
   min-height: 18rem;
 }
 
-.dashboard-card .number{
+.dashboard-card .number {
   font-size: 6rem;
 }

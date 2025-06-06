@@ -1,50 +1,48 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState, useEffect } from "react";
 import { PlusIcon, MinusIcon } from "@heroicons/react/24/outline";
-import { useValoNation } from "../../hooks/useValoNation";
+import { useCart } from "../../hooks/useCart";
 
 const MIN_ITEMS = 1;
 const MAX_ITEMS = 5;
 
 export default function ProductCartController({ weaponInfo }) {
-  const { cart, cartDispatch } = useValoNation();
+  const { cart, cartDispatch } = useCart();
   const [quantity, setQuantity] = useState(1);
+  const btnIncrementRef = useRef(null);
+  const btnDecrementRef = useRef(null);
+
+  useEffect(() => {
+    // Filtrar por producto
+    const cartProduct = cart.find((item) => item.id === weaponInfo.id);
+
+    if (cartProduct) {
+      setQuantity(cartProduct.quantity);
+
+      // Habilitar Botones
+      btnIncrementRef.current.disabled = false;
+      btnDecrementRef.current.disabled = false;
+    }
+  }, [cart]);
 
   const handleChangeQuantity = (increment = false) => {
     // Incrementar
     if (increment) {
-      if (quantity >= MAX_ITEMS) return setQuantity(MAX_ITEMS);
-
-      const newQuantity = quantity + 1;
+      btnIncrementRef.current.disabled = true;
+      btnDecrementRef.current.disabled = true;
 
       cartDispatch({
-        type: "update-quantity",
+        type: "increase-quantity",
         payload: {
           itemId: weaponInfo.id,
-          newQuantity,
         },
       });
-      setQuantity(newQuantity);
     } else {
-      if (quantity <= MIN_ITEMS) {
-        cartDispatch({
-          type: "remove-from-cart",
-          payload: { itemId: weaponInfo.id },
-        });
-
-        return;
-        // return setQuantity(MIN_ITEMS);
-      } else {
-        const newQuantity = quantity - 1;
-
-        cartDispatch({
-          type: "update-quantity",
-          payload: {
-            itemId: weaponInfo.id,
-            newQuantity,
-          },
-        });
-        setQuantity(newQuantity);
-      }
+      cartDispatch({
+        type: "decrease-quantity",
+        payload: {
+          itemId: weaponInfo.id,
+        },
+      });
     }
   };
 
@@ -68,6 +66,7 @@ export default function ProductCartController({ weaponInfo }) {
           <button
             className="btn btn-outline-primary p-2"
             onClick={() => handleChangeQuantity()}
+            ref={btnDecrementRef}
           >
             <i>
               <MinusIcon className="icon" />
@@ -79,6 +78,7 @@ export default function ProductCartController({ weaponInfo }) {
           <button
             className="btn btn-outline-primary p-2"
             onClick={() => handleChangeQuantity(true)}
+            ref={btnIncrementRef}
           >
             <i>
               <PlusIcon className="icon" />

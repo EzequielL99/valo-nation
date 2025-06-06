@@ -1,102 +1,86 @@
-import CartPopover from "./shop/CartPopover";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import CartButton from "./shop/CartButton";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { useValoNation } from "../hooks/useValoNation";
 import AdminButton from "./AdminButton";
 import ProfileButton from "./ProfileButton";
+import { useAuth } from "../hooks/useAuth";
 
 export default function Header() {
   const { pathname } = useLocation();
-  const [showCart, setShowCart] = useState(false);
-  const { auth, authDispatch } = useValoNation();
+  const { auth, authDispatch } = useAuth();
 
-  const isShop = useMemo(() => pathname.includes("/shop") , [pathname]);
+  const isShop = useMemo(() => pathname.includes("/shop"), [pathname]);
 
   return (
-    <header className="bg-dark sticky-top">
-      <div className="container">
-        <nav
-          className="position-relative z-3 navbar bg-dark navbar-expand-md py-3 rounded-bottom rounded-bottom-3"
-          data-bs-theme="dark"
-        >
-          <div className="container px-0 justify-content-md-between">
-            <Link to="/" className="navbar-brand">
+    <header className="bg-light sticky-top">
+      <nav className="container py-3">
+        <div className="row align-items-center">
+          <div className="col-4">
+            <Link to="/" className="navbar-brand p-0 m-0">
               <span className="fw-bold text-primary">VALO</span>-NATION
             </Link>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            <div
-              className="collapse navbar-collapse flex-md-grow-0"
-              id="navbarSupportedContent"
-            >
-              <ul className="navbar-nav">
-                <li className="nav-item">
-                  <NavLink
-                    to="/"
-                    className={({ isActive }) =>
-                      isActive ? "nav-link text-primary" : "nav-link"
-                    }
-                  >
-                    Inicio
-                  </NavLink>
-                </li>
-                <li className="nav-item">
-                  <NavLink
-                    to="/shop"
-                    className={({ isActive }) =>
-                      isActive ? "nav-link text-primary" : "nav-link"
-                    }
-                  >
-                    Tienda
-                  </NavLink>
-                </li>
-                <li className="nav-item">
-                  <NavLink
-                    to="/contact"
-                    className={({ isActive }) =>
-                      isActive ? "nav-link text-primary" : "nav-link"
-                    }
-                  >
-                    Contacto
-                  </NavLink>
-                </li>
+          </div>
 
-                <li className="nav-item d-md-none py-4 border-top border-primary">
-                  <div className="d-flex justify-content-between align-items-center">
-                    <AdminButton className="btn btn-outline-light rounded-pill" />
+          <div className="col-4 d-flex justify-content-center">
+            <ul className="d-flex flex-row gap-4 list-unstyled p-0 m-0 align-items-center">
+              <li>
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    isActive ? "nav-link text-primary" : "nav-link"
+                  }
+                >
+                  Inicio
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/shop"
+                  className={({ isActive }) =>
+                    isActive ? "nav-link text-primary" : "nav-link"
+                  }
+                >
+                  Tienda
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/contact"
+                  className={({ isActive }) =>
+                    isActive ? "nav-link text-primary" : "nav-link"
+                  }
+                >
+                  Contacto
+                </NavLink>
+              </li>
 
-                    <ProfileButton mobile={true} />
+              <li className="nav-item d-md-none py-4 border-top border-primary">
+                <div className="d-flex justify-content-between align-items-center">
+                  <AdminButton className="btn btn-outline-light rounded-pill" />
 
-                    {auth.currentUser && (
-                      <button
-                        className="btn btn-outline-light rounded-pill"
-                        onClick={() => authDispatch({ type: "logout" })}
-                      >
-                        SALIR
-                      </button>
-                    )}
-                  </div>
-                </li>
-              </ul>
-            </div>
+                  <ProfileButton mobile={true} />
 
-            <ul className="navbar-nav gap-3 d-none d-md-flex align-items-center">
+                  {auth.currentUser && (
+                    <button
+                      className="btn btn-outline-light rounded-pill"
+                      onClick={() => authDispatch({ type: "logout" })}
+                    >
+                      SALIR
+                    </button>
+                  )}
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div className="col-4 d-flex justify-content-end">
+            <ul className="list-unstyled m-0 p-0 gap-3 d-none d-md-flex align-items-center">
               <li className="nav-item">
                 <AdminButton className="btn btn-outline-primary rounded-pill text-uppercase px-4" />
               </li>
               {isShop && (
                 <li className="nav-item">
-                  <CartButton showCart={showCart} setShowCart={setShowCart} />
+                  <CartButton />
                 </li>
               )}
               <li className="nav-item">
@@ -104,19 +88,8 @@ export default function Header() {
               </li>
             </ul>
           </div>
-        </nav>
-
-        {isShop && (
-          <>
-            <CartButton
-              showCart={showCart}
-              setShowCart={setShowCart}
-              floatingButton={true}
-            />
-            <CartPopover showCart={showCart} setShowCart={setShowCart} />
-          </>
-        )}
-      </div>
+        </div>
+      </nav>
     </header>
   );
 }
