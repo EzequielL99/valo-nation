@@ -499,6 +499,15 @@ section.weapon-details .img-weapon {
 /*                                    ADMIN                                   */
 /* -------------------------------------------------------------------------- */
 
+/* -------------------------------- SIDEBAR ------------------------------- */
+.admin-layout-wrapper {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+
 /* -------------------------------- DASHBOARD ------------------------------- */
 .dashboard-card {
   min-height: 18rem;

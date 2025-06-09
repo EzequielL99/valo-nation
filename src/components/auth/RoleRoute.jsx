@@ -6,7 +6,7 @@ export default function RoleRoute({ requiredRole, children }) {
 
   if (!auth.currentUser) return <Navigate to="/auth/login" />;
 
-  if (auth.currentUser?.role !== requiredRole) return <Navigate to="/unauthorized" />;
+  if (auth.currentUser?.role.toUpperCase() !== requiredRole) return <Navigate to="/unauthorized" />;
 
   return children;
 }
