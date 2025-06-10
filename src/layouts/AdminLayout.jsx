@@ -4,24 +4,50 @@ import {
   HomeIcon,
   ArchiveBoxIcon,
   PlusCircleIcon,
-  MinusCircleIcon,
-  SparklesIcon,
   UsersIcon,
-  ChevronDoubleLeftIcon,
   RectangleGroupIcon,
-  EllipsisVerticalIcon,
 } from "@heroicons/react/24/outline";
 
 import Footer from "../components/Footer";
-import AdminSidebar from "../components/admin/AdminSidebar";
+import AdminSidebar, {
+  AdminSidebarItem,
+} from "../components/admin/AdminSidebar";
 
 export default function AdminLayout() {
   return (
     <>
       <div className="admin-layout-wrapper">
-        <AdminSidebar />
-        <main>
-          <Outlet />
+        <AdminSidebar>
+          <AdminSidebarItem
+            to="/"
+            text="Volver al sitio"
+            icon={<HomeIcon className="icon" />}
+          />
+          <AdminSidebarItem
+            to="/admin/dashboard"
+            text="Dashboard"
+            icon={<RectangleGroupIcon className="icon" />}
+          />
+          <AdminSidebarItem
+            to="/admin/products"
+            text="Productos"
+            icon={<ArchiveBoxIcon className="icon" />}
+          />
+          <AdminSidebarItem
+            to="/admin/products/add"
+            text="Agregar Producto"
+            icon={<PlusCircleIcon className="icon" />}
+          />
+          <AdminSidebarItem
+            to="/admin/users"
+            text="Usuarios"
+            icon={<UsersIcon className="icon" />}
+          />
+        </AdminSidebar>
+        <main className="bg-light">
+          <div className="container py-5 px-5">
+            <Outlet />
+          </div>
         </main>
       </div>
       <Footer />

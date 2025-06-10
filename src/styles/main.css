@@ -507,6 +507,76 @@ section.weapon-details .img-weapon {
   grid-template-columns: auto 1fr;
 }
 
+aside nav .btn-expand-menu:hover {
+  background-color: var(--bs-gray-300);
+}
+
+nav:not(.expanded) .btn-expand-menu svg {
+  transform: rotate(-180deg);
+}
+
+aside nav li > a {
+  color: var(--bs-dark);
+}
+
+aside nav li > a:hover {
+  background-color: var(--bs-gray-300);
+}
+
+aside nav .brand {
+  text-wrap: nowrap;
+  transition: max-width 0.2s ease-in-out;
+}
+
+aside nav .brand {
+  max-width: 0;
+}
+
+aside nav.expanded .brand {
+  max-width: 50rem;
+}
+
+.sidebar-item {
+  font-size: 1.4rem;
+}
+
+.sidebar-item .icon {
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.sidebar-item .text {
+  overflow: hidden;
+  transition: all 0.1s ease-in-out;
+  text-wrap: nowrap;
+}
+
+nav:not(.expanded) .sidebar-item .text {
+  max-width: 0;
+  margin: 0 !important;
+}
+
+nav.expanded .sidebar-item .text {
+  max-width: 50rem;
+}
+
+nav:not(.expanded) .user-wrapper,
+nav:not(.expanded) .sidebar-item a {
+  justify-content: center;
+}
+
+nav .user-data {
+  transition: all 0.2s ease-in-out;
+}
+
+nav:not(.expanded) .user-data {
+  max-width: 0;
+  margin: 0 !important;
+}
+
+nav.expanded .user-data {
+  max-width: 50rem;
+}
 
 /* -------------------------------- DASHBOARD ------------------------------- */
 .dashboard-card {
@@ -515,4 +585,30 @@ section.weapon-details .img-weapon {
 
 .dashboard-card .number {
   font-size: 6rem;
+}
+
+/* ---------------------------------- USERS --------------------------------- */
+.table-users {
+  width: 100%;
+  overflow: hidden;
+}
+.table-users th {
+  background-color: var(--bs-gray-100);
+  border-bottom: 3px solid var(--bs-gray-300);
+  color: var(--bs-gray-600);
+  padding: 2rem;
+}
+
+.table-users td {
+  padding: 2rem;
+}
+
+.table-users .tag-role {
+  border-color: var(--bs-gray-500) !important;
+  color: var(--bs-gray-600);
+}
+
+.table-users .tag-role.admin {
+  border-color: var(--bs-primary) !important;
+  color: var(--bs-primary);
 }
