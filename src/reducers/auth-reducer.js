@@ -78,6 +78,19 @@ export const authReducer = (state, action) => {
       };
     }
 
+    case 'delete':
+      {
+        const updatedUsers = state.users.filter(user => user.email !== action.payload.email);
+
+        // Actualizar local storage
+        localStorage.setItem('users', JSON.stringify(updatedUsers));
+
+        return {
+          ...state,
+          users: updatedUsers
+        }
+      }
+
     case "logout":
       // Liberar Fake JWT
       localStorage.removeItem("authToken");

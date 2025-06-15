@@ -1,5 +1,6 @@
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { useAuth } from "../../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const roleList = {
   user: "usuario",
@@ -7,7 +8,14 @@ const roleList = {
 };
 
 export default function UserListItem({ user }) {
-  const { auth } = useAuth();
+  const { auth, authDispatch } = useAuth();
+
+  const handleDeleteUser = () => {
+    authDispatch({ type: "delete", payload: { email: user.email } });
+    toast.info('Usuario eliminado', {
+      autoClose: 1300
+    });
+  };
   return (
     <>
       <td>{user.usuario}</td>
@@ -23,7 +31,10 @@ export default function UserListItem({ user }) {
       </td>
       <td>
         {auth.currentUser.email !== user.email && (
-          <button className="btn btn-outline-danger p-3">
+          <button
+            className="btn btn-outline-danger p-3"
+            onClick={handleDeleteUser}
+          >
             <TrashIcon className="icon" />
           </button>
         )}

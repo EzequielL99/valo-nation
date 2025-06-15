@@ -593,9 +593,9 @@ nav.expanded .user-data {
   overflow: hidden;
 }
 .table-users th {
-  background-color: var(--bs-gray-100);
+  background-color: var(--bs-gray-800);
   border-bottom: 3px solid var(--bs-gray-300);
-  color: var(--bs-gray-600);
+  color: var(--bs-light);
   padding: 2rem;
 }
 
@@ -611,4 +611,14 @@ nav.expanded .user-data {
 .table-users .tag-role.admin {
   border-color: var(--bs-primary) !important;
   color: var(--bs-primary);
+}
+
+/* ---------------------------- ADD PRODUCT PAGE ---------------------------- */
+.add-product-form .col-img{
+  flex: 0 0 40%;
+}
+
+.add-product-form .col-img .image-wrapper {
+  height: 25rem;
+  width: 25rem;
 }
