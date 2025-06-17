@@ -34,7 +34,7 @@ export default function AdminLayout() {
             icon={<ArchiveBoxIcon className="icon" />}
           />
           <AdminSidebarItem
-            to="/admin/products/add"
+            to="/admin/products/new"
             text="Agregar Producto"
             icon={<PlusCircleIcon className="icon" />}
           />

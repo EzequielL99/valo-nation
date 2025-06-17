@@ -1,6 +1,10 @@
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+
 import FormErrorMessage from "../../components/FormErrorMessage";
+import { useProduct } from "../../hooks/useProduct";
+import { toast } from "react-toastify";
 
 const categories = [
   {
@@ -115,9 +119,10 @@ const validateForm = (formData) => {
   return errors;
 };
 
-export default function AddProductPage() {
+export default function NewProductPage() {
   const [formData, setFormData] = useState(formInitialState);
   const [errors, setErrors] = useState({});
+  const { dispatch: productDispatch } = useProduct();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -155,11 +160,22 @@ export default function AddProductPage() {
     setErrors({});
 
     // Cargar producto
-    console.log("PRODUCTO OK PARA CARGAR");
+    const objNewProduct = {
+      ...formData,
+      id: uuidv4(),
+      origin: 'local'
+    };
+
+    productDispatch({ type: "ADD_PRODUCT", payload: objNewProduct });
+
+    toast.success("Producto creado!", {
+      autoClose: 1300,
+    });
 
     // Reinicio de formulario
     setFormData(formInitialState);
   };
+
   return (
     <>
       <div className="d-flex justify-content-between align-items-center">
@@ -223,7 +239,17 @@ export default function AddProductPage() {
               </div>
 
               <div className="input-group mb-4 d-flex flex-column gap-2">
-                <label htmlFor="img">Imagen (Busca armamento <a href="https://www.deviantart.com/battlegroundpnh" target="_blank" className="link-info">aquí</a>)</label>
+                <label htmlFor="img">
+                  Imagen (Busca armamento{" "}
+                  <a
+                    href="https://www.deviantart.com/battlegroundpnh"
+                    target="_blank"
+                    className="link-info"
+                  >
+                    aquí
+                  </a>
+                  )
+                </label>
                 <input
                   type="text"
                   id="img"
@@ -260,7 +286,11 @@ export default function AddProductPage() {
             <div className="col-img">
               <div className="image-wrapper rounded-3 overflow-hidden bg-dark-subtle d-flex align-items-center justify-content-center mx-auto">
                 <img
-                  src={formData.img.trim() !== '' ? formData.img : '/img/ar-icon.png'}
+                  src={
+                    formData.img.trim() !== ""
+                      ? formData.img
+                      : "/img/ar-icon.png"
+                  }
                   className="img-fluid"
                   alt="Imagen de tu producto"
                 />

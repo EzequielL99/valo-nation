@@ -14,12 +14,13 @@ import ProductDetailPage from "./pages/shop/ProductDetailPage";
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import UnauthorizedPage from "./pages/auth/UnauthorizedPage";
-import AddProductPage from "./pages/admin/AddProductPage";
+import NewProductPage from "./pages/admin/NewProductPage";
 import ProductsPage from "./pages/admin/ProductsPage";
 import UsersPage from "./pages/admin/UsersPage";
 
 import PrivateRoute from "./components/auth/PrivateRoute";
 import RoleRoute from "./components/auth/RoleRoute";
+import EditProductPage from "./pages/admin/EditProductPage";
 
 export default function AppRouter() {
   return (
@@ -57,7 +58,8 @@ export default function AppRouter() {
         >
           <Route path="/admin/dashboard" element={<AdminPage />} />
           <Route path="/admin/products" element={<ProductsPage />} />
-          <Route path="/admin/products/add" element={<AddProductPage />} />
+          <Route path="/admin/products/new" element={<NewProductPage />} />
+          <Route path="/admin/products/:id/edit" element={<EditProductPage />} />
           <Route path="/admin/users" element={<UsersPage />} />
         </Route>
 

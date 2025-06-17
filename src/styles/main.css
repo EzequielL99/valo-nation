@@ -614,11 +614,20 @@ nav.expanded .user-data {
 }
 
 /* ---------------------------- ADD PRODUCT PAGE ---------------------------- */
-.add-product-form .col-img{
+.add-product-form .col-img {
   flex: 0 0 40%;
 }
 
 .add-product-form .col-img .image-wrapper {
   height: 25rem;
   width: 25rem;
+}
+
+/* ------------------------------ PRODUCTS PAGE ----------------------------- */
+.product-item .img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 8rem;
+  width: 8rem;
 }
