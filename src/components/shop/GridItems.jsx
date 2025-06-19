@@ -1,23 +1,29 @@
 import { useEffect, useState } from "react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
+
 import useValorantAPI from "../../api/useValorantAPI";
 import ItemCard from "./ItemCard";
 import Loader from "../Loader";
+import { getProductInfo } from "../../utils";
+import { useProduct } from "../../hooks/useProduct";
 
 export default function GridItems() {
-  const [weapons, setWeapons] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  const { state, dispatch } = useProduct();
 
   const { fetchWeapons } = useValorantAPI();
 
   useEffect(() => {
-    if(isError) setIsError(!isError);
+    if (isError) setIsError(!isError);
 
     fetchWeapons()
       .then((weaponsList) => {
+        // Aplicar Formato
+        const products = weaponsList.map((weapon) => getProductInfo(weapon));
+
+        dispatch({ type: "SET_PRODUCTS", payload: products });
         setIsLoading(false);
-        setWeapons(weaponsList);
       })
       .catch((error) => {
         console.error("Error con API:", error.message);
@@ -43,18 +49,27 @@ export default function GridItems() {
           <p className="pt-4 mb-5">
             Oops! Tuvimos algunos problemas para cargar los productos.
           </p>
-          <button className="btn btn-outline-primary text-uppercase" onClick={() => setIsLoading(true)}>reintentar</button>
+          <button
+            className="btn btn-outline-primary text-uppercase"
+            onClick={() => setIsLoading(true)}
+          >
+            reintentar
+          </button>
         </div>
       )}
 
-      {!isLoading && !isError && weapons.length === 0 ? (
+      {!isLoading && !isError && state.products.length === 0 ? (
         <p className="d-flex justify-content-center align-items-center h-100 p-0 m-0 text-center text-danger h1">
           NO HAY PRODUCTOS
         </p>
       ) : (
         <div className="row">
-          {weapons.map((weapon) => (
-            <ItemCard key={weapon.uuid} weapon={weapon} />
+          {state.customProducts.map((item) => (
+            <ItemCard key={item.id} item={item} />
+          ))}
+
+          {state.products.map((item) => (
+            <ItemCard key={item.id} item={item} />
           ))}
         </div>
       )}

@@ -495,6 +495,14 @@ section.weapon-details .img-weapon {
   flex-basis: 20%;
 }
 
+.cart-list .image-wrapper > div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10rem;
+  width: 10rem;
+}
+
 /* -------------------------------------------------------------------------- */
 /*                                    ADMIN                                   */
 /* -------------------------------------------------------------------------- */
@@ -631,3 +639,10 @@ nav.expanded .user-data {
   height: 8rem;
   width: 8rem;
 }
+
+/* ------------------------------ EDIT PRODUCT PAGE ----------------------------- */
+.icon.icon-tabler{
+  width: 3rem;
+  height: 3rem;
+}
+

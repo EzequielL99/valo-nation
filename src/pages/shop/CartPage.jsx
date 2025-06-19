@@ -12,6 +12,7 @@ export default function CartPage() {
     () => cart.reduce((total, item) => total + item.quantity * item.price, 0),
     [cart]
   );
+
   return (
     <main className="min-vh-100">
       <div className="container py-5">
@@ -20,16 +21,19 @@ export default function CartPage() {
             <>
               {cart.map((product) => (
                 <li
-                  className="bg-light shadow mb-5 rounded-4 d-flex justify-content-between align-items-center p-5"
+                  className="bg-white cart-item shadow mb-5 rounded-4 d-flex justify-content-between align-items-center px-5 py-4"
                   key={product.id}
                 >
-                  <img
-                    src={product.img}
-                    className="img-fluid"
-                    alt={product.name}
-                    style={{ maxWidth: "20rem" }}
-                  />
-                  <h2 className="text-center">{product.name}</h2>
+                  <div className="image-wrapper">
+                    <div className="bg-dark-subtle rounded-3">
+                      <img
+                        src={product.img}
+                        className="img-fluid"
+                        alt={product.name}
+                      />
+                    </div>
+                  </div>
+                  <h2 className="text-center h3">{product.name}</h2>
                   <p className="p-0 m-0 text-center">{product.price}</p>
                   <p className="p-0 m-0 text-center">{product.quantity}</p>
                   <div className="d-flex justify-content-end">

@@ -163,6 +163,7 @@ export default function NewProductPage() {
     const objNewProduct = {
       ...formData,
       id: uuidv4(),
+      skins: [],
       origin: 'local'
     };
 

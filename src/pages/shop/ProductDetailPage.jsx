@@ -6,9 +6,7 @@ import ProductInfoSection from "../../components/shop/ProductInfoSection";
 import ProductCartController from "../../components/shop/ProductCartController";
 import Loader from "../../components/Loader";
 
-import useValorantAPI from "../../api/useValorantAPI";
-
-import { getProductInfo } from "../../utils/index";
+import { useProduct } from "../../hooks/useProduct";
 
 export default function ProductDetailPage() {
   const { id } = useParams();
@@ -16,23 +14,34 @@ export default function ProductDetailPage() {
   const [weaponInfo, setWeaponInfo] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  const { getWeaponById } = useValorantAPI();
+  const { state, dispatch } = useProduct();
 
   useEffect(() => {
     setIsError(false);
 
-    getWeaponById(id)
-      .then((weaponInfo) => {
-        const objProduct = getProductInfo(weaponInfo);
+    try {
+      // Buscar entre productos MODIFICADOS
+      let item = state.modifiedProducts.find((item) => item.id == id);
 
-        setIsLoading(false);
-        setWeaponInfo(objProduct);
-      })
-      .catch((error) => {
-        console.error("Product Detail Page component error: ", error.message);
-        setIsLoading(false);
-        setIsError(true);
-      });
+      if (!item) {
+        // Buscar entre productos CUSTOM
+        item = state.customProducts.find((item) => item.id == id);
+
+        if (!item) {
+          // Buscar entre productos API
+          item = state.products.find((item) => item.id == id);
+
+          if (!item) throw new Error("No se encontró el producto solicitado.");
+        }
+      }
+
+      setIsLoading(false);
+      setWeaponInfo(item);
+    } catch (error) {
+      console.error("Product Detail Page - Error: ", error.message);
+      setIsLoading(false);
+      setIsError(true);
+    }
   }, [isLoading]);
 
   return (

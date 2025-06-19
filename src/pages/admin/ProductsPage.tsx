@@ -57,16 +57,24 @@ export default function ProductsPage() {
         </div>
       )}
 
-      {!isLoading && !isError && state.products.length === 0 ? (
-        <p className="d-flex justify-content-center align-items-center h-100 p-0 m-0 text-center text-danger h1">
-          NO HAY PRODUCTOS
-        </p>
-      ) : (
-        <div className="row">
-          {state.products.map((product) => (
-            <ProductItem key={product.id} product={product} />
-          ))}
-        </div>
+      {!isLoading && !isError && (
+        <>
+          {state.products.length > 0 || state.customProducts.length > 0 ? (
+            <div className="row">
+              {state.products.map((product) => (
+                <ProductItem key={product.id} product={product} />
+              ))}
+
+              {state.customProducts.map((product) => (
+                <ProductItem key={product.id} product={product} />
+              ))}
+            </div>
+          ) : (
+            <p className="d-flex justify-content-center align-items-center h-100 p-0 m-0 text-center text-danger h1">
+              NO HAY PRODUCTOS
+            </p>
+          )}
+        </>
       )}
     </>
   );
