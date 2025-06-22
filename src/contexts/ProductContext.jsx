@@ -1,7 +1,23 @@
-import { createContext, useEffect, useReducer } from "react";
+import { createContext, useEffect, useMemo, useReducer } from "react";
 import { initialState, productReducer } from "../reducers/product-reducer";
 
 export const ProductContext = createContext();
+
+// Selector: Retorna los objetos disponibles/visibles para la
+const getShopProducts = (state) => {
+  // Mapa de productos modificados
+  const modifiedMap = new Map(state.modifiedProducts.map((item) => [item.id, item]));
+
+  // Combinar productos API y productos CUSTOM, aplicando modificaciones
+  const allProducts = [
+    ...state.customProducts.map(item => modifiedMap.get(item.id) || item),
+    ...state.products.map(item => modifiedMap.get(item.id) || item),
+
+  ]
+
+  // Filtrar bloqueados
+  return allProducts.filter(item => !state.hiddenProducts.includes(item.id));
+};
 
 export const ProductProvider = ({ children }) => {
   const [state, dispatch] = useReducer(productReducer, initialState);
@@ -18,13 +34,31 @@ export const ProductProvider = ({ children }) => {
       "modifiedProducts",
       JSON.stringify(state.modifiedProducts)
     );
-  }, [state.modifiedProducts])
+  }, [state.modifiedProducts]);
+
+  useEffect(() => {
+    localStorage.setItem(
+      "hiddenProducts",
+      JSON.stringify(state.hiddenProducts)
+    );
+  }, [state.hiddenProducts]);
+
+  const shopProducts = useMemo(
+    () => getShopProducts(state),
+    [
+      state.products,
+      state.customProducts,
+      state.modifiedProducts,
+      state.hiddenProducts,
+    ]
+  );
 
   return (
     <ProductContext.Provider
       value={{
         state,
         dispatch,
+        shopProducts
       }}
     >
       {children}

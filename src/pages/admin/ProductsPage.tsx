@@ -59,7 +59,7 @@ export default function ProductsPage() {
 
       {!isLoading && !isError && (
         <>
-          {state.products.length > 0 || state.customProducts.length > 0 ? (
+          {state.products.length > 0 ? (
             <div className="row">
               {state.products.map((product) => (
                 <ProductItem key={product.id} product={product} />

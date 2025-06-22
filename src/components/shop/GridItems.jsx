@@ -10,7 +10,7 @@ import { useProduct } from "../../hooks/useProduct";
 export default function GridItems() {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  const { state, dispatch } = useProduct();
+  const { state, dispatch, shopProducts } = useProduct();
 
   const { fetchWeapons } = useValorantAPI();
 
@@ -64,11 +64,7 @@ export default function GridItems() {
         </p>
       ) : (
         <div className="row">
-          {state.customProducts.map((item) => (
-            <ItemCard key={item.id} item={item} />
-          ))}
-
-          {state.products.map((item) => (
+          {shopProducts.map((item) => (
             <ItemCard key={item.id} item={item} />
           ))}
         </div>
