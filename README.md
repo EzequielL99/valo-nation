@@ -1,21 +1,33 @@
 <h1>VALO-NATION</h1>
 
-![Badge en Desarollo](https://img.shields.io/badge/STATUS-EN%20DESAROLLO-blue)
+<h4 align="center">
+:construction: Proyecto en construcción :construction:
+</h4>
 
-# Indice
+## Índice
+*[Índice](#índice)
+*[Descripción del proyecto](#descripción-del-proyecto)
+*[Estado del proyecto](#Estado-del-proyecto)
+*[Características de la aplicación y demostración](#Características-de-la-aplicación-y-demostración)
+*[Acceso al proyecto](#acceso-proyecto)
+*[Tecnologías utilizadas](#tecnologías-utilizadas)
+*[Personas Contribuyentes](#personas-contribuyentes)
+*[Personas-Desarrolladores del Proyecto](#personas-desarrolladores)
+*[Licencia](#licencia)
+*[Conclusión](#conclusión)
 
-# Descripcion del proyecto
+## Descripción del proyecto
 
-# Estado del proyecto
+## Estado del proyecto
 
-# Demostracion de funciones y aplicaciones
+## Demostracion de funciones y aplicaciones
 
-# Acceso al proyecto
+## Acceso al proyecto
 
-# Teconologias utilizadas
+## Teconologias utilizadas
 
-# Personas contribuyentes
+## Personas contribuyentes
 
-# Personas Desarrolladoras del Proyecto
+## Personas Desarrolladoras del Proyecto
 
-# Licencias
+## Licencias
