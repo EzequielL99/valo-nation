@@ -8,7 +8,7 @@ import { useAuth } from "../../hooks/useAuth";
 export default function RegisterPage() {
   const [newUser, setNewUser] = useState({
     email: "",
-    usuario: "",
+    username: "",
     password: "",
   });
 
@@ -37,7 +37,7 @@ export default function RegisterPage() {
 
   useEffect(() => {
     if (auth.currentUser !== null) {
-      toast.success(`Te damos la bienvenida ${auth.currentUser.usuario}`, {
+      toast.success(`Te damos la bienvenida ${auth.currentUser.username}`, {
         autoClose: 1200,
         onClose: () => {
           navigate("/");
@@ -62,7 +62,7 @@ export default function RegisterPage() {
   const isFormValid = useMemo(
     () =>
       newUser.email.trim() !== "" &&
-      newUser.usuario.trim() !== "" &&
+      newUser.username.trim() !== "" &&
       newUser.password.trim() !== "",
     [newUser]
   );
@@ -107,7 +107,7 @@ export default function RegisterPage() {
         </label>
         <input
           type="text"
-          name="usuario"
+          name="username"
           id="inputUsuario"
           onChange={handleChange}
           value={newUser.usuario}

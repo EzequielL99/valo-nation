@@ -11,9 +11,9 @@ export default function AdminSidebar({ children }) {
   const { auth } = useAuth();
 
   return (
-    <aside className="min-vh-100">
+    <aside className="min-vh-100 bg-white">
       <nav
-        className={`h-100 d-flex flex-column bg-light border-end shadow-sm ${
+        className={`h-100 d-flex flex-column border-end shadow-sm ${
           expandedMenu ? "expanded" : ""
         }`}
       >
@@ -35,10 +35,10 @@ export default function AdminSidebar({ children }) {
         <ul className="list-unstyled px-3">{children}</ul>
 
         <div className="border-top mt-auto d-flex align-items-center p-3 user-wrapper">
-          <div className="icon bg-dark text-white text-uppercase p-4">{auth.currentUser.usuario.substring(0, 1)}</div>
+          <div className="icon bg-dark text-white text-uppercase p-4">{auth.currentUser.username.substring(0, 1)}</div>
           <div className="d-flex justify-content-between align-items-center ms-3 overflow-hidden user-data">
             <div className="pe-5 me-5 d-flex flex-column justify-content-center">
-              <h4 className="fw-bold m-0 p-0">{auth.currentUser.usuario}</h4>
+              <h4 className="fw-bold m-0 p-0">{auth.currentUser.username}</h4>
               <span className="fs-6 text-black-50">{auth.currentUser.email}</span>
             </div>
             <EllipsisVerticalIcon className="icon" />

@@ -34,6 +34,23 @@ a.link-primary:hover {
   color: var(--bs-dark) !important;
 }
 
+/* ---------------------------- Generals: Tables ---------------------------- */
+table {
+  width: 100%;
+  overflow: hidden;
+}
+
+table th {
+  background-color: var(--bs-gray-200);
+  border-bottom: 3px solid var(--bs-gray-300);
+  color: var(--bs-gray-600);
+  padding: 2rem;
+}
+
+table td {
+  padding: 2rem;
+}
+
 /* -------------------------------- Generals: Buttons -------------------------------- */
 .btn {
   font-size: 1.4rem;
@@ -495,7 +512,7 @@ section.weapon-details .img-weapon {
   flex-basis: 20%;
 }
 
-.cart-list .image-wrapper > div{
+.cart-list .image-wrapper > div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -588,7 +605,7 @@ nav.expanded .user-data {
 
 /* -------------------------------- DASHBOARD ------------------------------- */
 .dashboard-card {
-  min-height: 18rem;
+  min-height: 22rem;
 }
 
 .dashboard-card .number {
@@ -596,21 +613,6 @@ nav.expanded .user-data {
 }
 
 /* ---------------------------------- USERS --------------------------------- */
-.table-users {
-  width: 100%;
-  overflow: hidden;
-}
-.table-users th {
-  background-color: var(--bs-gray-800);
-  border-bottom: 3px solid var(--bs-gray-300);
-  color: var(--bs-light);
-  padding: 2rem;
-}
-
-.table-users td {
-  padding: 2rem;
-}
-
 .table-users .tag-role {
   border-color: var(--bs-gray-500) !important;
   color: var(--bs-gray-600);
@@ -619,6 +621,19 @@ nav.expanded .user-data {
 .table-users .tag-role.admin {
   border-color: var(--bs-primary) !important;
   color: var(--bs-primary);
+}
+
+.btn-exit{
+  top: 1rem;
+  right: 1rem;
+}
+
+.btn-exit:hover{
+  background-color: var(--bs-gray-300);
+}
+
+.form-new-user .input-group input{
+  min-width: 50rem;
 }
 
 /* ---------------------------- ADD PRODUCT PAGE ---------------------------- */
@@ -632,17 +647,11 @@ nav.expanded .user-data {
 }
 
 /* ------------------------------ PRODUCTS PAGE ----------------------------- */
-.product-item .img {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 8rem;
-  width: 8rem;
+.table-products .img {
+  max-width: 15rem;
 }
-
 /* ------------------------------ EDIT PRODUCT PAGE ----------------------------- */
-.icon.icon-tabler{
+.icon.icon-tabler {
   width: 3rem;
   height: 3rem;
 }
-

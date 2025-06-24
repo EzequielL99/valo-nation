@@ -50,7 +50,7 @@ export default function AdminLayout() {
           </div>
         </main>
       </div>
-      <ToastContainer limit={3} />
+      <ToastContainer limit={1} />
     </>
   );
 }

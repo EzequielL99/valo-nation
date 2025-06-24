@@ -22,7 +22,8 @@ export default function LoginPage() {
 
     authDispatch({ type: "load-users", payload: { users: storedUsers } });
 
-    if(location.search.includes('302')) toast.error('Registrate o iniciá sesión', {autoClose: 1800})
+    if (location.search.includes("302"))
+      toast.error("Registrate o iniciá sesión", { autoClose: 1800 });
   }, []);
 
   // Efecto: Error al ingresar
@@ -39,15 +40,15 @@ export default function LoginPage() {
 
   // Efecto: Ingreso OK
   useEffect(() => {
-    if(auth.currentUser !== null){
-      toast.success(`Que bueno verte ${auth.currentUser.usuario}`, {
-        autoClose: 1000,
+    if (auth.currentUser !== null) {
+      toast.success(`Te damos la bienvenida ${auth.currentUser.username}`, {
+        autoClose: 1200,
         onClose: () => {
-          navigate('/');
-        }
-      })
+          navigate("/");
+        },
+      });
     }
-  }, [auth.currentUser])
+  }, [auth.currentUser]);
 
   const handleChange = (e) => {
     setUserData({

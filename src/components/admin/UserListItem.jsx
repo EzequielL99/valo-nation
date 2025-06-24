@@ -18,7 +18,7 @@ export default function UserListItem({ user }) {
   };
   return (
     <>
-      <td>{user.usuario}</td>
+      <td>{user.username}</td>
       <td>{user.email}</td>
       <td>
         <span

@@ -60,15 +60,26 @@ export default function ProductsPage() {
       {!isLoading && !isError && (
         <>
           {state.products.length > 0 ? (
-            <div className="row">
-              {state.products.map((product) => (
-                <ProductItem key={product.id} product={product} />
-              ))}
+            <table className="bg-white rounded-4 shadow table-products">
+              <thead>
+                <tr>
+                  <th>Producto</th>
+                  <th>Descripcion</th>
+                  <th>Precio</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {state.products.map((product) => (
+                  <ProductItem key={product.id} product={product} />
+                ))}
 
-              {state.customProducts.map((product) => (
-                <ProductItem key={product.id} product={product} />
-              ))}
-            </div>
+                {state.customProducts.map((product) => (
+                  <ProductItem key={product.id} product={product} />
+                ))}
+              </tbody>
+            </table>
           ) : (
             <p className="d-flex justify-content-center align-items-center h-100 p-0 m-0 text-center text-danger h1">
               NO HAY PRODUCTOS

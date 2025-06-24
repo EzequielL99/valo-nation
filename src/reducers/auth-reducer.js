@@ -30,19 +30,18 @@ export const authReducer = (state, action) => {
       // Relevar rol del nuevo usuario
       const newUser = { ...action.payload.newUser, role: "user" };
 
-      if (action.payload.newUser.usuario.toLowerCase() === "admin") {
+      if (action.payload.newUser.username.toLowerCase() === "admin") {
         newUser.role = "admin";
       }
       // Registrar nuevo usuario
       const updatedUsers = [...state.users, newUser];
 
       localStorage.setItem("users", JSON.stringify(updatedUsers));
-      createFakeJWT(newUser.usuario);
+      createFakeJWT(newUser.username);
 
       return {
         ...state,
         users: updatedUsers,
-        currentUser: newUser,
         error: null,
       };
     }
@@ -68,7 +67,7 @@ export const authReducer = (state, action) => {
       }
 
       // Credenciales OK - Generar Fake JWT
-      createFakeJWT(filteredUser.usuario);
+      createFakeJWT(filteredUser.username);
 
 
       return {

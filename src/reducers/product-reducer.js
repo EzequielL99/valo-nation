@@ -2,7 +2,7 @@ export const initialState = {
   products: [],
   customProducts: JSON.parse(localStorage.getItem("customProducts")) || [],
   modifiedProducts: JSON.parse(localStorage.getItem("modifiedProducts")) || [],
-  hiddenProducts: JSON.parse(localStorage.getItem("hidenProducts")) || [],
+  hiddenProducts: JSON.parse(localStorage.getItem("hiddenProducts")) || [],
 };
 
 export const productReducer = (state, action) => {
@@ -67,7 +67,7 @@ export const productReducer = (state, action) => {
           modifiedProducts: updatedModifiedProducts,
         };
       }
-    case "HIDE_PRODUCT":
+    case "HIDE_PRODUCT": {
       // Buscar en productos CUSTOM
       let item = state.customProducts.find(
         (item) => item.id === action.payload
@@ -100,14 +100,17 @@ export const productReducer = (state, action) => {
       return {
         ...state,
       };
+    }
 
     case "UNHIDE_PRODUCT":
       return {
         ...state,
-        hiddenProducts: state.hiddenProducts.filter((id) => id !== action.payload),
+        hiddenProducts: state.hiddenProducts.filter(
+          (id) => id !== action.payload
+        ),
       };
 
-    case "SET_PRODUCTS":
+    case "SET_PRODUCTS": {
       // Sincronizar Modificados con API
       const syncProducts = action.payload.map((item) => {
         const mProduct = state.modifiedProducts.find(
@@ -120,6 +123,7 @@ export const productReducer = (state, action) => {
         ...state,
         products: syncProducts,
       };
+    }
     default:
       return state;
   }

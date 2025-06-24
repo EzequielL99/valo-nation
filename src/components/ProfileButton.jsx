@@ -26,7 +26,7 @@ export default function ProfileButton({ mobile = false }) {
         <ul className="dropdown-menu p-0 top-100 pt-3">
           <li className="pb-2 px-4">
             <p className="dropdown-header p-0 m-0 fs-5">
-              Hola {auth.currentUser.usuario}!
+              Hola {auth.currentUser.username}!
             </p>
           </li>
           <li>
