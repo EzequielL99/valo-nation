@@ -1,6 +1,6 @@
 <h1 align="center">VALO-NATION</h1>
 
-<h4 align="center">:construction: Proyecto en construcción :construction:</h4>
+<p align="center">:construction: Proyecto en construcción :construction:</p>
 
 ## Índice
 
