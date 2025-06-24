@@ -1,18 +1,17 @@
-<h1>VALO-NATION</h1>
+<h1 align="center"><span style="color: red;">VALO</span>-NATION</h1>
 
-<h4 align="center">
-:construction: Proyecto en construcción :construction:
-</h4>
+<h4 align="center">:construction: Proyecto en construcción :construction:</h4>
 
 ## Índice
+
 *[Índice](#índice)
 *[Descripción del proyecto](#descripción-del-proyecto)
-*[Estado del proyecto](#Estado-del-proyecto)
-*[Características de la aplicación](#Características-de-la-aplicación)
-*[Acceso al proyecto](#acceso-proyecto)
+*[Estado del proyecto](#estado-del-proyecto)
+*[Características de la aplicación](#características-de-la-aplicación)
+*[Acceso al proyecto](#acceso-al-proyecto)
 *[Tecnologías utilizadas](#tecnologías-utilizadas)
 *[Personas contribuyentes](#personas-contribuyentes)
-*[Personas Desarrolladoras del Proyecto](#personas-desarrolladores)
+*[Desarrolladores](#desarrolladores)
 *[Licencia](#licencia)
 *[Conclusión](#conclusión)
 
@@ -28,7 +27,7 @@
 
 ## Personas contribuyentes
 
-## Personas Desarrolladoras del Proyecto
+## Desarrolladores
 
 ## Licencia
 
