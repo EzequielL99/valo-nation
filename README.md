@@ -1,9 +1,8 @@
-<h1 align="center"><span style="color: red;">VALO</span>-NATION</h1>
+<h1 align="center">VALO-NATION</h1>
 
 <h4 align="center">:construction: Proyecto en construcción :construction:</h4>
 
 ## Índice
-
 *[Índice](#índice)
 *[Descripción del proyecto](#descripción-del-proyecto)
 *[Estado del proyecto](#estado-del-proyecto)
