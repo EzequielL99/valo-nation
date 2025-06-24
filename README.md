@@ -44,12 +44,26 @@ la implementación de un Back Office para la gestión de usuarios, productos y a
 
 ## Acceso al proyecto
 
+Para poder activar el proyecto, simplemente se necesita clonar el repositorio, instalar las dependencias y ejecutar el comando **'npm run dev'**
+
 ## Tecnologías utilizadas
+
+- Vite
+- JavaScript
+- ReactJS
 
 ## Personas contribuyentes
 
+Sin contribuyentes
+
 ## Desarrolladores
+
+**Ezequiel Mario Lopez Vallejos**
 
 ## Licencia
 
+Código abierto no licenciado.
+
 ## Conclusión
+
+El proyecto está funcionando de acuerdo a lo solicitado por la instrucción. No obstante, siempre se encuentre abierto a mejoras en cuanto al responsive, UI/UX, etc.
