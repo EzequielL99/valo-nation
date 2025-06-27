@@ -8,6 +8,7 @@
 html {
   font-size: 62.5% !important;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 *,
@@ -99,6 +100,11 @@ table td {
   color: var(--bs-light);
   background-color: var(--bs-primary) !important;
   box-shadow: none !important;
+}
+
+.btn-outline-primary:disabled {
+  border-color: var(--bs-gray-200);
+  color: var(--bs-gray-500);
 }
 
 .btn.rounded-circle {
@@ -371,6 +377,11 @@ section.weapon-details .img-weapon {
   align-items: center;
 }
 
+.pagination .active {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+}
+
 /* ------------------------------ CATEGORY LIST ----------------------------- */
 .categories-wrapper {
   max-height: 0;
@@ -520,6 +531,25 @@ section.weapon-details .img-weapon {
   width: 10rem;
 }
 
+/* ------------------------------ PAGE: PROFILE ----------------------------- */
+.profile-page form{
+  max-width: 70rem;
+  padding-left: 10rem !important;
+}
+
+.profile-page .img-deco{
+  position: absolute;
+  left: 0; 
+  top: 0;
+  height: 110%;
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+
+form .show-password:hover{
+  color: var(--bs-primary);
+}
+
 /* -------------------------------------------------------------------------- */
 /*                                    ADMIN                                   */
 /* -------------------------------------------------------------------------- */
@@ -623,16 +653,16 @@ nav.expanded .user-data {
   color: var(--bs-primary);
 }
 
-.btn-exit{
+.btn-exit {
   top: 1rem;
   right: 1rem;
 }
 
-.btn-exit:hover{
+.btn-exit:hover {
   background-color: var(--bs-gray-300);
 }
 
-.form-new-user .input-group input{
+.form-new-user .input-group input {
   min-width: 50rem;
 }
 
@@ -649,6 +679,11 @@ nav.expanded .user-data {
 /* ------------------------------ PRODUCTS PAGE ----------------------------- */
 .table-products .img {
   max-width: 15rem;
+  width: 15rem;
+  height: 10rem;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
 }
 /* ------------------------------ EDIT PRODUCT PAGE ----------------------------- */
 .icon.icon-tabler {

@@ -6,11 +6,15 @@ import ItemCard from "./ItemCard";
 import Loader from "../Loader";
 import { getProductInfo } from "../../utils";
 import { useProduct } from "../../hooks/useProduct";
+import Pagination from "./Pagination";
 
 export default function GridItems() {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  const { state, dispatch, shopProducts } = useProduct();
+  const { dispatch, shopProducts } = useProduct();
+  
+  // Paginacion
+  const [visibleProducts, setVisibleProducts] = useState([]);
 
   const { fetchWeapons } = useValorantAPI();
 
@@ -58,16 +62,24 @@ export default function GridItems() {
         </div>
       )}
 
-      {!isLoading && !isError && state.products.length === 0 ? (
-        <p className="d-flex justify-content-center align-items-center h-100 p-0 m-0 text-center text-danger h1">
-          NO HAY PRODUCTOS
-        </p>
-      ) : (
-        <div className="row">
-          {shopProducts.map((item) => (
-            <ItemCard key={item.id} item={item} />
-          ))}
-        </div>
+      {!isLoading && !isError && (
+        <>
+          {shopProducts.length === 0 ? (
+            <p className="d-flex justify-content-center align-items-center h-100 p-0 m-0 text-center text-danger h1">
+              NO HAY PRODUCTOS
+            </p>
+          ) : (
+            <>
+              <div className="row">
+                {visibleProducts.map((item) => (
+                  <ItemCard key={item.id} item={item} />
+                ))}
+              </div>
+
+              <Pagination setVisibleProducts={setVisibleProducts}/>
+            </>
+          )}
+        </>
       )}
     </div>
   );

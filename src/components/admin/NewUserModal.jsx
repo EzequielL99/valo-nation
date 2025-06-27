@@ -5,7 +5,7 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
-import { Fragment, useEffect, useState, useMemo, useRef } from "react";
+import { Fragment, useEffect, useState, useMemo } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { toast } from "react-toastify";
 import { XMarkIcon } from "@heroicons/react/24/outline";

@@ -26,9 +26,12 @@ export default function ProductItem({ product }) {
   return (
     <tr>
       <td>
-        <div className="img">
-          <img src={product.img} alt={product.name} className="img-fluid" />
-        </div>
+        <div
+          className="img"
+          style={{
+            backgroundImage: `url(${product.img})`,
+          }}
+        ></div>
       </td>
       <td>
         <p>{product.name}</p>

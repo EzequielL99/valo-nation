@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { getProductInfo } from "../../utils";
 import { useCart } from "../../hooks/useCart";
 
 export default function ItemCard({ item }) {

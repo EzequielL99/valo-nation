@@ -69,7 +69,6 @@ export const authReducer = (state, action) => {
       // Credenciales OK - Generar Fake JWT
       createFakeJWT(filteredUser.username);
 
-
       return {
         ...state,
         error: null,
@@ -77,18 +76,42 @@ export const authReducer = (state, action) => {
       };
     }
 
-    case 'delete':
-      {
-        const updatedUsers = state.users.filter(user => user.email !== action.payload.email);
+    case "UPDATE_USER": {
+      const { data } = action.payload;
 
-        // Actualizar local storage
-        localStorage.setItem('users', JSON.stringify(updatedUsers));
+      const emailId = state.currentUser.email;
 
-        return {
-          ...state,
-          users: updatedUsers
-        }
-      }
+      // Actualizar Datos del Usuario Actual
+      const updatedCurrentUser = {
+        ...state.currentUser,
+        email: data.email,
+        username: data.username,
+        password: data.password,
+      };
+
+      // Actualizar Usuarios
+      const updatedUsers = state.users.map(user => user.email === emailId ? updatedCurrentUser : user);
+  
+      return {
+        ...state,
+        currentUser: updatedCurrentUser,
+        users: updatedUsers,
+      };
+    }
+
+    case "delete": {
+      const updatedUsers = state.users.filter(
+        (user) => user.email !== action.payload.email
+      );
+
+      // Actualizar local storage
+      localStorage.setItem("users", JSON.stringify(updatedUsers));
+
+      return {
+        ...state,
+        users: updatedUsers,
+      };
+    }
 
     case "logout":
       // Liberar Fake JWT
