@@ -70,6 +70,7 @@ export default function NewUserModal({ modal, setModal }) {
   }, [showToast]);
 
   const handleChange = (e) => {
+    // Limpiar error
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -112,12 +113,22 @@ export default function NewUserModal({ modal, setModal }) {
     setShowToast(true);
   };
 
+  const handleCloseModal = (e) => {
+    e.preventDefault();
+    
+    // Reiniciar formulario
+    setFormData(initialFormData);
+    setErrors({});
+
+    // Cerrar Modal
+    setModal(false);
+  }
+
   const isFormValid = useMemo(
     () =>
       formData.email.trim() !== "" &&
       formData.username.trim() !== "" &&
-      formData.password.trim() !== "" && 
-      Object.keys(errors).length === 0,
+      formData.password.trim() !== "",
     [formData, errors]
   );
 
@@ -148,7 +159,7 @@ export default function NewUserModal({ modal, setModal }) {
                     Crear usuario
                   </DialogTitle>
 
-                  <button className="btn position-absolute btn-exit p-2">
+                  <button className="btn position-absolute btn-exit p-2" onClick={handleCloseModal}>
                     <XMarkIcon className="icon" />
                   </button>
                   <form
@@ -214,7 +225,7 @@ export default function NewUserModal({ modal, setModal }) {
                     </div>
 
                     <div className="d-flex justify-content-between align-items-center mt-5">
-                      <button className="link-secondary btn">Cancelar</button>
+                      <button className="link-secondary btn" onClick={handleCloseModal}>Cancelar</button>
                       <input
                         type="submit"
                         value="Crear usuario"
