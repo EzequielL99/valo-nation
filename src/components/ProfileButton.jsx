@@ -46,7 +46,7 @@ export default function ProfileButton({ mobile = false }) {
               className="dropdown-item link-dark text-decoration-none fs-5 px-4 pt-2 pb-3"
               to="/profile"
             >
-              Salir
+              Cerrar Sesión
             </Link>
           </li>
         </ul>
@@ -61,9 +61,9 @@ export default function ProfileButton({ mobile = false }) {
     ) : (
       <NavLink
         to="/auth/login"
-        className="btn btn-outline-primary rounded-circle py-2"
+        className="btn btn-primary rounded-pill py-2 px-3"
       >
-        <ArrowRightEndOnRectangleIcon className="icon" />
+        Iniciar Sesión
       </NavLink>
     );
   }
