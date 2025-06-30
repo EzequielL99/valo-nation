@@ -309,7 +309,7 @@ export default function ProductForm() {
           </div>
           <form
             id="formAddProduct"
-            className="add-product-form"
+            className="bo-add-product-form"
             onSubmit={handleSubmit}
             noValidate
           >

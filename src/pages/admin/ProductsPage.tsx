@@ -60,7 +60,7 @@ export default function ProductsPage() {
       {!isLoading && !isError && (
         <>
           {state.products.length > 0 ? (
-            <table className="bg-white rounded-4 shadow table-products">
+            <table className="bg-white rounded-4 shadow bo-table-products">
               <thead>
                 <tr>
                   <th>Producto</th>

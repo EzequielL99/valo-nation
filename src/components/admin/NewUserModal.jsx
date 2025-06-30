@@ -5,7 +5,7 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
-import { Fragment, useEffect, useState, useMemo } from "react";
+import { Fragment, useState, useMemo } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { toast } from "react-toastify";
 import { XMarkIcon } from "@heroicons/react/24/outline";
@@ -40,34 +40,8 @@ const validateForm = (formData) => {
 
 export default function NewUserModal({ modal, setModal }) {
   const [errors, setErrors] = useState({});
-  const [showToast, setShowToast] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
-  const { auth, authDispatch } = useAuth();
-
-  // Efecto: Controlador de notificaciones
-  useEffect(() => {
-    if (showToast && !auth.error) {
-      toast.success("Usuario creado correctamente", {
-        isLoading: false,
-        autoClose: 2000,
-      });
-
-      // Reinicio Formulario
-      setFormData(initialFormData);
-      setErrors({});
-      setModal(false);
-    } else if (showToast && auth.error) {
-      toast.error(auth.error, {
-        isLoading: false,
-        autoClose: 2000,
-      });
-
-      // Reiniciar errores
-      authDispatch({ type: "clear-error" });
-    }
-
-    setShowToast(false);
-  }, [showToast]);
+  const { users, register } = useAuth();
 
   const handleChange = (e) => {
     // Limpiar error
@@ -85,7 +59,7 @@ export default function NewUserModal({ modal, setModal }) {
       .filter((key) => key !== "email")
       .forEach((key) => (updatedErrors[key] = errors[key]));
 
-    if (auth.users.some((user) => user.email === e.target.value.trim())) {
+    if (users.some((user) => user.email === e.target.value.trim())) {
       updatedErrors.email =
         "El correo ya existe. Por favor, ingrese uno diferente";
     }
@@ -108,21 +82,30 @@ export default function NewUserModal({ modal, setModal }) {
     setErrors({});
 
     // Registrar Usuario
-    authDispatch({ type: "register", payload: { newUser: formData } });
+    const response = register(formData);
+    if (response.success) {
+      toast.success("Usuario creado correctamente", {
+        autoClose: 1200,
+      });
 
-    setShowToast(true);
+      setFormData(initialFormData);
+    } else {
+      toast.error(response.error, {
+        autoClose: 1200,
+      });
+    }
   };
 
   const handleCloseModal = (e) => {
     e.preventDefault();
-    
+
     // Reiniciar formulario
     setFormData(initialFormData);
     setErrors({});
 
     // Cerrar Modal
     setModal(false);
-  }
+  };
 
   const isFormValid = useMemo(
     () =>
@@ -159,12 +142,15 @@ export default function NewUserModal({ modal, setModal }) {
                     Crear usuario
                   </DialogTitle>
 
-                  <button className="btn position-absolute btn-exit p-2" onClick={handleCloseModal}>
+                  <button
+                    className="btn position-absolute btn-exit p-2"
+                    onClick={handleCloseModal}
+                  >
                     <XMarkIcon className="icon" />
                   </button>
                   <form
                     noValidate
-                    className="form-new-user"
+                    className="bo-form-new-user"
                     onSubmit={handleSubmit}
                   >
                     <p className="p-0 m-0 bg-light-subtle mb-4">
@@ -218,6 +204,7 @@ export default function NewUserModal({ modal, setModal }) {
                         value={formData.password}
                         className="border border-3 border-light-subtle rounded-3 bg-dark-subtle px-3 py-2"
                         aria-describedby="password-error"
+                        autoComplete="off"
                       />
                       {errors.password && (
                         <FormErrorMessage>{errors.password}</FormErrorMessage>
@@ -225,7 +212,12 @@ export default function NewUserModal({ modal, setModal }) {
                     </div>
 
                     <div className="d-flex justify-content-between align-items-center mt-5">
-                      <button className="link-secondary btn" onClick={handleCloseModal}>Cancelar</button>
+                      <button
+                        className="link-secondary btn"
+                        onClick={handleCloseModal}
+                      >
+                        Cancelar
+                      </button>
                       <input
                         type="submit"
                         value="Crear usuario"

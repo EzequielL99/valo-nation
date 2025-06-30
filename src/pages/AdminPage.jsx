@@ -9,14 +9,14 @@ import { useProduct } from "../hooks/useProduct";
 import { useAuth } from "../hooks/useAuth";
 
 export default function AdminPage() {
-  const { auth } = useAuth();
+  const { users } = useAuth();
   const { shopProducts } = useProduct();
 
   return (
     <div className="container">
       <div className="row w-75 mx-auto py-5">
         <div className="col-4">
-          <DashboardCard title="Usuarios" number={auth.users.length} />
+          <DashboardCard title="Usuarios" number={users.length} />
         </div>
         <div className="col-4">
           <DashboardCard title="Ventas" number="4000" />

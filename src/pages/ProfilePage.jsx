@@ -32,7 +32,7 @@ const validateForm = (formData) => {
 };
 
 export default function ProfilePage() {
-  const { auth, authDispatch } = useAuth();
+  const { auth, users, updateUserData } = useAuth();
   const [formData, setFormData] = useState(formInitialState);
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
@@ -54,7 +54,7 @@ export default function ProfilePage() {
       .forEach((key) => (updatedErrors[key] = errors[key]));
 
     if (
-      auth.users.some(
+      users.some(
         (user) =>
           user.email === e.target.value.trim() &&
           user.email !== auth.currentUser.email
@@ -97,11 +97,17 @@ export default function ProfilePage() {
     setErrors({});
 
     // Actualizar Datos del Usuario
-    authDispatch({ type: "UPDATE_USER", payload: { data: formData } });
+    const response = updateUserData(formData);
 
-    toast.success("Datos actualizados correctamente!", {
-      autoClose: 1200,
-    });
+    if (response.success) {
+      toast.success("Datos actualizados correctamente!", {
+        autoClose: 1200,
+      });
+    } else {
+      toast.error(response.error, {
+        autoClose: 1200,
+      });
+    }
   };
 
   const isFormValid = useMemo(() => {

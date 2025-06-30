@@ -1,12 +1,11 @@
 import { NavLink, Link } from "react-router-dom";
 import {
-  UserIcon,
-  ArrowRightEndOnRectangleIcon,
+  UserIcon
 } from "@heroicons/react/24/outline";
 import { useAuth } from "../hooks/useAuth";
 
 export default function ProfileButton({ mobile = false }) {
-  const { auth, authDispatch } = useAuth();
+  const { auth, logout } = useAuth();
 
   if (auth.currentUser) {
     return mobile ? (
@@ -41,7 +40,7 @@ export default function ProfileButton({ mobile = false }) {
             <Link
               onClick={(e) => {
                 e.preventDefault();
-                authDispatch({ type: "logout" });
+                logout();
               }}
               className="dropdown-item link-dark text-decoration-none fs-5 px-4 pt-2 pb-3"
               to="/profile"

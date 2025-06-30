@@ -2,10 +2,10 @@ import { useAuth } from "../../hooks/useAuth";
 import UserListItem from "./UserListItem";
 
 export default function UsersList() {
-  const { auth } = useAuth();
+  const { users } = useAuth();
 
   return (
-    <table className="bg-white rounded-4 shadow table-users">
+    <table className="bg-white rounded-4 shadow bo-table-users">
       <thead>
         <tr>
           <th>Usuario</th>
@@ -15,7 +15,7 @@ export default function UsersList() {
         </tr>
       </thead>
       <tbody>
-        {auth.users.map((user) => (
+        {users.map((user) => (
           <tr key={user.email}>
             <UserListItem user={user} />
           </tr>

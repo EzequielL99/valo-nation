@@ -11,7 +11,7 @@ export default function AdminSidebar({ children }) {
   const { auth } = useAuth();
 
   return (
-    <aside className="min-vh-100 bg-white">
+    <aside className="min-vh-100 bg-white bo-aside">
       <nav
         className={`h-100 d-flex flex-column border-end shadow-sm ${
           expandedMenu ? "expanded" : ""

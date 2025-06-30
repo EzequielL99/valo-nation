@@ -8,13 +8,22 @@ const roleList = {
 };
 
 export default function UserListItem({ user }) {
-  const { auth, authDispatch } = useAuth();
+  const { auth, deleteUser } = useAuth();
 
   const handleDeleteUser = () => {
-    authDispatch({ type: "delete", payload: { email: user.email } });
-    toast.info('Usuario eliminado', {
-      autoClose: 1300
-    });
+    const response = deleteUser(user.email);
+
+    console.log(response);
+
+    if (response.success) {
+      toast.info("Usuario eliminado", {
+        autoClose: 1300,
+      });
+    } else {
+      toast.error(response.error, {
+        autoClose: 1200,
+      });
+    }
   };
   return (
     <>

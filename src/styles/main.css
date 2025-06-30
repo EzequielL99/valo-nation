@@ -479,6 +479,11 @@ section.weapon-details .img-weapon {
   color: var(--bs-light) !important;
 }
 
+.form-login .btn-primary:hover{
+  background-color: var(--bs-light);
+  color: var(--bs-primary);
+}
+
 /* ----------------------------- PRODUCT-DETAIL ----------------------------- */
 .page-product-detail {
   background-image: url(/img/bg-product.png);
@@ -562,7 +567,7 @@ form .show-password:hover{
   grid-template-columns: auto 1fr;
 }
 
-aside nav .btn-expand-menu:hover {
+.bo-aside nav .btn-expand-menu:hover {
   background-color: var(--bs-gray-300);
 }
 
@@ -570,85 +575,85 @@ nav:not(.expanded) .btn-expand-menu svg {
   transform: rotate(-180deg);
 }
 
-aside nav li > a {
+.bo-aside nav li > a {
   color: var(--bs-dark);
 }
 
-aside nav li > a:hover {
+.bo-aside nav li > a:hover {
   background-color: var(--bs-gray-300);
 }
 
-aside nav .brand {
+.bo-aside nav .brand {
   text-wrap: nowrap;
   transition: max-width 0.2s ease-in-out;
 }
 
-aside nav .brand {
+.bo-aside nav .brand {
   max-width: 0;
 }
 
-aside nav.expanded .brand {
+.bo-aside nav.expanded .brand {
   max-width: 50rem;
 }
 
-.sidebar-item {
+.bo-aside .sidebar-item {
   font-size: 1.4rem;
 }
 
-.sidebar-item .icon {
+.bo-aside .sidebar-item .icon {
   width: 2.2rem;
   height: 2.2rem;
 }
 
-.sidebar-item .text {
+.bo-aside .sidebar-item .text {
   overflow: hidden;
   transition: all 0.1s ease-in-out;
   text-wrap: nowrap;
 }
 
-nav:not(.expanded) .sidebar-item .text {
+.bo-aside nav:not(.expanded) .sidebar-item .text {
   max-width: 0;
   margin: 0 !important;
 }
 
-nav.expanded .sidebar-item .text {
+.bo-aside nav.expanded .sidebar-item .text {
   max-width: 50rem;
 }
 
-nav:not(.expanded) .user-wrapper,
-nav:not(.expanded) .sidebar-item a {
+.bo-aside nav:not(.expanded) .user-wrapper,
+.bo-aside nav:not(.expanded) .sidebar-item a {
   justify-content: center;
 }
 
-nav .user-data {
+.bo-aside nav .user-data {
   transition: all 0.2s ease-in-out;
 }
 
-nav:not(.expanded) .user-data {
+.bo-aside nav:not(.expanded) .user-data {
   max-width: 0;
   margin: 0 !important;
 }
 
-nav.expanded .user-data {
+.bo-aside nav.expanded .user-data {
   max-width: 50rem;
 }
 
 /* -------------------------------- DASHBOARD ------------------------------- */
-.dashboard-card {
+.bo-dashboard-card {
   min-height: 22rem;
 }
 
-.dashboard-card .number {
+.bo-dashboard-card .number {
   font-size: 6rem;
 }
 
 /* ---------------------------------- USERS --------------------------------- */
-.table-users .tag-role {
+.bo-table-users .tag-role {
   border-color: var(--bs-gray-500) !important;
   color: var(--bs-gray-600);
 }
 
-.table-users .tag-role.admin {
+.bo-table-users .tag-role.admin {
   border-color: var(--bs-primary) !important;
   color: var(--bs-primary);
 }
@@ -662,22 +667,22 @@ nav.expanded .user-data {
   background-color: var(--bs-gray-300);
 }
 
-.form-new-user .input-group input {
+.bo-form-new-user .input-group input {
   min-width: 50rem;
 }
 
 /* ---------------------------- ADD PRODUCT PAGE ---------------------------- */
-.add-product-form .col-img {
+.bo-add-product-form .col-img {
   flex: 0 0 40%;
 }
 
-.add-product-form .col-img .image-wrapper {
+.bo-add-product-form .col-img .image-wrapper {
   height: 25rem;
   width: 25rem;
 }
 
 /* ------------------------------ PRODUCTS PAGE ----------------------------- */
-.table-products .img {
+.bo-table-products .img {
   max-width: 15rem;
   width: 15rem;
   height: 10rem;
