@@ -4,10 +4,11 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import AdminButton from "./AdminButton";
 import ProfileButton from "./ProfileButton";
 import { useAuth } from "../hooks/useAuth";
+import { MoonIcon } from "@heroicons/react/24/outline";
 
 export default function Header() {
   const { pathname } = useLocation();
-  const { auth, authDispatch } = useAuth();
+  const { auth, logout } = useAuth();
 
   const isShop = useMemo(() => pathname.includes("/shop"), [pathname]);
 
@@ -63,7 +64,7 @@ export default function Header() {
                   {auth.currentUser && (
                     <button
                       className="btn btn-outline-light rounded-pill"
-                      onClick={() => authDispatch({ type: "logout" })}
+                      onClick={() => logout()}
                     >
                       SALIR
                     </button>
@@ -77,6 +78,11 @@ export default function Header() {
             <ul className="list-unstyled m-0 p-0 gap-3 d-none d-md-flex align-items-center">
               <li className="nav-item">
                 <AdminButton className="btn btn-outline-primary rounded-pill text-uppercase px-4" />
+              </li>
+              <li className="nav-item">
+                <button className="btn btn-outline-primary rounded-circle">
+                  <MoonIcon className="icon" />
+                </button>
               </li>
               {isShop && (
                 <li className="nav-item">
