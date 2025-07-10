@@ -5,13 +5,19 @@ import { getProductInfo } from "../../utils";
 import Loader from "../../components/Loader";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import ProductItem from "../../components/admin/ProductItem";
+import { useTheme } from "../../hooks/useTheme";
+import Pagination from "../../components/shop/Pagination";
 
 export default function ProductsPage() {
-  const { state, dispatch } = useProduct();
+  const { dispatch, allProducts } = useProduct();
+  const { darkMode } = useTheme();
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
   const { fetchWeapons } = useValorantAPI();
+
+  // Paginacion
+  const [visibleProducts, setVisibleProducts] = useState([]);
 
   useEffect(() => {
     fetchWeapons()
@@ -36,7 +42,9 @@ export default function ProductsPage() {
       {isLoading && (
         <div className="container text-center">
           <Loader className="mx-auto my-4" />
-          <p>Cargando productos...</p>
+          <p className={darkMode ? "text-white" : "text-dark"}>
+            Cargando productos...
+          </p>
         </div>
       )}
 
@@ -59,27 +67,34 @@ export default function ProductsPage() {
 
       {!isLoading && !isError && (
         <>
-          {state.products.length > 0 ? (
-            <table className="bg-white rounded-4 shadow bo-table-products">
-              <thead>
-                <tr>
-                  <th>Producto</th>
-                  <th>Descripcion</th>
-                  <th>Precio</th>
-                  <th>Estado</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                {state.products.map((product) => (
-                  <ProductItem key={product.id} product={product} />
-                ))}
+          {allProducts.length > 0 ? (
+            <>
+              <table
+                className={`${
+                  darkMode ? "bg-dark text-white" : "bg-white text-dark"
+                } rounded-4 shadow bo-table-products`}
+              >
+                <thead>
+                  <tr>
+                    <th>Producto</th>
+                    <th>Descripcion</th>
+                    <th>Precio</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {visibleProducts.map((product) => (
+                    <ProductItem key={product.id} product={product} />
+                  ))}
+                </tbody>
+              </table>
 
-                {state.customProducts.map((product) => (
-                  <ProductItem key={product.id} product={product} />
-                ))}
-              </tbody>
-            </table>
+              <Pagination
+                products={allProducts}
+                setVisibleProducts={setVisibleProducts}
+              />
+            </>
           ) : (
             <p className="d-flex justify-content-center align-items-center h-100 p-0 m-0 text-center text-danger h1">
               NO HAY PRODUCTOS

@@ -7,6 +7,7 @@ import {
 } from "@headlessui/react";
 import { Fragment, useState, useMemo } from "react";
 import { useAuth } from "../../hooks/useAuth";
+import { useTheme } from "../../hooks/useTheme";
 import { toast } from "react-toastify";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import FormErrorMessage from "../FormErrorMessage";
@@ -42,6 +43,7 @@ export default function NewUserModal({ modal, setModal }) {
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState(initialFormData);
   const { users, register } = useAuth();
+  const { darkMode } = useTheme();
 
   const handleChange = (e) => {
     // Limpiar error
@@ -134,7 +136,13 @@ export default function NewUserModal({ modal, setModal }) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <DialogPanel className="position-relative overflow-hidden rounded-4 bg-white p-5 text-start shadow-lg">
+                <DialogPanel
+                  className={`${
+                    darkMode
+                      ? "dark-mode bg-dark-subtle text-white"
+                      : "bg-white text-dark"
+                  } position-relative overflow-hidden rounded-4 p-5 text-start shadow-lg`}
+                >
                   <DialogTitle
                     as="h3"
                     className="text-primary h2 fw-medium mb-3 text-start"
@@ -153,7 +161,11 @@ export default function NewUserModal({ modal, setModal }) {
                     className="bo-form-new-user"
                     onSubmit={handleSubmit}
                   >
-                    <p className="p-0 m-0 bg-light-subtle mb-4">
+                    <p
+                      className={`${
+                        darkMode ? "bg-dark text-white" : ""
+                      } text-center py-3 rounded-3 m-0 mb-4`}
+                    >
                       Coloca{" "}
                       <span className="fw-medium text-primary">Admin</span> al
                       usuario para ser Administrador
@@ -165,7 +177,11 @@ export default function NewUserModal({ modal, setModal }) {
                         type="text"
                         id="username"
                         name="username"
-                        className="border border-3 border-light-subtle rounded-3 bg-dark-subtle px-3 py-2"
+                        className={`${
+                          darkMode
+                            ? "text-white border-light-subtle bg-dark"
+                            : "text-dark border-dark bg-light-subtle"
+                        } border border-3 rounded-3 px-3 py-2`}
                         placeholder="John Doe"
                         onChange={handleChange}
                         value={formData.username}
@@ -185,7 +201,11 @@ export default function NewUserModal({ modal, setModal }) {
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={formData.email}
-                        className="border border-3 border-light-subtle rounded-3 bg-dark-subtle px-3 py-2"
+                        className={`${
+                          darkMode
+                            ? "text-white border-light-subtle bg-dark"
+                            : "text-dark border-dark bg-light-subtle"
+                        } border border-3 rounded-3 px-3 py-2`}
                         placeholder="correo@correo.com"
                         aria-describedby="email-error"
                       />
@@ -202,7 +222,11 @@ export default function NewUserModal({ modal, setModal }) {
                         name="password"
                         onChange={handleChange}
                         value={formData.password}
-                        className="border border-3 border-light-subtle rounded-3 bg-dark-subtle px-3 py-2"
+                        className={`${
+                          darkMode
+                            ? "text-white border-light-subtle bg-dark"
+                            : "text-dark border-dark bg-light-subtle"
+                        } border border-3 rounded-3 px-3 py-2`}
                         aria-describedby="password-error"
                         autoComplete="off"
                       />
@@ -213,7 +237,7 @@ export default function NewUserModal({ modal, setModal }) {
 
                     <div className="d-flex justify-content-between align-items-center mt-5">
                       <button
-                        className="link-secondary btn"
+                        className='btn link-danger'
                         onClick={handleCloseModal}
                       >
                         Cancelar

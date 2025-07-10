@@ -1,31 +1,34 @@
 import { Link, NavLink } from "react-router-dom";
 import {
   ChevronDoubleLeftIcon,
-  EllipsisVerticalIcon,
+  MoonIcon,
+  SunIcon,
 } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
+import { useTheme } from "../../hooks/useTheme";
 
 export default function AdminSidebar({ children }) {
   const [expandedMenu, setExpandedMenu] = useState(true);
   const { auth } = useAuth();
+  const { darkMode, toggleTheme } = useTheme();
 
   return (
-    <aside className="min-vh-100 bg-white bo-aside">
+    <aside className={`min-vh-100 ${darkMode ? 'bg-dark text-white' : 'bg-white text-dark'} bo-aside`}>
       <nav
-        className={`h-100 d-flex flex-column border-end shadow-sm ${
+        className={`h-100 d-flex flex-column border-end ${darkMode ? 'border-danger' : ''} shadow-sm ${
           expandedMenu ? "expanded" : ""
         }`}
       >
         <div className="p-4 pb-2 d-flex justify-content-between align-items-center">
           <Link
             to="/"
-            className="brand overflow-hidden p-0 text-decoration-none text-dark"
+            className={`brand overflow-hidden p-0 text-decoration-none ${darkMode ? 'text-white' : 'text-dark'}`}
           >
             <span className="fw-bold text-primary">VALO</span>-NATION
           </Link>
           <button
-            className="btn p-3 rounded-2 btn-expand-menu"
+            className={`btn p-3 rounded-2 btn-expand-menu ${darkMode ? 'text-white' : 'text-dark'}`}
             onClick={() => setExpandedMenu((prev) => !prev)}
           >
             <ChevronDoubleLeftIcon className="icon" />
@@ -34,14 +37,27 @@ export default function AdminSidebar({ children }) {
 
         <ul className="list-unstyled px-3">{children}</ul>
 
-        <div className="border-top mt-auto d-flex align-items-center p-3 user-wrapper">
-          <div className="icon bg-dark text-white text-uppercase p-4">{auth.currentUser.username.substring(0, 1)}</div>
+        <div className={`border-top ${darkMode ? 'border-danger' : ''} mt-auto d-flex align-items-center p-3 user-wrapper`}>
+          <div className={`icon ${darkMode ? 'bg-light text-dark' : 'bg-dark text-white'} text-uppercase p-4`}>
+            {auth.currentUser.username.substring(0, 1)}
+          </div>
           <div className="d-flex justify-content-between align-items-center ms-3 overflow-hidden user-data">
             <div className="pe-5 me-5 d-flex flex-column justify-content-center">
               <h4 className="fw-bold m-0 p-0">{auth.currentUser.username}</h4>
-              <span className="fs-6 text-black-50">{auth.currentUser.email}</span>
+              <span className={`fs-6 ${darkMode ? 'text-light' : 'text-black-50'}`}>
+                {auth.currentUser.email}
+              </span>
             </div>
-            <EllipsisVerticalIcon className="icon" />
+            <button
+              onClick={() => toggleTheme()}
+              className="p-2 btn btn-outline-primary rounded-circle"
+            >
+              {darkMode ? (
+                <SunIcon className="icon" />
+              ) : (
+                <MoonIcon className="icon" />
+              )}
+            </button>
           </div>
         </div>
       </nav>

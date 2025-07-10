@@ -7,12 +7,14 @@ import Loader from "../Loader";
 import { getProductInfo } from "../../utils";
 import { useProduct } from "../../hooks/useProduct";
 import Pagination from "./Pagination";
+import { useTheme } from "../../hooks/useTheme";
 
 export default function GridItems() {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const { dispatch, shopProducts } = useProduct();
-  
+  const { darkMode } = useTheme();
+
   // Paginacion
   const [visibleProducts, setVisibleProducts] = useState([]);
 
@@ -70,13 +72,13 @@ export default function GridItems() {
             </p>
           ) : (
             <>
-              <div className="row">
+              <div className={`${darkMode ? 'dark' : ''} row`}>
                 {visibleProducts.map((item) => (
                   <ItemCard key={item.id} item={item} />
                 ))}
               </div>
 
-              <Pagination setVisibleProducts={setVisibleProducts}/>
+              <Pagination products={shopProducts} setVisibleProducts={setVisibleProducts} />
             </>
           )}
         </>

@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { toast } from "react-toastify";
+import { useTheme } from "../hooks/useTheme";
 
 const categories = [
   { id: 1, value: "Gestión de Cuenta" },
@@ -17,6 +18,7 @@ const initialState = {
 
 export default function ContactPage() {
   const [formData, setFormData] = useState(initialState);
+  const { darkMode } = useTheme();
 
   const handleChange = (e) => {
     setFormData({
@@ -44,74 +46,84 @@ export default function ContactPage() {
           <h1 className="text-uppercase fw-bold">Contacto</h1>
         </div>
       </section>
-      <main className="bg-light">
-        <div className="row">
-          <div className="col-12">
-            <div className="container-sm pb-5">
-              <form
-                onSubmit={handleSubmit}
-                className="border bordar-1 bg-light-subtle border-dark-subtle rounded-4 contact-form mx-auto p-5 position-relative z-2"
-              >
-                <legend className="text-primary mb-3">
-                  Completa el formulario para comunicarte con nosotros...
-                </legend>
+      <main className={darkMode ? "bg-dark" : "bg-light"}>
+        <div className="container-sm pb-5">
+          <form
+            onSubmit={handleSubmit}
+            className={`shadow ${
+              darkMode ? "bg-dark-subtle text-white" : "bg-white text-dark"
+            } rounded-4 contact-form mx-auto p-5 position-relative z-2`}
+          >
+            <legend className="text-primary mb-3">
+              Completa el formulario para comunicarte con nosotros...
+            </legend>
 
-                <div className="input-group mb-4 d-flex flex-column gap-2">
-                  <label htmlFor="username">Usuario</label>
-                  <input
-                    type="text"
-                    id="username"
-                    name="username"
-                    className="border border-3 border-light-subtle rounded-3 bg-dark-subtle px-3 py-2"
-                    placeholder="Usuario"
-                    onChange={handleChange}
-                    value={formData.username}
-                    required
-                  />
-                </div>
-
-                <div className="input-group mb-4 d-flex flex-column gap-2">
-                  <label htmlFor="">Topico</label>
-                  <select
-                    name="category"
-                    id="category"
-                    className="border border-3 border-light-subtle rounded-3 bg-dark-subtle px-3 py-2"
-                    onChange={handleChange}
-                    defaultValue={"1"}
-                    required
-                  >
-                    {categories.map((category) => (
-                      <option value={category.id} key={category.id}>
-                        {category.value}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="input-group mb-4 d-flex flex-column gap-2">
-                  <label htmlFor="message">Mensaje</label>
-                  <textarea
-                    className="border border-3 border-light-subtle rounded-3 bg-dark-subtle px-3 py-2"
-                    name="message"
-                    id="message"
-                    onChange={handleChange}
-                    value={formData.message}
-                    placeholder="Escribenos tu mensaje"
-                    required
-                  ></textarea>
-                </div>
-
-                <div className="d-flex justify-content-end align-items-center">
-                  <input
-                    type="submit"
-                    value="enviar"
-                    className="btn btn-primary px-4 py-2 text-uppercase"
-                    disabled={!formIsValid}
-                  />
-                </div>
-              </form>
+            <div className="input-group mb-4 d-flex flex-column gap-2">
+              <label htmlFor="username">Usuario</label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                className={`${
+                  darkMode
+                    ? "border-dark-subtle bg-dark"
+                    : "border-dark bg-light-subtle"
+                } border border-3 rounded-3 px-3 py-2`}
+                placeholder="Usuario"
+                onChange={handleChange}
+                value={formData.username}
+                required
+              />
             </div>
-          </div>
+
+            <div className="input-group mb-4 d-flex flex-column gap-2">
+              <label htmlFor="">Topico</label>
+              <select
+                name="category"
+                id="category"
+                className={`${
+                  darkMode
+                    ? "border-dark-subtle bg-dark"
+                    : "border-dark bg-light-subtle"
+                } border border-3 rounded-3 px-3 py-2`}
+                onChange={handleChange}
+                defaultValue={"1"}
+                required
+              >
+                {categories.map((category) => (
+                  <option value={category.id} key={category.id}>
+                    {category.value}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="input-group mb-4 d-flex flex-column gap-2">
+              <label htmlFor="message">Mensaje</label>
+              <textarea
+                className={`${
+                  darkMode
+                    ? "border-dark-subtle bg-dark"
+                    : "border-dark bg-light-subtle"
+                } border border-3 rounded-3 px-3 py-2`}
+                name="message"
+                id="message"
+                onChange={handleChange}
+                value={formData.message}
+                placeholder="Escribenos tu mensaje"
+                required
+              ></textarea>
+            </div>
+
+            <div className="d-flex justify-content-end align-items-center">
+              <input
+                type="submit"
+                value="enviar"
+                className="btn btn-primary px-4 py-2 text-uppercase"
+                disabled={!formIsValid}
+              />
+            </div>
+          </form>
         </div>
       </main>
     </>

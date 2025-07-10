@@ -3,6 +3,7 @@ import { useAuth } from "../hooks/useAuth";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import FormErrorMessage from "../components/FormErrorMessage";
 import { toast } from "react-toastify";
+import { useTheme } from "../hooks/useTheme";
 
 const formInitialState = {
   email: "",
@@ -33,6 +34,7 @@ const validateForm = (formData) => {
 
 export default function ProfilePage() {
   const { auth, users, updateUserData } = useAuth();
+  const { darkMode } = useTheme();
   const [formData, setFormData] = useState(formInitialState);
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
@@ -128,10 +130,14 @@ export default function ProfilePage() {
     <div className="container min-vh-100 profile-page d-flex justify-content-center align-items-center">
       <form
         onSubmit={handleSubmit}
-        className="position-relative rounded-4 shadow bg-white p-5 mx-auto"
+        className={`${
+          darkMode ? "bg-dark-subtle text-white" : "bg-white text-dark"
+        } position-relative rounded-4 shadow p-5 mx-auto`}
       >
-        <h1 className="mb-3 text-primary text-uppercase">Tu PERFIL</h1>
-        <p className="text-body-secondary">
+        <h1 className="mb-3 text-primary text-center text-md-start text-uppercase">
+          Tu PERFIL
+        </h1>
+        <p className="description text-center text-md-start mb-5">
           Esta es la información con la cual te registraste a nuestro sitio.
           Podés modificar ciertos datos si lo crees conveniente.
         </p>
@@ -142,7 +148,11 @@ export default function ProfilePage() {
             type="email"
             id="email"
             name="email"
-            className="border border-3 border-light-subtle rounded-3 bg-dark-subtle px-3 py-2"
+            className={`${
+              darkMode
+                ? "border-dark-subtle bg-dark"
+                : "border-dark bg-light-subtle"
+            } border border-3 rounded-3 px-3 py-2`}
             placeholder="correo"
             onChange={handleChange}
             onBlur={handleBlur}
@@ -158,7 +168,11 @@ export default function ProfilePage() {
             type="text"
             id="username"
             name="username"
-            className="border border-3 border-light-subtle rounded-3 bg-dark-subtle px-3 py-2"
+            className={`${
+              darkMode
+                ? "border-dark-subtle bg-dark"
+                : "border-dark bg-light-subtle"
+            } border border-3 rounded-3 px-3 py-2`}
             placeholder="Usuario"
             onChange={handleChange}
             value={formData.username}
@@ -173,7 +187,11 @@ export default function ProfilePage() {
               type={showPassword ? "text" : "password"}
               id="password"
               name="password"
-              className="border border-3 border-light-subtle rounded-3 bg-dark-subtle px-3 py-2 w-100"
+              className={`${
+                darkMode
+                  ? "border-dark-subtle bg-dark"
+                  : "border-dark bg-light-subtle"
+              } border border-3 rounded-3 px-3 py-2 w-100`}
               onChange={handleChange}
               value={formData.password}
               required
@@ -203,7 +221,7 @@ export default function ProfilePage() {
 
         <img
           src="./img/phoenix-char.png"
-          className="img-deco"
+          className="img-deco d-none d-md-block"
           alt="Decoration"
         />
       </form>

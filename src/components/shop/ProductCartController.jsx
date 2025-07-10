@@ -1,6 +1,7 @@
 import { useMemo, useRef, useState, useEffect } from "react";
 import { PlusIcon, MinusIcon } from "@heroicons/react/24/outline";
 import { useCart } from "../../hooks/useCart";
+import { toast } from "react-toastify";
 
 const MIN_ITEMS = 1;
 const MAX_ITEMS = 5;
@@ -30,6 +31,12 @@ export default function ProductCartController({ weaponInfo }) {
       btnIncrementRef.current.disabled = true;
       btnDecrementRef.current.disabled = true;
 
+      if (quantity == MAX_ITEMS) {
+        toast.error("Alcanzaste el máximo permitido", {
+          autoClose: 1200,
+        });
+      }
+
       cartDispatch({
         type: "increase-quantity",
         payload: {
@@ -37,6 +44,11 @@ export default function ProductCartController({ weaponInfo }) {
         },
       });
     } else {
+      if (quantity == MIN_ITEMS) {
+        toast.info("El producto fue eliminado de tu carrito", {
+          autoClose: 1200,
+        });
+      }
       cartDispatch({
         type: "decrease-quantity",
         payload: {
@@ -72,7 +84,7 @@ export default function ProductCartController({ weaponInfo }) {
               <MinusIcon className="icon" />
             </i>
           </button>
-          <span className="py-2 px-4 rounded-3 bg-light border border-3 border-primary">
+          <span className="py-2 px-4 rounded-3 bg-light border border-3 border-primary text-dark">
             {quantity}
           </span>
           <button
@@ -86,7 +98,7 @@ export default function ProductCartController({ weaponInfo }) {
           </button>
         </div>
       ) : (
-        <button onClick={handleAddToCart} className="btn btn-primary fs-3">
+        <button onClick={handleAddToCart} className="btn btn-primary add-to-cart fs-3">
           Agregar al carrito
         </button>
       )}

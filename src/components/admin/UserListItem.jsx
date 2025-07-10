@@ -1,5 +1,6 @@
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { useAuth } from "../../hooks/useAuth";
+import { useTheme } from "../../hooks/useTheme";
 import { toast } from "react-toastify";
 
 const roleList = {
@@ -9,6 +10,7 @@ const roleList = {
 
 export default function UserListItem({ user }) {
   const { auth, deleteUser } = useAuth();
+  const { darkMode } = useTheme();
 
   const handleDeleteUser = () => {
     const response = deleteUser(user.email);
@@ -31,7 +33,7 @@ export default function UserListItem({ user }) {
       <td>{user.email}</td>
       <td>
         <span
-          className={`text-capitalize border tag-role rounded-pill px-4 py-2 ${
+          className={`${darkMode ? 'dark' : ''} text-capitalize border tag-role rounded-pill px-4 py-2 ${
             user.role.toLowerCase() === "admin" ? "admin" : ""
           }`}
         >
@@ -41,7 +43,7 @@ export default function UserListItem({ user }) {
       <td>
         {auth.currentUser.email !== user.email && (
           <button
-            className="btn btn-outline-danger p-3"
+            className={`${darkMode ? 'btn-danger' : 'btn-outline-danger'} btn  p-3`}
             onClick={handleDeleteUser}
           >
             <TrashIcon className="icon" />

@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import Loader from "../Loader";
 import FormErrorMessage from "../FormErrorMessage";
 import { useProduct } from "../../hooks/useProduct";
+import { useTheme } from "../../hooks/useTheme";
 import { toast } from "react-toastify";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import FloppyIcon from "../icons/FloppyIcon";
@@ -134,6 +135,7 @@ export default function ProductForm() {
   const { state, dispatch } = useProduct();
   const [formData, setFormData] = useState(formInitialState);
   const [errors, setErrors] = useState({});
+  const { darkMode } = useTheme();
 
   // EDICION DE PRODUCTO
   useEffect(() => {
@@ -162,11 +164,11 @@ export default function ProductForm() {
         img: product.img,
         price: product.price,
         stats: {
-          equipTimeSeconds: product.stats.equipTimeSeconds,
-          fireRate: product.stats.fireRate,
-          firstBulletAccuracy: product.stats.firstBulletAccuracy,
-          magazineSize: product.stats.magazineSize,
-          reloadTimeSeconds: product.stats.reloadTimeSeconds,
+          equipTimeSeconds: product.stats?.equipTimeSeconds || 0,
+          fireRate: product.stats?.fireRate || 0,
+          firstBulletAccuracy: product.stats?.firstBulletAccuracy || 0,
+          magazineSize: product.stats?.magazineSize || 0,
+          reloadTimeSeconds: product.stats?.reloadTimeSeconds || 0,
         },
       });
 
@@ -181,7 +183,7 @@ export default function ProductForm() {
       let dataWasModified = false;
       Object.keys(formData).forEach((key) => {
         // Evaluar OBJETO - STATS
-        if (typeof originalDataRef.current[key] === "object") {
+        if (typeof originalDataRef.current[key] === "object" && originalDataRef.current[key] !== null) {
           Object.keys(formData[key]).forEach((key2) => {
             if (originalDataRef.current[key][key2] != formData[key][key2])
               dataWasModified = true;
@@ -313,8 +315,8 @@ export default function ProductForm() {
             onSubmit={handleSubmit}
             noValidate
           >
-            <div className="form-generals bg-white rounded-4 shadow p-5 my-5">
-              <h3 className="fw-bold text-dark h3 mb-4">Generales</h3>
+            <div className={`form-generals ${darkMode ? 'bg-dark text-white' : 'bg-white text-dark'} rounded-4 shadow p-5 my-5`}>
+              <h3 className="fw-bold h3 mb-4">Generales</h3>
               <div className="d-flex justify-content-between gap-4">
                 <div className="col-product flex-grow-1">
                   <div className="input-group mb-4 d-flex flex-column gap-2">
@@ -323,7 +325,7 @@ export default function ProductForm() {
                       type="text"
                       id="name"
                       name="name"
-                      className="border border-3 border-light-subtle rounded-3 bg-dark-subtle px-3 py-2"
+                      className={`${darkMode ? 'text-white border-light-subtle bg-dark-subtle' : 'text-dark border-dark bg-light-subtle'} border border-3 rounded-3 px-3 py-2`}
                       placeholder="Rifle asombroso"
                       onChange={handleChange}
                       value={formData.name}
@@ -339,7 +341,7 @@ export default function ProductForm() {
                     <select
                       name="category"
                       id="category"
-                      className="border border-3 border-light-subtle rounded-3 bg-dark-subtle px-3 py-2"
+                      className={`${darkMode ? 'text-white border-light-subtle bg-dark-subtle' : 'text-dark border-dark bg-light-subtle'} border border-3 rounded-3 px-3 py-2`}
                       onChange={handleChange}
                       defaultValue={categories[0].id}
                       aria-describedby="category-error"
@@ -371,7 +373,7 @@ export default function ProductForm() {
                       type="text"
                       id="img"
                       name="img"
-                      className="border border-3 border-light-subtle rounded-3 bg-dark-subtle px-3 py-2"
+                      className={`${darkMode ? 'text-white border-light-subtle bg-dark-subtle' : 'text-dark border-dark bg-light-subtle'} border border-3 rounded-3 px-3 py-2`}
                       placeholder="URL de tu imagen"
                       onChange={handleChange}
                       value={formData.img}
@@ -388,7 +390,7 @@ export default function ProductForm() {
                       type="number"
                       id="price"
                       name="price"
-                      className="border border-3 border-light-subtle rounded-3 bg-dark-subtle px-3 py-2"
+                      className={`${darkMode ? 'text-white border-light-subtle bg-dark-subtle' : 'text-dark border-dark bg-light-subtle'} border border-3 rounded-3 px-3 py-2`}
                       onChange={handleChange}
                       value={formData.price}
                       min="0"
@@ -416,15 +418,15 @@ export default function ProductForm() {
               </div>
             </div>
 
-            <div className="form-specs rounded-4 bg-white shadow p-5 my-5">
-              <h3 className="fw-bold text-dark h3 mb-4">Caracteristicas</h3>
+            <div className={`form-specs rounded-4 ${darkMode ? 'bg-dark text-white' : 'bg-white text-dark'} shadow p-5 my-5`}>
+              <h3 className="fw-bold h3 mb-4">Caracteristicas</h3>
               <div className="input-group mb-4 d-flex flex-column gap-2">
                 <label htmlFor="equipTimeSeconds">Tiempo equipado</label>
                 <input
                   type="number"
                   id="equipTimeSeconds"
                   name="equipTimeSeconds"
-                  className="border border-3 border-light-subtle rounded-3 bg-dark-subtle px-3 py-2"
+                  className={`${darkMode ? 'text-white border-light-subtle bg-dark-subtle' : 'text-dark border-dark bg-light-subtle'} border border-3 rounded-3 px-3 py-2`}
                   min="0"
                   step="0.01"
                   onChange={handleChange}
@@ -442,7 +444,7 @@ export default function ProductForm() {
                   type="number"
                   id="fireRate"
                   name="fireRate"
-                  className="border border-3 border-light-subtle rounded-3 bg-dark-subtle px-3 py-2"
+                  className={`${darkMode ? 'text-white border-light-subtle bg-dark-subtle' : 'text-dark border-dark bg-light-subtle'} border border-3 rounded-3 px-3 py-2`}
                   min="0"
                   step="0.01"
                   onChange={handleChange}
@@ -460,7 +462,7 @@ export default function ProductForm() {
                   type="number"
                   id="firstBulletAccuracy"
                   name="firstBulletAccuracy"
-                  className="border border-3 border-light-subtle rounded-3 bg-dark-subtle px-3 py-2"
+                  className={`${darkMode ? 'text-white border-light-subtle bg-dark-subtle' : 'text-dark border-dark bg-light-subtle'} border border-3 rounded-3 px-3 py-2`}
                   min="0"
                   step="0.01"
                   onChange={handleChange}
@@ -480,7 +482,7 @@ export default function ProductForm() {
                   type="number"
                   id="magazineSize"
                   name="magazineSize"
-                  className="border border-3 border-light-subtle rounded-3 bg-dark-subtle px-3 py-2"
+                  className={`${darkMode ? 'text-white border-light-subtle bg-dark-subtle' : 'text-dark border-dark bg-light-subtle'} border border-3 rounded-3 px-3 py-2`}
                   min="0"
                   onChange={handleChange}
                   value={formData.stats.magazineSize}
@@ -497,7 +499,7 @@ export default function ProductForm() {
                   type="number"
                   id="reloadTimeSeconds"
                   name="reloadTimeSeconds"
-                  className="border border-3 border-light-subtle rounded-3 bg-dark-subtle px-3 py-2"
+                  className={`${darkMode ? 'text-white border-light-subtle bg-dark-subtle' : 'text-dark border-dark bg-light-subtle'} border border-3 rounded-3 px-3 py-2`}
                   min="0"
                   step="0.01"
                   onChange={handleChange}

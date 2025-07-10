@@ -2,7 +2,41 @@
   --bs-primary: #ff4655;
   --bs-primary-dark: #c42431;
   --bs-primary-rgb: 255, 70, 85;
+  --bs-dark-bg-subtle: #393939;
 }
+
+/* ------------------------- REFERENCIAS PARA TESTING ------------------------- */
+/*
+Mobiles
+----------------------
+320x568
+375x812
+360x800
+393x851
+
+Tablets
+----------------------
+768x1024
+820x1180
+834x1194
+
+Laptops y Desktop
+----------------------
+1024x768
+1366x768
+1440x900
+1920x1080
+2560x1440
+*/
+
+/* ----------------------------- BREAKPOINTS CSS ---------------------------- */
+/*
+480px
+768px
+1024px
+1280px
+1536px
+*/
 
 /* -------------------------------- Generals -------------------------------- */
 html {
@@ -33,6 +67,11 @@ h2 {
 /* ----------------------------- Generals: Links ---------------------------- */
 a.link-primary:hover {
   color: var(--bs-dark) !important;
+}
+
+.dark a.link-primary:hover,
+.bg-dark a.link-primary:hover {
+  color: var(--bs-light) !important;
 }
 
 /* ---------------------------- Generals: Tables ---------------------------- */
@@ -68,6 +107,13 @@ table td {
   border-color: var(--bs-dark);
   background-color: var(--bs-dark);
   color: var(--bs-light);
+}
+
+.dark .btn-primary:hover,
+.bg-dark .btn-primary:hover {
+  border-color: var(--bs-light);
+  background-color: var(--bs-light);
+  color: var(--bs-dark);
 }
 
 .btn.btn-primary:active {
@@ -252,6 +298,89 @@ header .btn-carrito:focus {
   color: var(--bs-primary);
 }
 
+header .link-light:hover {
+  color: var(--bs-primary) !important;
+}
+
+header .mobile-menu {
+  max-height: 0;
+  transition: all 0.8s ease-in-out;
+}
+
+header .mobile-menu.show {
+  max-height: 35rem;
+}
+
+/* ----------------------------- FOOTER NAV MENU ---------------------------- */
+.bottom-menu li {
+  position: relative;
+  flex: 20% 0 0;
+  margin: auto;
+}
+
+.bottom-menu li a,
+.bottom-menu li button {
+  color: var(--bs-dark);
+  text-decoration: none;
+}
+
+.dark-mode.bottom-menu li a,
+.dark-mode.bottom-menu li button {
+  color: var(--bs-light);
+}
+
+.bottom-menu li i {
+  position: relative;
+  transition: 0.5s;
+}
+
+.bottom-menu li .text {
+  font-size: 1rem;
+}
+
+.bottom-menu li:nth-child(3) {
+  transform: translateY(-1rem);
+}
+
+.bottom-menu li:nth-child(3) a {
+  transform: translateY(-1rem);
+}
+
+.bottom-menu li a.active {
+  color: var(--bs-primary);
+}
+
+.bottom-menu li:nth-child(3) i {
+  background-color: var(--bs-dark);
+  border: 0.6rem solid var(--bs-dark);
+  display: flex;
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.bottom-menu.dark-mode li:nth-child(3) i {
+  background-color: var(--bs-light);
+  color: var(--bs-dark) !important;
+}
+
+.bottom-menu li:nth-child(3) a.active i {
+  background-color: var(--bs-primary);
+}
+
+.bottom-menu li:nth-child(3) i:not(.dark-mode) {
+  color: var(--bs-light) !important;
+}
+
+.bottom-menu i svg {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
 /* --------------------------------- HERO -------------------------------- */
 .hero {
   background-image: url(/img/generic-background.jpeg);
@@ -364,9 +493,17 @@ section.weapon-details .img-weapon {
   border-color: grey !important;
 }
 
+.search-bar.dark form {
+  border-color: var(--bs-light) !important;
+}
+
 .search-bar input {
   border: none !important;
   outline: none !important;
+}
+
+.search-bar.dark input {
+  color: var(--bs-light) !important;
 }
 
 .icon {
@@ -380,6 +517,7 @@ section.weapon-details .img-weapon {
 .pagination .active {
   background-color: var(--bs-primary);
   border-color: var(--bs-primary);
+  color: var(--bs-light);
 }
 
 /* ------------------------------ CATEGORY LIST ----------------------------- */
@@ -390,24 +528,44 @@ section.weapon-details .img-weapon {
   overflow: hidden;
 }
 
+.categories-wrapper.dark {
+  color: var(--bs-light);
+}
+
 @media (min-width: 992px) {
   .categories-wrapper {
     max-height: 50rem;
     pointer-events: initial;
   }
 }
+
 .categories-wrapper.active {
   pointer-events: initial;
   max-height: 50rem;
 }
+
 .category-list button {
   font-size: 1.1rem;
 }
+
+.categories-wrapper.dark button {
+  color: var(--bs-light);
+}
+
+.categories-wrapper.dark button:hover {
+  background-color: var(--bs-black);
+}
+
 .category-list button:hover {
   background-color: var(--bs-gray-400);
 }
 
 /* ------------------------------- WEAPON ITEM/CARD ------------------------------ */
+.dark .weapon-card {
+  border-color: var(--bs-light) !important;
+  color: var(--bs-light) !important;
+}
+
 .weapon-card .weapon-img {
   min-height: 10rem;
 }
@@ -422,6 +580,10 @@ section.weapon-details .img-weapon {
   background-color: var(--bs-gray-500);
   width: 4rem;
   height: 4rem;
+}
+
+.dark .weapon-card .weapon-img > span:not(.tag-weapon) {
+  background-color: var(--bs-gray-200);
 }
 
 @media (min-width: 768px) {
@@ -452,12 +614,26 @@ section.weapon-details .img-weapon {
   }
 }
 
+.dark .weapon-card .actions .btn-primary:hover {
+  background-color: var(--bs-light);
+  color: var(--bs-dark);
+}
+
 .weapon-card .actions a {
   color: var(--bs-primary);
 }
 
-.weapon-card .actions a:hover {
-  color: var(--bs-light);
+.dark .weapon-card .actions a:hover {
+  color: var(--bs-light) !important;
+}
+
+.weapon-card .input-quantity{
+  justify-content: space-between;
+}
+
+.weapon-card .add-to-cart{
+  font-size: 1rem !important;
+  width: 100%;
 }
 
 /* ---------------------------------- LOGIN --------------------------------- */
@@ -479,7 +655,7 @@ section.weapon-details .img-weapon {
   color: var(--bs-light) !important;
 }
 
-.form-login .btn-primary:hover{
+.form-login .btn-primary:hover {
   background-color: var(--bs-light);
   color: var(--bs-primary);
 }
@@ -490,6 +666,10 @@ section.weapon-details .img-weapon {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
+}
+
+.page-product-detail.dark {
+  background-image: url(/img/bg-dark-product.png);
 }
 
 .product-details .title {
@@ -514,14 +694,36 @@ section.weapon-details .img-weapon {
 
 /* ------------------------------ PAGE:CONTACT ------------------------------ */
 .contact-form {
-  max-width: var(--bs-breakpoint-sm);
-  margin-top: -7rem;
+  max-width: 90%;
+  transform: translateY(-7rem);
+}
+
+@media (min-width: 768) {
+  .contact-form {
+    max-width: var(--bs-breakpoint-sm);
+  }
+}
+
+form.bg-dark-subtle input,
+form.bg-dark-subtle textarea,
+form.bg-dark-subtle select {
+  color: var(--bs-white) !important;
+}
+
+.contact-form input[type="submit"] {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .contact-form input[type="submit"] {
+    width: initial;
+  }
 }
 
 /* ------------------------------- PAGE: CART ------------------------------- */
 .cart-list .btn .icon {
-  width: 2.8rem;
-  height: 2.8rem;
+  width: 1.8rem;
+  height: 1.8rem;
 }
 
 .cart-list li > * {
@@ -536,22 +738,63 @@ section.weapon-details .img-weapon {
   width: 10rem;
 }
 
-/* ------------------------------ PAGE: PROFILE ----------------------------- */
-.profile-page form{
-  max-width: 70rem;
-  padding-left: 10rem !important;
+.cart-actions button {
+  width: 100%;
 }
 
-.profile-page .img-deco{
+.cart-item .quantity-controller button{
+  border: none !important;
+  transition: none !important;
+}
+
+.cart-item .quantity-controller button:disabled{
+border: none;
+color: var(--bs-gray-200) !important;
+}
+
+/* ------------------------------ PAGE: PROFILE ----------------------------- */
+.profile-page form {
+  max-width: 70rem;
+  width: 90%;
+}
+
+@media (min-width: 768px) {
+  .profile-page form {
+    padding-left: 10rem !important;
+    width: 100%;
+  }
+}
+
+.profile-page form .description {
+  font-size: 1.2rem;
+}
+
+@media (min-width: 768px) {
+  .profile-page form .description {
+    font-size: 1.4rem;
+  }
+}
+
+.profile-page .img-deco {
   position: absolute;
-  left: 0; 
+  left: 0;
   top: 0;
   height: 110%;
   pointer-events: none;
   transform: translateX(-50%);
 }
 
-form .show-password:hover{
+.profile-page form input[type="submit"] {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .profile-page form input[type="submit"] {
+    width: initial;
+  }
+}
+
+form .show-password:hover {
   color: var(--bs-primary);
 }
 
@@ -567,20 +810,31 @@ form .show-password:hover{
   grid-template-columns: auto 1fr;
 }
 
-.bo-aside nav .btn-expand-menu:hover {
+.bg-white.bo-aside nav .btn-expand-menu:hover {
   background-color: var(--bs-gray-300);
+}
+.bg-dark.bo-aside nav .btn-expand-menu:hover {
+  background-color: var(--bs-dark-bg-subtle);
 }
 
 nav:not(.expanded) .btn-expand-menu svg {
   transform: rotate(-180deg);
 }
 
-.bo-aside nav li > a {
+.bg-white.bo-aside nav li > a {
   color: var(--bs-dark);
 }
 
-.bo-aside nav li > a:hover {
+.bg-dark.bo-aside nav li > a {
+  color: var(--bs-white);
+}
+
+.bg-white.bo-aside nav li > a:hover {
   background-color: var(--bs-gray-300);
+}
+
+.bg-dark.bo-aside nav li > a:hover {
+  background-color: var(--bs-dark-bg-subtle);
 }
 
 .bo-aside nav .brand {
@@ -653,9 +907,19 @@ nav:not(.expanded) .btn-expand-menu svg {
   color: var(--bs-gray-600);
 }
 
+.bo-table-users .tag-role.dark {
+  background-color: var(--bs-gray-500);
+  color: var(--bs-dark);
+}
+
 .bo-table-users .tag-role.admin {
   border-color: var(--bs-primary) !important;
   color: var(--bs-primary);
+}
+
+.bo-table-users .tag-role.admin.dark {
+  background-color: var(--bs-primary);
+  color: var(--bs-light) !important;
 }
 
 .btn-exit {
@@ -663,8 +927,16 @@ nav:not(.expanded) .btn-expand-menu svg {
   right: 1rem;
 }
 
+.dark-mode .btn-exit {
+  color: var(--bs-light);
+}
+
 .btn-exit:hover {
   background-color: var(--bs-gray-300);
+}
+
+.dark-mode .btn-exit:hover {
+  background-color: var(--bs-dark);
 }
 
 .bo-form-new-user .input-group input {

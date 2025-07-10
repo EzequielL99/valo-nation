@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
-import { useProduct } from "../../hooks/useProduct";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { useTheme } from "../../hooks/useTheme";
 
 const itemsPerPage = 9;
 
-export default function Pagination({ setVisibleProducts }) {
-  const { shopProducts } = useProduct();
+export default function Pagination({ products, setVisibleProducts }) {
   const [currentPage, setCurrentPage] = useState(1);
+  const { darkMode } = useTheme();
 
-  const totalPages = Math.ceil(shopProducts.length / itemsPerPage);
+  const totalPages = Math.ceil(products.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
 
   useEffect(() => {
     setVisibleProducts(
-      shopProducts.slice(startIndex, startIndex + itemsPerPage)
+      products.slice(startIndex, startIndex + itemsPerPage)
     );
   }, [currentPage]);
 
@@ -37,9 +37,9 @@ export default function Pagination({ setVisibleProducts }) {
       <div className="list-unstyled d-flex gap-3">
         {Array.from({ length: totalPages }, (_, i) => (
           <button
-            className={`btn btn-outline-dark px-3 py-2 ${
-              i + 1 === currentPage ? "active" : ""
-            }`}
+            className={`btn ${
+              darkMode ? "btn-outline-light" : "btn-outline-dark"
+            } px-3 py-2 ${i + 1 === currentPage ? "active" : ""}`}
             key={i + 1}
             onClick={() => goToPage(i + 1)}
           >

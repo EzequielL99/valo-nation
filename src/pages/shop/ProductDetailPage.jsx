@@ -7,6 +7,7 @@ import ProductCartController from "../../components/shop/ProductCartController";
 import Loader from "../../components/Loader";
 
 import { useProduct } from "../../hooks/useProduct";
+import { useTheme } from "../../hooks/useTheme";
 
 export default function ProductDetailPage() {
   const { id } = useParams();
@@ -14,7 +15,8 @@ export default function ProductDetailPage() {
   const [weaponInfo, setWeaponInfo] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  const { state, dispatch } = useProduct();
+  const { state } = useProduct();
+  const { darkMode } = useTheme();
 
   useEffect(() => {
     setIsError(false);
@@ -45,7 +47,7 @@ export default function ProductDetailPage() {
   }, [isLoading]);
 
   return (
-    <main className="py-5 page-product-detail">
+    <main className={`${darkMode ? "dark" : ""} py-5 page-product-detail`}>
       {isLoading && (
         <div className="container text-center min-vh-100 d-flex flex-column justify-content-center">
           <Loader className="mx-auto my-4" />
@@ -78,7 +80,7 @@ export default function ProductDetailPage() {
                   />
                 </div>
               </div>
-              <div className="col-md-6 ps-5">
+              <div className={`col-md-6 ps-5 ${darkMode ? 'text-light' : ''}`}>
                 <div className="product-details mb-5">
                   <p className="fs-5 border d-inline-block border-1 border-primary text-primary rounded-pill px-3 py-2 mb-3">
                     {weaponInfo.category}
@@ -98,11 +100,11 @@ export default function ProductDetailPage() {
             </div>
           </div>
 
-          <div className="container py-5">
+          <div className={`container py-5 ${darkMode ? 'text-light' : ''}`}>
             <h2 className="h1 fw-bolder text-primary text-center mb-5">
               ASPECTOS ESPECIALES
             </h2>
-            {weaponInfo.skins.length > 0 ? (
+            {weaponInfo.skins?.length > 0 ? (
               <div className="row">
                 {weaponInfo.skins.map((skinData) => (
                   <div className="col-3" key={skinData.uuid}>

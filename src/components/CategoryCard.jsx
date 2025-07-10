@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useTheme } from "../hooks/useTheme";
 
 export default function CategoryCard({
   title,
@@ -6,8 +7,10 @@ export default function CategoryCard({
   image,
   navigateTo,
 }) {
+  const {darkMode} = useTheme();
+
   return (
-    <div className="mx-auto category-card bg-dark text-light rounded-4 px-4 py-5 d-flex flex-column">
+    <div className={`${darkMode ? 'bg-dark-subtle shadow text-white' : 'bg-dark text-light'} mx-auto category-card rounded-4 px-4 py-5 d-flex flex-column`}>
       <div className="card-image mb-5 text-center">
         <img src={image} className="img-fluid" alt={title} />
       </div>
@@ -15,7 +18,10 @@ export default function CategoryCard({
         <h3 className="text-uppercase mb-3">{title}</h3>
         <p className="mb-4">{description}</p>
       </div>
-      <Link to={navigateTo} className="btn btn-lg w-100 btn-outline-light mt-auto">
+      <Link
+        to={navigateTo}
+        className="btn btn-lg w-100 btn-outline-light mt-auto"
+      >
         Ver todos
       </Link>
     </div>

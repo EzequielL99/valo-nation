@@ -1,10 +1,13 @@
 import { useMemo } from "react";
 import { useCart } from "../../hooks/useCart";
-import { TrashIcon } from "@heroicons/react/24/outline";
+import { TrashIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
+import { useTheme } from "../../hooks/useTheme";
+import CartQuantityController from "../../components/shop/CartQuantityController";
 
 export default function CartPage() {
   const { cart, cartDispatch } = useCart();
+  const { darkMode } = useTheme();
 
   const cartIsEmpty = useMemo(() => cart.length === 0, [cart]);
 
@@ -21,11 +24,15 @@ export default function CartPage() {
             <>
               {cart.map((product) => (
                 <li
-                  className="bg-white cart-item shadow mb-5 rounded-4 d-flex justify-content-between align-items-center px-5 py-4"
+                  className={`${
+                    darkMode
+                      ? "bg-dark-subtle text-light"
+                      : "bg-white text-dark"
+                  } cart-item shadow mb-5 rounded-4 d-flex justify-content-between gap-4 align-items-stretch p-3 position-relative`}
                   key={product.id}
                 >
                   <div className="image-wrapper">
-                    <div className="bg-dark-subtle rounded-3">
+                    <div className="bg-body-secondary rounded-3">
                       <img
                         src={product.img}
                         className="img-fluid"
@@ -33,49 +40,49 @@ export default function CartPage() {
                       />
                     </div>
                   </div>
-                  <h2 className="text-center h3">{product.name}</h2>
-                  <p className="p-0 m-0 text-center">{product.price}</p>
-                  <p className="p-0 m-0 text-center">{product.quantity}</p>
-                  <div className="d-flex justify-content-end">
-                    <button
-                      className="btn btn-outline-primary p-2"
-                      onClick={() =>
-                        cartDispatch({
-                          type: "remove-from-cart",
-                          payload: { itemId: product.id },
-                        })
-                      }
-                    >
-                      <TrashIcon className="icon" />
-                    </button>
+                  <div className="flex-grow-1 d-flex flex-column justify-content-between py-3">
+                    <h2 className="h3">{product.name}</h2>
+                    <div className="d-flex justify-content-between align-items-center">
+                      <p className="p-0 m-0 text-center fw-bold fs-1 text-primary">${product.price}</p>
+                      <CartQuantityController product={product} />
+                    </div>
                   </div>
+                  <button
+                    className="btn p-2 position-absolute text-danger top-0 end-0 m-1"
+                    onClick={() =>
+                      cartDispatch({
+                        type: "remove-from-cart",
+                        payload: { itemId: product.id },
+                      })
+                    }
+                  >
+                    <XMarkIcon className="icon" />
+                  </button>
                 </li>
               ))}
 
-              <div className="row">
-                <div className="col-12 text-end">
-                  <div className="d-flex justify-content-between align-items-center">
-                    <div className="cart-actions">
-                      <button className="btn fs-2 btn-primary me-4 px-5">
-                        Pagar
-                      </button>
-                      <button
-                        onClick={() => cartDispatch({ type: "clear-cart" })}
-                        className="btn fs-2 btn-outline-secondary"
-                      >
-                        Vaciar carrito
-                      </button>
-                    </div>
-                    <p className="fs-1 text-uppercase">
-                      Total a pagar:{" "}
-                      <span className="fw-bolder text-primary">
-                        ${cartTotal}
-                      </span>
-                    </p>
+              <div className={`row ${darkMode ? "text-light" : "text-dark"}`}>
+                <div className="col-12">
+                  <div className="d-flex justify-content-between align-items-center mb-3">
+                    <p className={`${darkMode ? 'text-white-50' : 'text-black-50'} p-0 m-0`}>Subtotal</p>
+                    <span className="fw-bolder fs-1 text-primary">${cartTotal}</span>
+                  </div>
+                </div>
+                <div className="col-12">
+                  <div className="cart-actions">
+                    <button className="btn d-block d-md-inline-block fs-2 btn-primary mb-3">
+                      Pagar
+                    </button>
+                    <button
+                      onClick={() => cartDispatch({ type: "clear-cart" })}
+                      className={`${darkMode ? 'link-light' : 'link-dark'} btn fs-4`}
+                    >
+                      Vaciar carrito
+                    </button>
                   </div>
                 </div>
                 <div className="col-12 text-center py-5">
-                  <p className="mb-4">¿Sabés qué? Quiero seguir comprando...</p>
+                  <p className="mb-4">Quiero seguir comprando...</p>
                   <Link
                     to="/shop"
                     className="btn btn-primary px-4 py-3 text-uppercase"

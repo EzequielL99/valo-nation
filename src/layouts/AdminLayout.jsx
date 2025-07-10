@@ -8,12 +8,14 @@ import {
   RectangleGroupIcon,
 } from "@heroicons/react/24/outline";
 
-import Footer from "../components/Footer";
 import AdminSidebar, {
   AdminSidebarItem,
 } from "../components/admin/AdminSidebar";
+import { useTheme } from "../hooks/useTheme";
 
 export default function AdminLayout() {
+  const { darkMode } = useTheme();
+
   return (
     <>
       <div className="admin-layout-wrapper">
@@ -44,7 +46,7 @@ export default function AdminLayout() {
             icon={<UsersIcon className="icon" />}
           />
         </AdminSidebar>
-        <main className="bg-light">
+        <main className={darkMode ? "bg-dark-subtle" : "bg-light"}>
           <div className="container py-5 px-5">
             <Outlet />
           </div>

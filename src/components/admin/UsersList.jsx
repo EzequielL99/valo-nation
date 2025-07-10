@@ -1,11 +1,13 @@
 import { useAuth } from "../../hooks/useAuth";
 import UserListItem from "./UserListItem";
+import { useTheme } from "../../hooks/useTheme";
 
 export default function UsersList() {
   const { users } = useAuth();
+  const { darkMode } = useTheme();
 
   return (
-    <table className="bg-white rounded-4 shadow bo-table-users">
+    <table className={`${darkMode ? 'bg-dark text-white' : 'bg-white text-dark'} rounded-4 shadow bo-table-users`}>
       <thead>
         <tr>
           <th>Usuario</th>

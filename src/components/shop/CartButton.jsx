@@ -1,11 +1,14 @@
 import { useMemo } from "react";
 import { useCart } from "../../hooks/useCart";
+import { useTheme } from "../../hooks/useTheme";
+
 // Icons
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import { NavLink } from "react-router-dom";
 
 export default function CartButton() {
   const { cart } = useCart();
+  const { darkMode } = useTheme();
 
   const cartItemsQuantity = useMemo(() => cart.length, [cart]);
 
@@ -20,7 +23,7 @@ export default function CartButton() {
     >
       <ShoppingCartIcon className="icon" />
       {cartItemsQuantity > 0 && (
-        <span className="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-dark text-light">
+        <span className={`position-absolute top-0 start-100 translate-middle badge rounded-circle ${darkMode ? 'bg-light text-dark' : 'bg-dark text-light'}`}>
           {cartItemsQuantity}
         </span>
       )}
