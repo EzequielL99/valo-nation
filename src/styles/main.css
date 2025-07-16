@@ -11,18 +11,14 @@ Mobiles
 ----------------------
 320x568
 375x812
-360x800
-393x851
 
 Tablets
 ----------------------
 768x1024
-820x1180
 834x1194
 
 Laptops y Desktop
 ----------------------
-1024x768
 1366x768
 1440x900
 1920x1080
@@ -34,8 +30,8 @@ Laptops y Desktop
 480px
 768px
 1024px
-1280px
-1536px
+1366px
+1440px
 */
 
 /* -------------------------------- Generals -------------------------------- */
@@ -54,6 +50,10 @@ html {
 body {
   font-family: "Roboto", sans-serif;
   font-size: 1.6rem !important;
+}
+
+main {
+  min-height: 100vh;
 }
 /* -------------------------------- Generals: Headings -------------------------------- */
 h1 {
@@ -80,6 +80,16 @@ table {
   overflow: hidden;
 }
 
+table thead {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  table thead {
+    display: table-header-group;
+  }
+}
+
 table th {
   background-color: var(--bs-gray-200);
   border-bottom: 3px solid var(--bs-gray-300);
@@ -87,8 +97,72 @@ table th {
   padding: 2rem;
 }
 
+table.bg-dark th {
+  background-color: var(--bs-gray-800);
+  border-bottom: 3px solid var(--bs-gray-900);
+  color: var(--bs-gray-500);
+}
+
 table td {
-  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.6rem;
+}
+
+@media (min-width: 768px) {
+  table td {
+    display: table-cell;
+    align-items: initial;
+    justify-content: initial;
+    padding: 1rem 1.6rem;
+  }
+
+  table td[data-label="#"] {
+    display: none;
+  }
+}
+
+table tr:nth-child(odd) td {
+  background-color: var(--bs-gray-300);
+}
+
+table.bg-dark tr:nth-child(odd) td {
+  background-color: var(--bs-gray-700);
+  color: var(--bs-gray-200);
+}
+
+@media (min-width: 768px) {
+  table tr:nth-child(odd) td {
+    background-color: var(--bs-gray-100);
+  }
+}
+
+table td::before {
+  content: attr(data-label);
+  color: var(--bs-gray-600);
+  display: block;
+}
+
+@media (min-width: 768px) {
+  table td::before {
+    display: none;
+  }
+}
+
+table td.blank {
+  padding-top: 3rem;
+  border-bottom: 2px solid var(--bs-gray-400);
+}
+
+@media (min-width: 768px) {
+  table td.blank {
+    display: none;
+  }
+}
+
+table tr:last-of-type td.blank {
+  border: none;
 }
 
 /* -------------------------------- Generals: Buttons -------------------------------- */
@@ -96,6 +170,18 @@ table td {
   font-size: 1.4rem;
   text-transform: uppercase;
   transition: all 0.3s ease-in-out;
+  display: inline-block;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .btn {
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+    display: inline-block;
+    width: auto;
+  }
 }
 
 .btn-primary {
@@ -311,6 +397,11 @@ header .mobile-menu.show {
   max-height: 35rem;
 }
 
+header .btn-mobile-menu {
+  display: inline-block;
+  width: auto;
+}
+
 /* ----------------------------- FOOTER NAV MENU ---------------------------- */
 .bottom-menu li {
   position: relative;
@@ -389,17 +480,17 @@ header .mobile-menu.show {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-  min-height: 60vh;
+  min-height: 50vh;
   margin-top: -7rem;
 }
 
 .hero:not(.index) h1 {
-  font-size: 6rem;
+  font-size: 5rem;
 }
 
 @media (min-width: 768px) {
   .hero:not(.index) h1 {
-    font-size: 18rem;
+    font-size: 10rem;
   }
 }
 
@@ -417,6 +508,12 @@ header .mobile-menu.show {
 
 .category-card {
   min-height: 30rem;
+}
+
+@media (min-width: 1024px) {
+  .category-card {
+    min-height: 34rem;
+  }
 }
 
 .category-card .card-image {
@@ -498,11 +595,13 @@ section.weapon-details .img-weapon {
 }
 
 .search-bar input {
+  background-color: var(--bs-light) !important;
   border: none !important;
   outline: none !important;
 }
 
 .search-bar.dark input {
+  background-color: var(--bs-dark) !important;
   color: var(--bs-light) !important;
 }
 
@@ -518,6 +617,10 @@ section.weapon-details .img-weapon {
   background-color: var(--bs-primary);
   border-color: var(--bs-primary);
   color: var(--bs-light);
+}
+
+.pagination > .btn {
+  width: auto;
 }
 
 /* ------------------------------ CATEGORY LIST ----------------------------- */
@@ -546,6 +649,18 @@ section.weapon-details .img-weapon {
 
 .category-list button {
   font-size: 1.1rem;
+}
+
+.category-list button.active {
+  background-color: var(--bs-dark) !important;
+  border-color: var(--bs-dark) !important;
+  color: var(--bs-light);
+}
+
+.dark .category-list button.active {
+  background-color: var(--bs-light) !important;
+  border-color: var(--bs-light) !important;
+  color: var(--bs-dark);
 }
 
 .categories-wrapper.dark button {
@@ -595,7 +710,7 @@ section.weapon-details .img-weapon {
 
 .weapon-img img {
   transform: translate(-50%, -50%);
-  max-width: 90%;
+  max-width: 60%;
 }
 
 @media (min-width: 768px) {
@@ -627,13 +742,23 @@ section.weapon-details .img-weapon {
   color: var(--bs-light) !important;
 }
 
-.weapon-card .input-quantity{
-  justify-content: space-between;
+.weapon-card .input-quantity {
+  justify-content: center;
 }
 
-.weapon-card .add-to-cart{
+.weapon-card .input-quantity button {
+  width: auto;
+}
+
+.weapon-card .add-to-cart {
   font-size: 1rem !important;
   width: 100%;
+}
+
+@media (min-width: 768px) {
+  .weapon-card .add-to-cart {
+    font-size: 1.6rem !important;
+  }
 }
 
 /* ---------------------------------- LOGIN --------------------------------- */
@@ -672,12 +797,76 @@ section.weapon-details .img-weapon {
   background-image: url(/img/bg-dark-product.png);
 }
 
+@media (min-width: 768px) {
+  .page-product-detail.dark .col-img {
+    background-color: var(--bs-dark-bg-subtle);
+    border-radius: var(--bs-border-radius-lg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-product-detail.dark .col-img {
+    background-color: transparent;
+    border-radius: 0;
+  }
+}
+
+.page-product-detail .product-image {
+  width: 60%;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .page-product-detail .product-image {
+    width: auto;
+    max-width: 35rem;
+    max-height: 35rem;
+  }
+}
+
+.product-details .category {
+  width: 100%;
+  text-align: center;
+}
+
+@media (min-width: 1024px) {
+  .product-details .category {
+    width: auto;
+  }
+}
+
 .product-details .title {
-  font-size: 5rem;
+  font-size: 3rem;
+}
+
+@media (min-width: 1024px) {
+  .product-details .title {
+    font-size: 4rem;
+  }
 }
 
 .product-details .price {
-  font-size: 3rem;
+  font-size: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .product-details .price {
+    font-size: 3rem;
+  }
+}
+
+.product-details .input-quantity {
+  justify-content: center;
+}
+
+@media (min-width: 1024px) {
+  .product-details .input-quantity {
+    justify-content: flex-start;
+  }
+}
+
+.product-details .input-quantity button {
+  width: auto;
 }
 
 .input-quantity input {
@@ -694,14 +883,8 @@ section.weapon-details .img-weapon {
 
 /* ------------------------------ PAGE:CONTACT ------------------------------ */
 .contact-form {
-  max-width: 90%;
+  max-width: var(--bs-breakpoint-sm);
   transform: translateY(-7rem);
-}
-
-@media (min-width: 768) {
-  .contact-form {
-    max-width: var(--bs-breakpoint-sm);
-  }
 }
 
 form.bg-dark-subtle input,
@@ -714,13 +897,18 @@ form.bg-dark-subtle select {
   width: 100%;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .contact-form input[type="submit"] {
     width: initial;
   }
 }
 
 /* ------------------------------- PAGE: CART ------------------------------- */
+@media (min-width: 1024px) {
+  .cart-box {
+    max-width: 70rem;
+  }
+}
 .cart-list .btn .icon {
   width: 1.8rem;
   height: 1.8rem;
@@ -742,14 +930,26 @@ form.bg-dark-subtle select {
   width: 100%;
 }
 
-.cart-item .quantity-controller button{
+@media (min-width: 1024px) {
+  .cart-actions button {
+    width: auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cart-item .image-wrapper {
+    max-width: 10rem;
+  }
+}
+
+.cart-item .quantity-controller button {
   border: none !important;
   transition: none !important;
 }
 
-.cart-item .quantity-controller button:disabled{
-border: none;
-color: var(--bs-gray-200) !important;
+.cart-item .quantity-controller button:disabled {
+  border: none;
+  color: var(--bs-gray-200) !important;
 }
 
 /* ------------------------------ PAGE: PROFILE ----------------------------- */
@@ -801,13 +1001,35 @@ form .show-password:hover {
 /* -------------------------------------------------------------------------- */
 /*                                    ADMIN                                   */
 /* -------------------------------------------------------------------------- */
+.admin-layout-wrapper main {
+  padding-bottom: 7rem;
+}
+
+@media (min-width: 1024px) {
+  .admin-layout-wrapper main {
+    padding-bottom: 0;
+  }
+}
+
+.admin-layout-wrapper h1 {
+  color: var(--bs-primary);
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+}
 
 /* -------------------------------- SIDEBAR ------------------------------- */
 .admin-layout-wrapper {
   min-height: 100vh;
-  min-height: 100dvh;
-  display: grid;
-  grid-template-columns: auto 1fr;
+}
+
+@media (min-width: 1024px) {
+  .admin-layout-wrapper {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: auto 1fr;
+  }
 }
 
 .bg-white.bo-aside nav .btn-expand-menu:hover {
@@ -893,6 +1115,16 @@ nav:not(.expanded) .btn-expand-menu svg {
 }
 
 /* -------------------------------- DASHBOARD ------------------------------- */
+.bo-dashboard-cards {
+  width: 75%;
+}
+
+@media (min-width: 768px) {
+  .bo-dashboard-cards {
+    width: 100%;
+  }
+}
+
 .bo-dashboard-card {
   min-height: 22rem;
 }
@@ -902,6 +1134,12 @@ nav:not(.expanded) .btn-expand-menu svg {
 }
 
 /* ---------------------------------- USERS --------------------------------- */
+@media (min-width: 768px) {
+  .bo-table-users td {
+    padding: 2rem;
+  }
+}
+
 .bo-table-users .tag-role {
   border-color: var(--bs-gray-500) !important;
   color: var(--bs-gray-600);
@@ -940,7 +1178,18 @@ nav:not(.expanded) .btn-expand-menu svg {
 }
 
 .bo-form-new-user .input-group input {
-  min-width: 50rem;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .modal-container {
+    max-width: 60rem;
+    width: 75%;
+  }
+
+  .modal-container input[type="submit"] {
+    width: 100%;
+  }
 }
 
 /* ---------------------------- ADD PRODUCT PAGE ---------------------------- */
@@ -955,12 +1204,17 @@ nav:not(.expanded) .btn-expand-menu svg {
 
 /* ------------------------------ PRODUCTS PAGE ----------------------------- */
 .bo-table-products .img {
-  max-width: 15rem;
-  width: 15rem;
-  height: 10rem;
+  width: 5rem;
+  height: 5rem;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center center;
+}
+
+@media (min-width: 768px) {
+  .bo-table-products .img {
+    margin: 0 auto;
+  }
 }
 /* ------------------------------ EDIT PRODUCT PAGE ----------------------------- */
 .icon.icon-tabler {

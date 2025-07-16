@@ -1,55 +1,38 @@
 import { Link, NavLink } from "react-router-dom";
+import { useTheme } from "../../hooks/useTheme";
+import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 
 export default function AdminHeader() {
+  const { darkMode, toggleTheme } = useTheme();
+
   return (
-    <header className="bg-dark sticky-top">
+    <header
+      className={`${
+        darkMode ? "bg-dark text-white" : "bg-light text-dark"
+      } sticky-top d-lg-none py-4`}
+    >
       <div className="container">
-        <nav
-          className="position-relative z-3 navbar bg-dark navbar-expand-md py-3 rounded-bottom rounded-bottom-3"
-          data-bs-theme="dark"
-        >
-          <div className="container px-0 justify-content-md-between">
+        <nav>
+          <div className="container px-0 d-flex align-items-center justify-content-between">
             <Link to="/" className="navbar-brand">
               <span className="fw-bold text-primary">VALO</span>-NATION
             </Link>
+
             <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
+              className={`${
+                darkMode ? "btn-outline-light" : "btn-outline-dark"
+              } btn p-2`}
+              onClick={() => toggleTheme()}
+              aria-label={
+                darkMode ? "Cambiar a modo claro" : "Cambiar a modo oscuro"
+              }
             >
-              <span className="navbar-toggler-icon"></span>
+              {darkMode ? (
+                <SunIcon className="icon" />
+              ) : (
+                <MoonIcon className="icon" />
+              )}
             </button>
-            <div
-              className="collapse navbar-collapse flex-md-grow-0"
-              id="navbarSupportedContent"
-            >
-              <ul className="navbar-nav">
-                <li className="nav-item">
-                  <NavLink
-                    to="/admin/dashboard"
-                    className={({ isActive }) =>
-                      isActive ? "nav-link text-primary" : "nav-link"
-                    }
-                  >
-                    Dashboard
-                  </NavLink>
-                </li>
-                <li className="nav-item">
-                  <NavLink
-                    to="/"
-                    className={({ isActive }) =>
-                      isActive ? "nav-link text-primary" : "nav-link"
-                    }
-                  >
-                    Volver al sitio
-                  </NavLink>
-                </li>
-              </ul>
-            </div>
           </div>
         </nav>
       </div>

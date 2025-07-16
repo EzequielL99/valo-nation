@@ -34,7 +34,7 @@ export default function Header() {
     <header className={`${darkMode ? "bg-dark" : "bg-light"} sticky-top`}>
       <nav className="container py-3">
         <div className="row align-items-center">
-          <div className="col-12 col-md-4 d-flex justify-content-between align-items-center px-4">
+          <div className="col-12 col-lg-4 d-flex justify-content-between align-items-center px-4">
             <Link
               to="/"
               className={`${darkMode ? "text-light" : ""} navbar-brand m-0 p-0`}
@@ -45,7 +45,7 @@ export default function Header() {
             <button
               className={`${
                 darkMode ? "btn-outline-light" : "btn-outline-dark"
-              } btn`}
+              } btn btn-mobile-menu d-lg-none`}
               onClick={() => setShowMobileMenu(!showMobileMenu)}
             >
               <Bars3BottomRightIcon className="icon" />
@@ -53,12 +53,10 @@ export default function Header() {
           </div>
 
           <div
-            className={`${
-              showMobileMenu ? "show" : ""
-            } col-12 col-md-4 d-md-flex justify-content-center mobile-menu overflow-hidden`}
+            className='d-none col-lg-4 d-lg-flex justify-content-center overflow-hidden'
           >
-            <ul className="d-none d-md-flex flex-row gap-4 list-unstyled p-2 p-md-0 m-0 align-items-center">
-              <li className="py-2 p-md-0">
+            <ul className="d-flex flex-row gap-4 list-unstyled p-2 p-lg-0 m-0 align-items-center">
+              <li className="py-2 p-lg-0">
                 <NavLink
                   to="/"
                   className={({ isActive }) =>
@@ -70,7 +68,7 @@ export default function Header() {
                   Inicio
                 </NavLink>
               </li>
-              <li className="py-2 p-md-0">
+              <li className="py-2 p-lg-0">
                 <NavLink
                   to="/shop"
                   className={({ isActive }) =>
@@ -82,7 +80,7 @@ export default function Header() {
                   Tienda
                 </NavLink>
               </li>
-              <li className="py-2 p-md-0">
+              <li className="py-2 p-lg-0">
                 <NavLink
                   to="/contact"
                   className={({ isActive }) =>
@@ -95,9 +93,16 @@ export default function Header() {
                 </NavLink>
               </li>
             </ul>
+          </div>
+
+          <div
+            className={`${
+              showMobileMenu ? "show" : ""
+            } col-12 d-lg-none mobile-menu overflow-hidden`}
+          >
 
             {/* Mobile Menu */}
-            <ul className="d-md-none list-unstyled p-2 text-center m-0 p-0 pt-4">
+            <ul className="d-lg-none list-unstyled p-2 text-center m-0 p-0 pt-4">
               {auth.currentUser?.role === "admin" && (
                 <li className="py-2">
                   <NavLink
@@ -146,7 +151,7 @@ export default function Header() {
             </ul>
           </div>
 
-          <div className="col-4 d-none d-md-flex justify-content-end">
+          <div className="col-4 d-none d-lg-flex justify-content-end">
             <ul className="list-unstyled m-0 p-0 gap-3 d-flex align-items-center">
               <li className="nav-item">
                 <AdminButton className="btn btn-outline-primary rounded-pill text-uppercase px-4" />

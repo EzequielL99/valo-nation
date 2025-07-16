@@ -8,7 +8,7 @@ import { useProduct } from "../../hooks/useProduct";
 import { useEffect, useState } from "react";
 import { useTheme } from "../../hooks/useTheme";
 
-export default function ProductItem({ product }) {
+export default function ProductItem({ product, index }) {
   const { state, dispatch } = useProduct();
   const { darkMode } = useTheme();
   const [isHidden, setIsHidden] = useState(false);
@@ -27,7 +27,10 @@ export default function ProductItem({ product }) {
 
   return (
     <tr>
-      <td>
+      <td data-label="#">
+        {index}
+      </td>
+      <td data-label="Producto">
         <div
           className="img"
           style={{
@@ -35,11 +38,11 @@ export default function ProductItem({ product }) {
           }}
         ></div>
       </td>
-      <td>
+      <td data-label="Descripcion">
         <p>{product.name}</p>
       </td>
-      <td>$ {product.price}</td>
-      <td>
+      <td data-label="Precio">$ {product.price}</td>
+      <td data-label="Estado">
         <span
           className={`p-2 px-4 rounded-pill ${
             isHidden
@@ -51,31 +54,36 @@ export default function ProductItem({ product }) {
         </span>
       </td>
 
-      <td>
+      <td data-label="Acciones">
         <div className="d-flex align-items-center gap-3">
           <Link
             to={`/admin/products/${product.id}/edit`}
-            className={`btn ${darkMode ? 'btn-info' : 'btn-outline-info'} p-3`}
+            className={`btn ${darkMode ? 'btn-info' : 'btn-outline-info'} p-2`}
+            aria-label="Editar producto"
           >
             <PencilSquareIcon className="icon" />
           </Link>
           {!isHidden ? (
             <button
-              className={`btn ${darkMode ? 'btn-danger' : 'btn-outline-danger'} p-3`}
+              className={`btn ${darkMode ? 'btn-danger' : 'btn-outline-danger'} p-2`}
               onClick={() => handleHideProduct()}
+              aria-label="Ocultar producto"
             >
               <EyeSlashIcon className="icon" />
             </button>
           ) : (
             <button
-              className={`btn ${darkMode ? 'btn-success' : 'btn-outline-success'} p-3`}
+              className={`btn ${darkMode ? 'btn-success' : 'btn-outline-success'} p-2`}
               onClick={() => handleUnhideProduct()}
+              aria-label="Mostrar producto"
             >
               <EyeIcon className="icon" />
             </button>
           )}
         </div>
       </td>
+
+      <td className="blank"></td>
     </tr>
   );
 }

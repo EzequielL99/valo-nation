@@ -10,7 +10,7 @@ export default function MobileNavMenu({ children }) {
     <nav
       className={`${
         darkMode ? "bg-dark dark-mode" : "bg-light"
-      } bottom-menu position-fixed bottom-0 start-0 w-100`}
+      } bottom-menu position-fixed bottom-0 start-0 w-100 d-lg-none`}
     >
       <div className="container">
         <ul className="m-0 d-flex justify-content-between align-items-center list-unstyled">

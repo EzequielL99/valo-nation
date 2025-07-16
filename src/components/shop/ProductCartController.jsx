@@ -2,13 +2,15 @@ import { useMemo, useRef, useState, useEffect } from "react";
 import { PlusIcon, MinusIcon } from "@heroicons/react/24/outline";
 import { useCart } from "../../hooks/useCart";
 import { toast } from "react-toastify";
+import { useTheme } from "../../hooks/useTheme";
 
-const MIN_ITEMS = 1;
-const MAX_ITEMS = 5;
+const MIN_ITEMS = import.meta.env.VITE_MIN_PRODUCTS;
+const MAX_ITEMS = import.meta.env.VITE_MAX_PRODUCTS;
 
 export default function ProductCartController({ weaponInfo }) {
   const { cart, cartDispatch } = useCart();
   const [quantity, setQuantity] = useState(1);
+  const { darkMode } = useTheme();
   const btnIncrementRef = useRef(null);
   const btnDecrementRef = useRef(null);
 
@@ -84,7 +86,11 @@ export default function ProductCartController({ weaponInfo }) {
               <MinusIcon className="icon" />
             </i>
           </button>
-          <span className="py-2 px-4 rounded-3 bg-light border border-3 border-primary text-dark">
+          <span
+            className={`${
+              darkMode ? "bg-dark text-white" : "bg-white text-dark"
+            } py-2 px-4 rounded-3 border border-3 border-primary`}
+          >
             {quantity}
           </span>
           <button
@@ -98,7 +104,10 @@ export default function ProductCartController({ weaponInfo }) {
           </button>
         </div>
       ) : (
-        <button onClick={handleAddToCart} className="btn btn-primary add-to-cart fs-3">
+        <button
+          onClick={handleAddToCart}
+          className="btn btn-primary add-to-cart fs-3"
+        >
           Agregar al carrito
         </button>
       )}

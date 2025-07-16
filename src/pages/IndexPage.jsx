@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import CategoryCard from "../components/CategoryCard";
+import {useAuth} from '../hooks/useAuth';
+import { Helmet } from "react-helmet";
 
 const itemCategories = [
   {
@@ -23,14 +25,20 @@ const itemCategories = [
 ];
 
 export default function IndexPage() {
+  const {auth} = useAuth();
+
   return (
     <>
+    <Helmet>
+      <title>ValoNation | Inicio</title>
+      <meta name="description" content="La página número 1 para adquirir réplicas de armamento de Valorant para exhibición" />
+    </Helmet>
       <section className="container-fluid hero index d-flex flex-column align-items-center justify-content-center">
         <div className="container text-white text-center">
           <h1 className="text-uppercase fw-bold">Domina la batalla</h1>
           <p>Registrate y adquiere las mejores réplicas del armamento de Valorant.</p>
-          <Link to="/auth/register" className="btn btn-lg btn-light fs-2">
-            Registrarme
+          <Link to={auth.currentUser ? '/shop' : '/auth/register'} className="btn btn-lg btn-light fs-2" aria-label={auth.currentUser ? 'Ir a la tienda' : 'Registrarse'}>
+            {auth.currentUser ? 'Ir a la tienda' : 'Registrarme'}
           </Link>
         </div>
       </section>

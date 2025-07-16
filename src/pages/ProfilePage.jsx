@@ -4,6 +4,7 @@ import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import FormErrorMessage from "../components/FormErrorMessage";
 import { toast } from "react-toastify";
 import { useTheme } from "../hooks/useTheme";
+import { Helmet } from "react-helmet";
 
 const formInitialState = {
   email: "",
@@ -128,6 +129,10 @@ export default function ProfilePage() {
 
   return (
     <div className="container min-vh-100 profile-page d-flex justify-content-center align-items-center">
+      <Helmet>
+        <title>Mi Perfil</title>
+        <meta name="description" content="Perfil del usuario" />
+      </Helmet>
       <form
         onSubmit={handleSubmit}
         className={`${
@@ -199,7 +204,9 @@ export default function ProfilePage() {
 
             <button
               onClick={handleShowPassword}
-              className="btn position-absolute end-0 top-50 translate-middle-y me-2 z-3 show-password"
+              className="btn position-absolute end-0 top-50 
+              translate-middle-y me-2 z-3 show-password w-auto"
+              aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
             >
               {showPassword ? (
                 <EyeSlashIcon className="icon" />

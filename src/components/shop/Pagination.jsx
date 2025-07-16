@@ -7,14 +7,16 @@ const itemsPerPage = 9;
 export default function Pagination({ products, setVisibleProducts }) {
   const [currentPage, setCurrentPage] = useState(1);
   const { darkMode } = useTheme();
-
   const totalPages = Math.ceil(products.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
 
   useEffect(() => {
-    setVisibleProducts(
-      products.slice(startIndex, startIndex + itemsPerPage)
-    );
+    setCurrentPage(1);
+    setVisibleProducts(products.slice(startIndex, startIndex + itemsPerPage));
+  }, [products]);
+
+  useEffect(() => {
+    setVisibleProducts(products.slice(startIndex, startIndex + itemsPerPage));
   }, [currentPage]);
 
   const goToPage = (page) => {

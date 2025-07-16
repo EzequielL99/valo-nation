@@ -285,16 +285,17 @@ export default function ProductForm() {
         </div>
       ) : (
         <>
-          <div className="d-flex justify-content-between align-items-center edit-product-page">
-            <h1 className="text-primary">
+          <div className="d-md-flex justify-content-between align-items-center edit-product-page">
+            <h1 className="text-primary text-center text-uppercase text-md-start mb-4 mb-md-0">
               {isEditing ? "Editar Producto" : "Agregar Producto"}
             </h1>
             <button
               type="submit"
               form="formAddProduct"
               value={isEditing ? "Guardar cambios" : "Crear Producto"}
-              className="btn btn-primary d-flex gap-2 align-items-center p-4"
+              className="btn btn-primary d-flex gap-2 justify-content-center align-items-center p-4"
               disabled={isEditing ? !isSaveEnabled : false}
+              aria-label={isEditing ? 'Guardar cambios' : 'Agregar Producto'}
             >
               {isEditing ? (
                 <>
@@ -317,7 +318,7 @@ export default function ProductForm() {
           >
             <div className={`form-generals ${darkMode ? 'bg-dark text-white' : 'bg-white text-dark'} rounded-4 shadow p-5 my-5`}>
               <h3 className="fw-bold h3 mb-4">Generales</h3>
-              <div className="d-flex justify-content-between gap-4">
+              <div className="d-md-flex justify-content-between gap-4">
                 <div className="col-product flex-grow-1">
                   <div className="input-group mb-4 d-flex flex-column gap-2">
                     <label htmlFor="name">Nombre</label>
@@ -403,7 +404,7 @@ export default function ProductForm() {
                   </div>
                 </div>
                 <div className="col-img">
-                  <div className="image-wrapper rounded-3 overflow-hidden bg-dark-subtle d-flex align-items-center justify-content-center mx-auto">
+                  <div className={`${darkMode ? 'bg-dark-subtle' : 'bg-light'} p-4 image-wrapper rounded-3 overflow-hidden d-flex align-items-center justify-content-center mx-auto`}>
                     <img
                       src={
                         formData.img.trim() !== ""
@@ -514,16 +515,17 @@ export default function ProductForm() {
               </div>
             </div>
 
-            <div className="d-flex justify-content-between align-items-center">
-              <Link to="/admin/products" className="link-danger">
+            <div className="d-flex flex-column flex-md-row justify-content-between align-items-center">
+              <Link to="/admin/products" className="link-danger order-2 order-md-0" aria-label="Cancelar">
                 Cancelar
               </Link>
 
               <button
                 type="submit"
                 value={isEditing ? "Guardar cambios" : "Crear Producto"}
-                className="btn btn-primary d-flex gap-2 align-items-center p-4"
+                className="btn btn-primary d-flex gap-2 align-items-center justify-content-center p-4 mb-4 mb-md-0"
                 disabled={isEditing ? !isSaveEnabled : false}
+                aria-label={isEditing ? 'Guardar cambios' : 'Crear producto'}
               >
                 {isEditing ? (
                   <>

@@ -8,8 +8,13 @@ import { getProductInfo } from "../../utils";
 import { useProduct } from "../../hooks/useProduct";
 import Pagination from "./Pagination";
 import { useTheme } from "../../hooks/useTheme";
+import { useSearchParams } from "react-router-dom";
 
 export default function GridItems() {
+  const [searchParams] = useSearchParams();
+  const searchQuery = searchParams.get("q") || "";
+
+  const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const { dispatch, shopProducts } = useProduct();
@@ -19,6 +24,17 @@ export default function GridItems() {
   const [visibleProducts, setVisibleProducts] = useState([]);
 
   const { fetchWeapons } = useValorantAPI();
+
+  useEffect(() => {
+    // Todos los productos
+    if (!searchQuery || searchQuery.trim() === "") {
+      setProducts(shopProducts);
+    } else {
+      setProducts(
+        shopProducts.filter((product) => product.category == searchQuery)
+      );
+    }
+  }, [searchQuery, shopProducts]);
 
   useEffect(() => {
     if (isError) setIsError(!isError);
@@ -41,8 +57,8 @@ export default function GridItems() {
   return (
     <div className="col-12 col-lg-10">
       {isLoading && (
-        <div className="container text-center">
-          <Loader className="mx-auto my-4" />
+        <div className="container text-center my-5">
+          <Loader className="mx-auto mb-4" />
           <p>Consultando productos...</p>
         </div>
       )}
@@ -72,13 +88,16 @@ export default function GridItems() {
             </p>
           ) : (
             <>
-              <div className={`${darkMode ? 'dark' : ''} row`}>
+              <div className={`${darkMode ? "dark" : ""} row`}>
                 {visibleProducts.map((item) => (
                   <ItemCard key={item.id} item={item} />
                 ))}
               </div>
 
-              <Pagination products={shopProducts} setVisibleProducts={setVisibleProducts} />
+              <Pagination
+                products={products}
+                setVisibleProducts={setVisibleProducts}
+              />
             </>
           )}
         </>

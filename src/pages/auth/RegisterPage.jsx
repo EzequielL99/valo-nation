@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 
 import { useAuth } from "../../hooks/useAuth";
 import FormErrorMessage from "../../components/FormErrorMessage";
+import { Helmet } from "react-helmet";
 
 const validateForm = (formData) => {
   let errors = {};
@@ -92,6 +93,10 @@ export default function RegisterPage() {
 
   return (
     <form onSubmit={handleSubmit} className="form-login mx-auto" noValidate>
+      <Helmet>
+        <title>Registrarse</title>
+        <meta name="description" content="Registrate para acceder al catálogo de Valo-Nation"/>
+      </Helmet>
       <div className="border border-light-subtle rounded-3 p-4 mb-5">
         <p className="p-0 m-0 fs-4">
           Queres ser admin? Tu nombre de usuario debe ser{" "}
@@ -184,7 +189,7 @@ export default function RegisterPage() {
         className="text-uppercase btn btn-lg btn-primary w-100 mb-3"
       />
 
-      <Link to="/auth/login" className="link-primary text-decoration-none">
+      <Link to="/auth/login" className="link-primary text-decoration-none" aria-label="Ya tengo una cuenta. Iniciar sesión.">
         YA TENGO CUENTA
       </Link>
     </form>

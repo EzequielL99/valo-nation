@@ -141,7 +141,7 @@ export default function NewUserModal({ modal, setModal }) {
                     darkMode
                       ? "dark-mode bg-dark-subtle text-white"
                       : "bg-white text-dark"
-                  } position-relative overflow-hidden rounded-4 p-5 text-start shadow-lg`}
+                  } position-relative modal-container overflow-hidden rounded-4 p-4 p-md-5 text-start shadow-lg`}
                 >
                   <DialogTitle
                     as="h3"
@@ -151,8 +151,9 @@ export default function NewUserModal({ modal, setModal }) {
                   </DialogTitle>
 
                   <button
-                    className="btn position-absolute btn-exit p-2"
+                    className="btn position-absolute btn-exit p-2 w-auto"
                     onClick={handleCloseModal}
+                    aria-label="Cerrar ventana modal"
                   >
                     <XMarkIcon className="icon" />
                   </button>
@@ -163,7 +164,7 @@ export default function NewUserModal({ modal, setModal }) {
                   >
                     <p
                       className={`${
-                        darkMode ? "bg-dark text-white" : ""
+                        darkMode ? "bg-dark text-white" : "bg-light"
                       } text-center py-3 rounded-3 m-0 mb-4`}
                     >
                       Coloca{" "}
@@ -235,18 +236,20 @@ export default function NewUserModal({ modal, setModal }) {
                       )}
                     </div>
 
-                    <div className="d-flex justify-content-between align-items-center mt-5">
+                    <div className="d-flex flex-column-reverse justify-content-between align-items-center mt-5">
                       <button
                         className='btn link-danger'
                         onClick={handleCloseModal}
+                        aria-label="Cancelar creación de usuario"
                       >
                         Cancelar
                       </button>
                       <input
                         type="submit"
                         value="Crear usuario"
+                        aria-label="Crerar usuario"
                         disabled={!isFormValid}
-                        className="text-uppercase btn btn-primary px-4 py-2"
+                        className="text-uppercase btn btn-primary px-4 py-2 mb-3"
                       />
                     </div>
                   </form>

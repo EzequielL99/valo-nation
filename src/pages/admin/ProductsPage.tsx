@@ -7,6 +7,7 @@ import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import ProductItem from "../../components/admin/ProductItem";
 import { useTheme } from "../../hooks/useTheme";
 import Pagination from "../../components/shop/Pagination";
+import { Helmet } from "react-helmet";
 
 export default function ProductsPage() {
   const { dispatch, allProducts } = useProduct();
@@ -38,7 +39,16 @@ export default function ProductsPage() {
 
   return (
     <>
-      <h1 className="mb-5 text-primary">Productos</h1>
+      <Helmet>
+        <title>Admin | Productos</title>
+        <meta
+          name="description"
+          content="Crea, edita y releva el estado de los productos del sistema."
+        />
+      </Helmet>
+      <h1 className="mb-5 text-primary text-center text-lg-start text-uppercase fw-bold">
+        Productos
+      </h1>
       {isLoading && (
         <div className="container text-center">
           <Loader className="mx-auto my-4" />
@@ -84,8 +94,12 @@ export default function ProductsPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {visibleProducts.map((product) => (
-                    <ProductItem key={product.id} product={product} />
+                  {visibleProducts.map((product, index) => (
+                    <ProductItem
+                      key={product.id}
+                      product={product}
+                      index={index}
+                    />
                   ))}
                 </tbody>
               </table>

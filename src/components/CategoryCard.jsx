@@ -21,6 +21,7 @@ export default function CategoryCard({
       <Link
         to={navigateTo}
         className="btn btn-lg w-100 btn-outline-light mt-auto"
+        aria-label="Ver los productos"
       >
         Ver todos
       </Link>

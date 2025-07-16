@@ -3,8 +3,8 @@ import { useCart } from "../../hooks/useCart";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { useTheme } from "../../hooks/useTheme";
 
-const MIN_ITEMS = 1;
-const MAX_ITEMS = 5;
+const MIN_ITEMS = parseInt(import.meta.env.VITE_MIN_PRODUCTS);
+const MAX_ITEMS = parseInt(import.meta.env.VITE_MAX_PRODUCTS);
 
 export default function CartQuantityController({ product }) {
   const { cartDispatch } = useCart();

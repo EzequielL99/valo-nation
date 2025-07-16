@@ -29,9 +29,9 @@ export default function UserListItem({ user }) {
   };
   return (
     <>
-      <td>{user.username}</td>
-      <td>{user.email}</td>
-      <td>
+      <td data-label="Usuario">{user.username}</td>
+      <td data-label="E-mail">{user.email}</td>
+      <td data-label="Rol">
         <span
           className={`${darkMode ? 'dark' : ''} text-capitalize border tag-role rounded-pill px-4 py-2 ${
             user.role.toLowerCase() === "admin" ? "admin" : ""
@@ -40,16 +40,18 @@ export default function UserListItem({ user }) {
           {roleList[user.role.toLowerCase()]}
         </span>
       </td>
-      <td>
+      <td data-label="Acciones">
         {auth.currentUser.email !== user.email && (
           <button
-            className={`${darkMode ? 'btn-danger' : 'btn-outline-danger'} btn  p-3`}
+            className={`${darkMode ? 'btn-danger' : 'btn-outline-danger'} btn w-auto p-3`}
             onClick={handleDeleteUser}
+            aria-label="Eliminar usuario"
           >
             <TrashIcon className="icon" />
           </button>
         )}
       </td>
+      <td className="blank"></td>
     </>
   );
 }

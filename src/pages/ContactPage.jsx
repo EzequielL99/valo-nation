@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { toast } from "react-toastify";
 import { useTheme } from "../hooks/useTheme";
+import { Helmet } from "react-helmet";
 
 const categories = [
   { id: 1, value: "Gestión de Cuenta" },
@@ -41,6 +42,10 @@ export default function ContactPage() {
 
   return (
     <>
+    <Helmet>
+      <title>Contacto</title>
+      <meta name="description" content="Puedes ponerte en contacto con nosotros de forma fácil y rápida" />
+    </Helmet>
       <section className="container-fluid hero d-flex flex-column align-items-center justify-content-center">
         <div className="container text-white text-center">
           <h1 className="text-uppercase fw-bold">Contacto</h1>

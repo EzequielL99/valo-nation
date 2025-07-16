@@ -7,7 +7,7 @@ export default function UsersList() {
   const { darkMode } = useTheme();
 
   return (
-    <table className={`${darkMode ? 'bg-dark text-white' : 'bg-white text-dark'} rounded-4 shadow bo-table-users`}>
+    <table className={`${darkMode ? 'bg-dark text-white' : 'bg-white text-dark'} rounded-4 shadow bo-table-users`} aria-label="Tabla de usuarios">
       <thead>
         <tr>
           <th>Usuario</th>

@@ -8,6 +8,7 @@ import Loader from "../../components/Loader";
 
 import { useProduct } from "../../hooks/useProduct";
 import { useTheme } from "../../hooks/useTheme";
+import { Helmet } from "react-helmet";
 
 export default function ProductDetailPage() {
   const { id } = useParams();
@@ -47,7 +48,16 @@ export default function ProductDetailPage() {
   }, [isLoading]);
 
   return (
-    <main className={`${darkMode ? "dark" : ""} py-5 page-product-detail`}>
+    <main
+      className={`${darkMode ? "dark" : ""} py-md-5 p-3 page-product-detail`}
+    >
+      <Helmet>
+        <title>Producto - {weaponInfo.name}</title>
+        <meta
+          name="description"
+          content={`Detalle del producto ${weaponInfo.name}`}
+        />
+      </Helmet>
       {isLoading && (
         <div className="container text-center min-vh-100 d-flex flex-column justify-content-center">
           <Loader className="mx-auto my-4" />
@@ -56,12 +66,13 @@ export default function ProductDetailPage() {
       )}
       {!isLoading && !isError && (
         <>
-          <div className="container py-5">
+          <div className="container py-md-5">
             <div className="row">
               <div className="col-12">
                 <Link
                   to="/shop"
                   className="link-primary text-decoration-none d-flex align-items-center gap-1 text-uppercase"
+                  aria-label="Volver a la tienda"
                 >
                   <i>
                     <ChevronDoubleLeftIcon className="icon" />
@@ -71,8 +82,12 @@ export default function ProductDetailPage() {
               </div>
             </div>
             <div className="row py-3">
-              <div className="col-md-6">
-                <div className="product-image bg-dark-subtle p-3 rounded-3 h-100 d-grid justify-content-center align-items-center">
+              <div className="col-md-6 d-md-flex align-items-md-center justify-content-md-center col-img">
+                <div
+                  className={`${
+                    darkMode ? "bg-dark-subtle" : "bg-white"
+                  } product-image p-3 rounded-3 h-100 d-grid justify-content-center align-items-center`}
+                >
                   <img
                     src={weaponInfo.img}
                     className="img-fluid"
@@ -80,13 +95,21 @@ export default function ProductDetailPage() {
                   />
                 </div>
               </div>
-              <div className={`col-md-6 ps-5 ${darkMode ? 'text-light' : ''}`}>
+              <div
+                className={`col-md-6 ps-md-5 py-3 ${
+                  darkMode ? "text-light" : ""
+                }`}
+              >
                 <div className="product-details mb-5">
-                  <p className="fs-5 border d-inline-block border-1 border-primary text-primary rounded-pill px-3 py-2 mb-3">
+                  <p className="fs-5 category border d-inline-block border-1 border-primary text-primary rounded-pill px-3 py-2 mb-3">
                     {weaponInfo.category}
                   </p>
-                  <h2 className="h1 fw-bolder mb-4 title">{weaponInfo.name}</h2>
-                  <p className="h1 fw-bold mb-4 price">${weaponInfo.price}</p>
+                  <h2 className="fw-bolder text-center text-lg-start mb-2 title">
+                    {weaponInfo.name}
+                  </h2>
+                  <p className="fw-bold mb-4 text-center text-lg-start price text-primary fw-bolder">
+                    ${weaponInfo.price}
+                  </p>
 
                   <ProductCartController weaponInfo={weaponInfo} />
                 </div>
@@ -100,7 +123,9 @@ export default function ProductDetailPage() {
             </div>
           </div>
 
-          <div className={`container py-5 ${darkMode ? 'text-light' : ''}`}>
+          <div
+            className={`container py-md-5 py-3 ${darkMode ? "text-light" : ""}`}
+          >
             <h2 className="h1 fw-bolder text-primary text-center mb-5">
               ASPECTOS ESPECIALES
             </h2>
@@ -108,9 +133,14 @@ export default function ProductDetailPage() {
               <div className="row">
                 {weaponInfo.skins.map((skinData) => (
                   <div className="col-3" key={skinData.uuid}>
-                    <div className="card">
+                    <div
+                      className={`${
+                        darkMode ? "bg-dark text-white" : "bg-white text-dark"
+                      } card`}
+                      aria-label="Diseño personalizado del armamento"
+                    >
                       <div
-                        className="card-img-top bg-dark-subtle text-center d-flex align-items-center justify-content-center overflow-hidden"
+                        className="card-img-top text-center d-flex align-items-center justify-content-center overflow-hidden"
                         style={{ minHeight: "20rem" }}
                       >
                         <img
@@ -119,7 +149,11 @@ export default function ProductDetailPage() {
                           alt={skinData.displayName}
                         />
                       </div>
-                      <div className="card-body">
+                      <div
+                        className={`${
+                          darkMode ? "bg-dark-subtle" : "bg-light"
+                        } card-body`}
+                      >
                         <h4 className="card-title">{skinData.displayName}</h4>
                       </div>
                     </div>

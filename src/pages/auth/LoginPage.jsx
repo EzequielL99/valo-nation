@@ -5,6 +5,7 @@ import { EnvelopeIcon, KeyIcon } from "@heroicons/react/24/outline";
 import FormErrorMessage from "../../components/FormErrorMessage";
 
 import { useAuth } from "../../hooks/useAuth";
+import { Helmet } from "react-helmet";
 
 const validateForm = (formData) => {
   let errors = {};
@@ -86,6 +87,10 @@ export default function LoginPage() {
 
   return (
     <form onSubmit={handleSubmit} className="form-login mx-auto" noValidate>
+      <Helmet>
+        <title>Iniciar Sesión</title>
+        <meta name="description" content="Inicia sesión en el sitio web de Valo-Nation"/>
+      </Helmet>
       <p className="mb-4">Inicia sesión para tener acceso al sitio completo</p>
       <div className="text-start mb-4">
         <div className="border border-light-subtle rounded-pill d-flex align-items-center py-2 mb-1">
@@ -142,9 +147,10 @@ export default function LoginPage() {
         value="Ingresar"
         disabled={!isFormValid}
         className="text-uppercase btn btn-lg btn-primary w-100 mb-3"
+        aria-label="Iniciar Sesión"
       />
 
-      <Link to="/auth/register" className="link-primary text-decoration-none">
+      <Link to="/auth/register" className="link-primary text-decoration-none" aria-label="No tengo cuenta. Crear una.">
         NO TENGO CUENTA
       </Link>
     </form>
