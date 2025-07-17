@@ -43,7 +43,7 @@ la implementación de un Back Office para la gestión de usuarios, productos y a
 - `Usuarios`: Permite la gestión de usuarios (listar, crear y eliminar).
 - `Gestión del perfil`: Permite la gestión de los datos del usuario administrador.
 
-## Implementación en ambiente DEV/TEST
+## Implementación en ambiente bajo
 
 Para poder desarrollar y probar el proyecto, necesita:
 - Clonar el repositorio 
