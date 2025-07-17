@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useTheme } from "../../hooks/useTheme";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 

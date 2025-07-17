@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useCart } from "../../hooks/useCart";
-import { TrashIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 import { useTheme } from "../../hooks/useTheme";
 import CartQuantityController from "../../components/shop/CartQuantityController";

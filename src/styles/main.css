@@ -881,6 +881,12 @@ section.weapon-details .img-weapon {
   color: var(--bs-light);
 }
 
+/* -------------------------------- PAGE: 404 ------------------------------- */
+.page-404 .icon{
+  height: 6rem;
+  width: 6rem;
+}
+
 /* ------------------------------ PAGE:CONTACT ------------------------------ */
 .contact-form {
   max-width: var(--bs-breakpoint-sm);

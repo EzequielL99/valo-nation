@@ -21,6 +21,7 @@ import UsersPage from "./pages/admin/UsersPage";
 import PrivateRoute from "./components/auth/PrivateRoute";
 import RoleRoute from "./components/auth/RoleRoute";
 import EditProductPage from "./pages/admin/EditProductPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 export default function AppRouter() {
   return (
@@ -31,7 +32,7 @@ export default function AppRouter() {
           <Route path="/" element={<IndexPage />} index />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/unauthorized" element={<UnauthorizedPage />} />
-          {/* <Route path="*" element={<ContactPage />} /> */}
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
 
         {/* Rutas protegidas: LOGIN */}

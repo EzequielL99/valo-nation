@@ -227,7 +227,7 @@ export default function ProfilePage() {
         </div>
 
         <img
-          src="./img/phoenix-char.png"
+          src="/img/phoenix-char.png"
           className="img-deco d-none d-md-block"
           alt="Decoration"
         />
