@@ -42,9 +42,12 @@ la implementación de un Back Office para la gestión de usuarios, productos y a
 - `Usuarios`: Permite la gestión de usuarios (listar, crear y eliminar).
 - `Gestión del perfil`: Permite la gestión de los datos del usuario administrador.
 
-## Acceso al proyecto
+## Implementación en ambiente DEV/TEST
 
-Para poder activar el proyecto, simplemente se necesita clonar el repositorio, instalar las dependencias y ejecutar el comando **'npm run dev'**
+Para poder desarrollar y probar el proyecto, necesita:
+- Clonar el repositorio 
+- Instalar las dependencias
+- Ejecutar el comando **'npm run dev'**
 
 ## Tecnologías utilizadas
 
