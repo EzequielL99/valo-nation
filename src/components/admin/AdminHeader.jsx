@@ -21,7 +21,7 @@ export default function AdminHeader() {
             <button
               className={`${
                 darkMode ? "btn-outline-light" : "btn-outline-dark"
-              } btn p-2`}
+              } btn p-2 w-auto`}
               onClick={() => toggleTheme()}
               aria-label={
                 darkMode ? "Cambiar a modo claro" : "Cambiar a modo oscuro"
