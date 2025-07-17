@@ -8,7 +8,8 @@
 * [Descripción del proyecto](#descripción-del-proyecto)
 * [Estado del proyecto](#estado-del-proyecto)
 * [Características de la aplicación](#características-de-la-aplicación)
-* [Acceso al proyecto](#acceso-al-proyecto)
+* [Implementación en ambiente bajo](#implementación-en-ambiente-bajo)
+* [Implementación para producción](#implementación-para-producción)
 * [Tecnologías utilizadas](#tecnologías-utilizadas)
 * [Personas contribuyentes](#personas-contribuyentes)
 * [Desarrolladores](#desarrolladores)
@@ -48,6 +49,14 @@ Para poder desarrollar y probar el proyecto, necesita:
 - Clonar el repositorio 
 - Instalar las dependencias
 - Ejecutar el comando **'npm run dev'**
+
+## Implementación para producción
+
+Para poder construir el proyecto para desplegar, necesita:
+- Clonar el repositorio 
+- Instalar las dependencias
+- Ejecutar el comando **'npm run build'**
+- Implementar el directorio **dist** en el hosting contratado
 
 ## Tecnologías utilizadas
 
