@@ -1,4 +1,4 @@
-<h1 align="center">VALO-NATION</h1>
+# [VALO-NATION](https://gentle-bunny-9e0466.netlify.app/)
 
 <p align="center">:construction: Proyecto en construcción :construction:</p>
 
@@ -8,7 +8,8 @@
 * [Descripción del proyecto](#descripción-del-proyecto)
 * [Estado del proyecto](#estado-del-proyecto)
 * [Características de la aplicación](#características-de-la-aplicación)
-* [Acceso al proyecto](#acceso-al-proyecto)
+* [Implementación en ambiente bajo](#implementación-en-ambiente-bajo)
+* [Implementación para producción](#implementación-para-producción)
 * [Tecnologías utilizadas](#tecnologías-utilizadas)
 * [Personas contribuyentes](#personas-contribuyentes)
 * [Desarrolladores](#desarrolladores)
@@ -42,9 +43,25 @@ la implementación de un Back Office para la gestión de usuarios, productos y a
 - `Usuarios`: Permite la gestión de usuarios (listar, crear y eliminar).
 - `Gestión del perfil`: Permite la gestión de los datos del usuario administrador.
 
-## Acceso al proyecto
+### Generales
+- `Modo claro/oscuro`: Permite al usuario escoger entre modo claro/oscuro, según lo requiera el usuario.
+- `Responsive`: El proyecto se adapta a diversas dimensiones para hacerlo así compatible con varios dispositivos.
+- `404`: Las URLs inválidas del sitio dirigen al usuario a una página informando el error de solicitud y permitiendo que vuelva al sitio principal para seguir navegando.
 
-Para poder activar el proyecto, simplemente se necesita clonar el repositorio, instalar las dependencias y ejecutar el comando **'npm run dev'**
+## Implementación en ambiente bajo
+
+Para poder desarrollar y probar el proyecto, necesita:
+- Clonar el repositorio 
+- Instalar las dependencias
+- Ejecutar el comando **'npm run dev'**
+
+## Implementación para producción
+
+Para poder construir el proyecto para desplegar, necesita:
+- Clonar el repositorio 
+- Instalar las dependencias
+- Ejecutar el comando **'npm run build'**
+- Implementar el directorio **dist** en el hosting contratado
 
 ## Tecnologías utilizadas
 
