@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # [VALO-NATION](https://gentle-bunny-9e0466.netlify.app/)
 
 <p align="center">:construction: Proyecto en construcción :construction:</p>
