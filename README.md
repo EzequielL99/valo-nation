@@ -43,6 +43,11 @@ la implementación de un Back Office para la gestión de usuarios, productos y a
 - `Usuarios`: Permite la gestión de usuarios (listar, crear y eliminar).
 - `Gestión del perfil`: Permite la gestión de los datos del usuario administrador.
 
+### Generales
+- `Modo claro/oscuro`: Permite al usuario escoger entre modo claro/oscuro, según lo requiera el usuario.
+- `Responsive`: El proyecto se adapta a diversas dimensiones para hacerlo así compatible con varios dispositivos.
+- `404`: Las URLs inválidas del sitio dirigen al usuario a una página informando el error de solicitud y permitiendo que vuelva al sitio principal para seguir navegando.
+
 ## Implementación en ambiente bajo
 
 Para poder desarrollar y probar el proyecto, necesita:
